@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	// private SimpleAdapter mSimpleAdapter;
 	private Button bt;
 	private ProgressBar pg;
-	private ProgressBar pbLoad;
+	private ProgressBar pbLoad;//载入中的进度条
 	List<Map<String, Object>> lmap;
 	private View moreView;
 	private Handler handler;
