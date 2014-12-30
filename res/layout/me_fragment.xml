@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include layout="@layout/top_title"/>
+    <Button android:id="@+id/toLogin"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/login"/>
+	<ImageView
+	    android:id="@+id/myPic"
+	    style="@style/meuserpic"
+	    android:layout_gravity="center"
+	    android:paddingTop="10dp"
+	    android:contentDescription="@string/myPic"/>
+	<TextView 
+	    android:id="@+id/userName"
+	    android:gravity="center"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:textSize="20sp"
+	    android:paddingTop="8dp"/>
+	<TextView android:id="@+id/myPost"
+	    style="@style/title"
+	    android:text="@string/mypost"/>
+	<TextView android:id="@+id/collection"
+	    style="@style/title"
+	    android:text="@string/collection"/>
+	<TextView android:id="@+id/fans"
+	    style="@style/title"
+	    android:text="@string/fans"
+	    android:clickable="true"/>
+	<TextView android:id="@+id/ifocus"
+	    style="@style/title"
+	    android:text="@string/ifocus"/>
+	<TextView android:id="@+id/changeInfo"
+	    style="@style/title"
+	    android:text="@string/changeinfo"/>
+</LinearLayout>

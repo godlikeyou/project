@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include layout="@layout/top_title"/>
+	<TextView android:id="@+id/pushMessage"
+	    style="@style/title"
+	    android:text="@string/pushmessage"/>
+	<TextView android:id="@+id/aboutSoft"
+	    style="@style/title"
+	    android:text="@string/aboutsoft"/>
+	<TextView android:id="@+id/aboutUs"
+	    style="@style/title"
+	    android:text="@string/aboutus"/>
+	<TextView android:id="@+id/newVersion"
+	    style="@style/title"
+	    android:text="@string/newversion"/>
+	<TextView android:id="@+id/opinion"
+	    style="@style/title"
+	    android:text="@string/opinion"/>
+	<TextView android:id="@+id/clearCache"
+	    style="@style/title"
+	    android:text="@string/clearcache"/>
+	<ListView android:id="@+id/btnTest"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+	    
+	</ListView>
+</LinearLayout>

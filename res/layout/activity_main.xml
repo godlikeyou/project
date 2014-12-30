@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/fragmentRoot"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bottombackground"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/bottomHome"
+            style="@style/main_bottom_item" >
+
+            <RadioButton
+                android:id="@+id/rbHome"
+                style="@style/footbar"
+                android:drawableTop="@drawable/home"
+                android:text="@string/home"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomFind"
+            style="@style/main_bottom_item" >
+
+            <RadioButton
+                android:id="@+id/rbFind"
+                style="@style/footbar"
+                android:text="@string/find"
+                android:drawableTop="@drawable/home"
+                 />
+        </LinearLayout>
+		
+        <LinearLayout android:id="@+id/bottomCamera"
+            style="@style/main_bottom_item">
+        	
+            <RadioButton android:id="@+id/rbTakePhoto"
+                style="@style/footbar"
+                android:text="@string/takephoto"
+                android:drawableTop="@drawable/home"/>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/bottomMe"
+            style="@style/main_bottom_item" >
+
+            <RadioButton
+                android:id="@+id/rbMe"
+                style="@style/footbar"
+                android:text="@string/me"
+                android:drawableTop="@drawable/home"
+                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomSetting"
+            style="@style/main_bottom_item" >
+
+            <RadioButton
+                android:id="@+id/rbSetting"
+                style="@style/footbar"
+                android:text="@string/setting"
+                android:drawableTop="@drawable/home"
+               />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
