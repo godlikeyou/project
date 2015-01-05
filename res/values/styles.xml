@@ -79,4 +79,10 @@
 	    <item name="android:layout_height">100dp</item>
 	    <item name="android:adjustViewBounds">true</item>
 	</style>
+    <style name="changeinfo">
+        <item name="android:textSize">17sp</item>
+        <item name="android:background">@color/titlebackground</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">100dp</item>
+    </style>
 </resources>

@@ -53,40 +53,8 @@ public class LoginActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login);
 		if( !NetUtil.checkNet(getApplicationContext())){
-			Toast.makeText(getApplicationContext(), "û����������", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "连接网络失败", Toast.LENGTH_LONG).show();
 		}
-		//fm = getSupportFragmentManager();
-		//get example
-//		String url = "http://192.168.0.108:8080/ssm_demo/customer/blogx/32";
-//		GETThread th = new GETThread(url);
-//		th.startServiceThread();//�����߳�
-//		String xx = th.getResultData();//��ȡ���
-//		Toast.makeText(this, xx, Toast.LENGTH_LONG).show();
-		
-		//post example
-/*		String url = "http://192.168.0.162/ssm_demo/customer/1.0/customerLogin";
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("customer","kamal"));
-		params.add(new BasicNameValuePair("passwd","123456"));
-		POSTThread th = new POSTThread(url,params);
-		th.startServiceThread();//�����߳�
-		String xx = th.getResultData();//��ȡ���
-		Toast.makeText(this, xx, Toast.LENGTH_LONG).show();
-		String type = "cId,cName,cPassword";
-		List<Map<String,Object>> lmap = JsonCodec.deJson(xx,type);
-		for(int i = 0;i < lmap.size();i ++){	
-			for(String key:lmap.get(i).keySet()){
-				Object ob = lmap.get(i).get(key);
-				Log.i("key",key+":"+ob.toString());
-			}
-		}*/
-		// �ӵ�һ��activity���ղ���
-		//Intent intent = getIntent();
-		//Bundle bundle = intent.getExtras();
-		//String str = bundle.getString("str");
-		// tv = (TextView) findViewById(R.id.secondTextview);
-		// tv.setText(str);// ��ʾ���յ�����
-		// ���ʱ���ز����һ��activity
 		tv = (TextView)findViewById(R.id.otherLogin);
 		customerName = (EditText) findViewById(R.id.name);
 		customerPasswd = (EditText) findViewById(R.id.passwd);
@@ -119,7 +87,6 @@ public class LoginActivity extends Activity {
 					focusCount = Integer.valueOf(jsonb.getString("focusCount"));
 					customername = jsonb.getString("customerName");
 					customerPic = jsonb.getString("customerPic");
-					//Intent intent = new Intent();
 					SharedPreferences mySharedPreferences= getSharedPreferences("loginInfo", 
 							Activity.MODE_PRIVATE);
 					Editor editor = mySharedPreferences.edit();
@@ -129,6 +96,9 @@ public class LoginActivity extends Activity {
 					editor.putInt("collectionCount", collectionCount);
 					editor.putInt("focusCount", focusCount);
 					editor.putString("customerPic", customerPic);
+                    editor.putString("customerNickname", jsonb.getString("customerNickname"));
+                    editor.putString("customerPhone", jsonb.getString("customerPhone"));
+                    editor.putString("customerEmail", jsonb.getString("customerEmail"));
 					editor.putInt("login", 001);
 					editor.commit();
 					finish();
