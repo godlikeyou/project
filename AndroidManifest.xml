@@ -49,6 +49,10 @@
             android:name="com.crazyfish.activity.CustomerHomeActivity"
             android:label="我的粉丝" >
         </activity>
+        <activity
+            android:name="com.crazyfish.activity.ChangeInfoActivity"
+            android:label="修改信息">
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.crazyfish.activity.fragment;
 
+import com.crazyfish.activity.ChangeInfoActivity;
 import com.crazyfish.activity.CustomerFansActivity;
 import com.crazyfish.activity.LoginActivity;
 import com.crazyfish.demo.R;
@@ -34,17 +35,12 @@ public class MeFragment extends Fragment {
 	private TextView meChangeInfo = null;
 	private final int CLICK_LOGIN = 1;
 	private final int CLICK_FANS = 2;
-	private String iflogin;
+    private final int CLICK_CHANGE_INFO = 3;
 	ImageView imageview;
 	Bitmap bitmap;
 
 	public MeFragment() {
 
-	}
-
-	public MeFragment(String iflogin) {
-		Log.v("ccccccc", iflogin);
-		this.iflogin = iflogin;
 	}
 
 	Handler handler = new Handler() {
@@ -59,7 +55,6 @@ public class MeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Log.v("xxx", "bbbbbbbbbbbbbbb");
 		view = inflater.inflate(R.layout.me_fragment, container, false);
 		// loginReturn();
 		return view;
@@ -67,7 +62,6 @@ public class MeFragment extends Fragment {
 
 	public void onResume() {
 		super.onResume();
-		Log.v("vvvv", "nnnnn");
 		loginReturn();
 	}
 
@@ -86,7 +80,10 @@ public class MeFragment extends Fragment {
 				intent.setClass(getActivity(), LoginActivity.class);
 				intent.putExtra("str", "from home");
 				startActivityForResult(intent, REQUEST_CODE);
-			} else {
+			}else if(tag == CLICK_CHANGE_INFO){
+                intent.setClass(getActivity(), ChangeInfoActivity.class);
+                startActivityForResult(intent,REQUEST_CODE);
+            } else {
 				Toast.makeText(getActivity(), "登录!",
 						Toast.LENGTH_LONG).show();
 			}
@@ -117,7 +114,7 @@ public class MeFragment extends Fragment {
 			int focusCount = preferences.getInt("focusCount", 0);
 			String customerPic = preferences.getString("customerPic", null);
 
-			((TextView) getView().findViewById(R.id.tvTop)).setText("��������");
+			((TextView) getView().findViewById(R.id.tvTop)).setText("个人中心");
 			login = (Button) view.findViewById(R.id.toLogin);
 			login.setVisibility(View.GONE);
 			imageview = (ImageView) getView().findViewById(R.id.myPic);
@@ -134,25 +131,28 @@ public class MeFragment extends Fragment {
 			TextView collection = (TextView) getView().findViewById(
 					R.id.collection);
 			TextView focus = (TextView) getView().findViewById(R.id.ifocus);
-			String fansStr = "�ҵķ�˿" + "(" + fansCount + ")";
+			String fansStr = "我的粉丝" + "(" + fansCount + ")";
 			fans.setText(fansStr);
-			String postStr = "�ҵ�����" + "(" + postCount + ")";
+			String postStr = "我的帖子" + "(" + postCount + ")";
 			post.setText(postStr);
-			String collectionStr = "�ҵ��ղ�" + "(" + collectionCount + ")";
+			String collectionStr = "我的收藏" + "(" + collectionCount + ")";
 			collection.setText(collectionStr);
-			String focusStr = "�ҵĹ�ע" + "(" + focusCount + ")";
+			String focusStr = "我的关注" + "(" + focusCount + ")";
 			focus.setText(focusStr);
 			meFans = (TextView) view.findViewById(R.id.fans);
 			meFans.setOnClickListener(listener);
 			meFans.setTag(CLICK_FANS);
+            TextView changeInfo = (TextView) getView().findViewById(
+                    R.id.changeInfo);
+            changeInfo.setOnClickListener(listener);
+            changeInfo.setTag(CLICK_CHANGE_INFO);
 		} else {
-			Log.v("xxxx", "û��¼");
 			imageview = (ImageView) getView().findViewById(R.id.myPic);
 			TextView userName = (TextView) getView()
 					.findViewById(R.id.userName);
 			imageview.setVisibility(View.GONE);
 			userName.setVisibility(View.GONE);
-			((TextView) getView().findViewById(R.id.tvTop)).setText("��������");
+			((TextView) getView().findViewById(R.id.tvTop)).setText("个人中心");
 			login = (Button) view.findViewById(R.id.toLogin);
 			login.setOnClickListener(listener);
 			login.setTag(CLICK_LOGIN);

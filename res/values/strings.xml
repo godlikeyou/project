@@ -50,4 +50,9 @@
 	<string name="fromfile">从本地图片选择</string>
 	<string name="loadmoredata">加载更多</string>
 	<string name="refresh">刷新</string>
+
+    <string name="username">用户名:</string>
+    <string name="usernickname">用户昵称:</string>
+    <string name="userphone">手机号码:</string>
+    <string name="useremail">电子邮箱:</string>
 </resources>

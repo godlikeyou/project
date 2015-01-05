@@ -11,6 +11,6 @@ public class GlobalVariable {
 	public static final int GAG_PAGE_SIZE = 2;
 //	public static final String URLHEAD = "http://192.168.1.6:8080/ssm_demo";	
 	public static final String FILE_CACHE_LOCATION = "sdcard/aqi";
-	public static final String URLHEAD = "http://192.168.0.108:8080/ssm_demo";
+	public static final String URLHEAD = "http://192.168.0.162:8080/ssm_demo";
 	public static final int HANDLER_GET_CODE = 1;
 }

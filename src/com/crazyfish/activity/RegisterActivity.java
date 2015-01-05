@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -29,7 +30,7 @@ public class RegisterActivity extends Activity {
 	private EditText custName;
 	private EditText passwd;
 	private EditText repasswd;
-	private String url = "http://192.168.0.162/ssm_demo/customer/1.0/customerRegister";
+	private String url = "http://192.168.0.162:8080/ssm_demo/customer/1.0/customerRegister";
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -59,7 +60,8 @@ public class RegisterActivity extends Activity {
 					JSONArray ja = new JSONArray(returnResult);
 					JSONObject jsonb = ja.getJSONObject(0);
 					String result = jsonb.getString("result");
-					int fansCount,postCount,collectionCount,focusCount;
+                    Log.v("rsulll===",result);
+                    int fansCount,postCount,collectionCount,focusCount;
 					String customername,customerPic;
 					if("001".equals(result)){
 						fansCount = Integer.valueOf(jsonb.getString("fansCount"));
@@ -78,6 +80,9 @@ public class RegisterActivity extends Activity {
 						editor.putInt("collectionCount", collectionCount);
 						editor.putInt("focusCount", focusCount);
 						editor.putString("customerPic", customerPic);
+                        editor.putString("customerNickname", jsonb.getString("customerNickname"));
+                        editor.putString("customerPhone", jsonb.getString("customerPhone"));
+                        editor.putString("customerEmail", jsonb.getString("customerEmail"));
 						editor.putInt("login", 001);
 						editor.commit();
 						intent.setClass(RegisterActivity.this, MainActivity.class);
