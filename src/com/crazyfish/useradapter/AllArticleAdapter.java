@@ -83,8 +83,8 @@ public class AllArticleAdapter extends BaseAdapter {
 	}
 
 	private void collectGag(int selectID) {
-		new AlertDialog.Builder(context).setTitle("ÊÕ²ØËµËµ").setMessage("ÊÕ²Ø±¾ËµËµ?")
-				.setPositiveButton("È·¶¨", null).setNegativeButton("È¡Ïû", null)
+		new AlertDialog.Builder(context).setTitle("æ”¶è—").setMessage("æ˜¯å¦æ”¶è—?")
+				.setPositiveButton("ç¡®å®š", null).setNegativeButton("å–æ¶ˆ", null)
 				.show();
 	}
 
@@ -180,10 +180,10 @@ public class AllArticleAdapter extends BaseAdapter {
 					"gContent"));
 			view.btnGood.setText(String.valueOf(listItems.get(position).get(
 					"gtGoodcount"))
-					+ "ÔŞ");
+					+ "èµ");
 			view.btnRec.setText(String.valueOf(listItems.get(position).get(
 					"gtReccount"))
-					+ "ÆÀ");
+					+ "è¯„");
 			view.btnCollect.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
