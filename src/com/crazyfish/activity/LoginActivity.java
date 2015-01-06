@@ -45,7 +45,6 @@ public class LoginActivity extends Activity {
 	private Button btnLogin;
 	private EditText customerName;
 	private EditText customerPasswd;
-	private String url = "http://192.168.0.162:8080/ssm_demo/customer/1.0/customerLogin";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -71,7 +70,7 @@ public class LoginActivity extends Activity {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("customer",customerName.getText().toString()));
 			params.add(new BasicNameValuePair("passwd",customerPasswd.getText().toString()));
-			POSTThread th = new POSTThread(url,params);
+			POSTThread th = new POSTThread(GlobalVariable.LOGINURL,params);
 			th.startServiceThread();
 			String returnResult = th.getResultData();
             Log.v("returnresult==",returnResult);
