@@ -106,6 +106,7 @@ public class MeFragment extends Fragment {
 		SharedPreferences preferences;
 		preferences = getActivity().getSharedPreferences("loginInfo", 0);
 		int iflogin = preferences.getInt("login", 0);
+        //int iflogin = 2;
 		if (iflogin == 001) {
 			String customername = preferences.getString("customerName", null);
 			int fansCount = preferences.getInt("fansCount", 0);

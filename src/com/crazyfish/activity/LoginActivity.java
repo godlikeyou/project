@@ -45,7 +45,7 @@ public class LoginActivity extends Activity {
 	private Button btnLogin;
 	private EditText customerName;
 	private EditText customerPasswd;
-	private String url = "http://192.168.0.162/ssm_demo/customer/1.0/customerLogin";
+	private String url = "http://192.168.0.162:8080/ssm_demo/customer/1.0/customerLogin";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -74,6 +74,7 @@ public class LoginActivity extends Activity {
 			POSTThread th = new POSTThread(url,params);
 			th.startServiceThread();
 			String returnResult = th.getResultData();
+            Log.v("returnresult==",returnResult);
 			try {
 				JSONArray ja = new JSONArray(returnResult);
 				JSONObject jsonb = ja.getJSONObject(0);
@@ -99,7 +100,9 @@ public class LoginActivity extends Activity {
                     editor.putString("customerNickname", jsonb.getString("customerNickname"));
                     editor.putString("customerPhone", jsonb.getString("customerPhone"));
                     editor.putString("customerEmail", jsonb.getString("customerEmail"));
-					editor.putInt("login", 001);
+					editor.putString("customerSignature",jsonb.getString("customerSignature"));
+                    editor.putString("customerId",jsonb.getString("customerId"));
+                    editor.putInt("login", 001);
 					editor.commit();
 					finish();
 				}else{
