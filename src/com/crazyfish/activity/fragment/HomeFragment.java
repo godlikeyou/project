@@ -92,7 +92,6 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 						btRefresh.setVisibility(View.VISIBLE);
 						break;
 					}
-					// ???????????????
 					if (FileUtils.fileCache("allgag", result) == null) {
 					}
 					String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
@@ -259,13 +258,13 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 		int count = allAdapter.getCount();
 		Log.i("currrentsize", "" + count);
 		if (count + GlobalVariable.GAG_PAGE_SIZE < (size + 2)) {
-			int currentPage = count / GlobalVariable.GAG_PAGE_SIZE + 1;// ????????????
+			int currentPage = count / GlobalVariable.GAG_PAGE_SIZE + 1;
 			Log.i("currentpage", "" + currentPage);
 			String url = GlobalVariable.URLHEAD + "/article/allarticle/"
 					+ currentPage;
 			GETThread th = new GETThread(url);
-			th.startServiceThread();// ???????
-			String xx = th.getResultData();// ??????
+			th.startServiceThread();
+			String xx = th.getResultData();
 			boolean s = false;
 			if (xx != null && !xx.equals("timeout")) {
 				String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
