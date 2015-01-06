@@ -53,6 +53,27 @@
         android:background="@color/bottombackground"
         android:layout_weight="1"
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/usersiguration"
+            android:text="@string/usersiguration"
+            style="@style/title"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/title"
+            android:gravity="right"
+            android:id="@+id/siguration"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottombackground"
+        android:layout_weight="1"
+        >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

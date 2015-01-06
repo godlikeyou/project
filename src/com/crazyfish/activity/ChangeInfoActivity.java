@@ -19,6 +19,7 @@ public class ChangeInfoActivity extends Activity{
     TextView phone;
     TextView email;
     TextView tvTop;
+    TextView usersiguration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +31,14 @@ public class ChangeInfoActivity extends Activity{
         nickname = (TextView)this.findViewById(R.id.nickname);
         phone = (TextView)this.findViewById(R.id.phone);
         email = (TextView)this.findViewById(R.id.email);
+        usersiguration = (TextView)this.findViewById(R.id.siguration);
         SharedPreferences preferences;
         preferences = this.getSharedPreferences("loginInfo",0);
         String name = preferences.getString("customerName","");
         String nickName = preferences.getString("customerNickname","");
         String phone1 = preferences.getString("customerPhone","");
         String email1 = preferences.getString("customerEmail","");
+        String siguration = preferences.getString("customerSignature","");
         Log.v("xxxxx",name+"cc"+nickname+"bb"+phone+"aa"+email);
         if(name == null || "".equals(name)){
             username.setText("暂无");
@@ -55,6 +58,10 @@ public class ChangeInfoActivity extends Activity{
             email.setText("未绑定");
         else
             email.setText(email1);
+        if(siguration == null || "".equals(siguration))
+            usersiguration.setText("前往设置");
+        else
+            usersiguration.setText(siguration);
 
     }
 }
