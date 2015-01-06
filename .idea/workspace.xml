@@ -13,13 +13,11 @@
       <config />
     </shared>
   </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.crazyfish.demo" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="bba31d80-e611-4900-ab8e-95cbd3a6a9a5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crazyfish/util/GlobalVariable.java" afterPath="$PROJECT_DIR$/src/com/crazyfish/util/GlobalVariable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../appcompat_v7/gen/android/support/v7/appcompat/BuildConfig.java" afterPath="$PROJECT_DIR$/../appcompat_v7/gen/android/support/v7/appcompat/BuildConfig.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crazyfish/activity/LoginActivity.java" afterPath="$PROJECT_DIR$/src/com/crazyfish/activity/LoginActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crazyfish/activity/fragment/MeFragment.java" afterPath="$PROJECT_DIR$/src/com/crazyfish/activity/fragment/MeFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="demo.iws" />
@@ -49,41 +47,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="462" max-vertical-offset="2068">
-              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GlobalVariable.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/crazyfish/util/GlobalVariable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24929178" vertical-offset="0" max-vertical-offset="462">
-              <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="styles.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1870" max-vertical-offset="2068">
-              <caret line="85" column="55" selection-start-line="85" selection-start-column="55" selection-end-line="85" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="top_title.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/top_title.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="132" max-vertical-offset="506">
-              <caret line="6" column="33" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="36" />
+            <state vertical-scroll-proportion="-0.96428573" vertical-offset="1793" max-vertical-offset="2444">
+              <caret line="70" column="40" selection-start-line="70" selection-start-column="40" selection-end-line="70" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -92,21 +57,22 @@
       <file leaf-file-name="ChangeInfoActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/ChangeInfoActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="858" max-vertical-offset="1452">
-              <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="1128" max-vertical-offset="1508">
+              <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="LoginActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2090">
-              <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
-              <folding />
+            <state vertical-scroll-proportion="0.3841962" vertical-offset="1575" max-vertical-offset="2548">
+              <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
+              <folding>
+                <element signature="e#2164#4505#0" expanded="true" />
+                <element signature="e#4501#4502#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,18 +80,28 @@
       <file leaf-file-name="MeFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/fragment/MeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2332" max-vertical-offset="4048">
-              <caret line="106" column="67" selection-start-line="106" selection-start-column="58" selection-end-line="106" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2451" max-vertical-offset="4056">
+              <caret line="114" column="28" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RegisterActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/RegisterActivity.java">
+      <file leaf-file-name="HomeFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/fragment/HomeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1628" max-vertical-offset="2442">
-              <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1664" max-vertical-offset="7098">
+              <caret line="108" column="46" selection-start-line="108" selection-start-column="46" selection-end-line="108" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JsonCodec.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/crazyfish/util/JsonCodec.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="722" max-vertical-offset="1118">
+              <caret line="25" column="32" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -157,15 +133,15 @@
         <option value="$PROJECT_DIR$/src/com/crazyfish/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/crazyfish/activity/PostActivity.java" />
         <option value="$PROJECT_DIR$/src/com/crazyfish/activity/fragment/HomeFragment.java" />
-        <option value="$PROJECT_DIR$/src/com/crazyfish/activity/fragment/MeFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/crazyfish/util/GlobalVariable.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/crazyfish/activity/RegisterActivity.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/res/layout/change_info.xml" />
         <option value="$PROJECT_DIR$/src/com/crazyfish/activity/ChangeInfoActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/crazyfish/activity/fragment/MeFragment.java" />
         <option value="$PROJECT_DIR$/src/com/crazyfish/activity/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/crazyfish/util/GlobalVariable.java" />
       </list>
     </option>
   </component>
@@ -173,7 +149,7 @@
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
-    <option name="height" value="784" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -203,8 +179,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -219,7 +195,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
+              <option name="myItemId" value="project" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -229,105 +205,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
+              <option name="myItemId" value="project" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="crazyfish" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="crazyfish" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="crazyfish" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="crazyfish" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fragment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -339,21 +227,21 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="186" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="40" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="261" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="69" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="159" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="68" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="686" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="453" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="232" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="66" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="232" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="67" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="234" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="68" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="594" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="429" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="File.Encoding" />
@@ -365,7 +253,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="96145b5b" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0123456789ABCDEF" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_21_x86" />
   </component>
   <component name="RecentsManager">
@@ -571,7 +459,11 @@
       <created>1419932423644</created>
       <updated>1419932423644</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Squashed commit of the following:&#10;&#10;commit 48ec4706edc445e717664e291acd33233fa3adf9&#10;Author: godlikeyou &lt;841483234@qq.com&gt;&#10;Date:   Wed Dec 24 11:40:18 2014 +0800&#10;&#10;&#9;Merge remote-tracking branch 'origin/master'&#10;&#10;commit 62b06e87e3394207d8ee15c69625993144c3e200&#10;Author: godlikeyou &lt;841483234@qq.com&gt;&#10;Date:   Wed Dec 24 11:34:57 2014 +0800&#10;&#10;&#9;用户&#10;&#10;commit 8b1a6903890505e57edc8e0f82e65a88cd0074e8&#10;Author: godlikeyou &lt;841483234@qq.com&gt;&#10;Date:   Wed Dec 24 11:27:05 2014 +0800&#10;&#10;&#9;Merge remote-tracking branch 'origin/master'&#10;&#10;commit ae0822d8d245644b2e2cdfd03b3955f3e406f7bf&#10;Author: godlikeyou &lt;841483234@qq.com&gt;&#10;Date:   Wed Dec 24 11:23:41 2014 +0800&#10;&#10;&#9;login&#10;">
+      <created>1420449439710</created>
+      <updated>1420449439711</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -598,7 +490,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -608,20 +500,20 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24872231" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38621795" sideWeight="0.3721634" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30323678" sideWeight="0.16944024" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38621795" sideWeight="0.6270802" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3867121" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24886535" sideWeight="0.5010352" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43270868" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.0625" sideWeight="0.83055973" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30323678" sideWeight="0.83055973" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24583964" sideWeight="0.49896482" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37257823" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24205749" sideWeight="0.49896482" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37308347" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -662,18 +554,14 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/fragment/MeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="220" max-vertical-offset="4048">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="308" max-vertical-offset="3674">
           <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-          <folding />
+          <folding>
+            <element signature="e#2164#4505#0" expanded="true" />
+            <element signature="e#4501#4502#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -681,7 +569,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
           <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -703,7 +590,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="3173">
           <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-          <folding />
+          <folding>
+            <element signature="e#2164#4505#0" expanded="true" />
+            <element signature="e#4501#4502#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -711,7 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="399">
           <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -726,7 +615,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="3173">
           <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-          <folding />
+          <folding>
+            <element signature="e#2164#4505#0" expanded="true" />
+            <element signature="e#4501#4502#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -734,7 +626,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
           <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -742,7 +633,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1197" max-vertical-offset="3173">
           <caret line="63" column="26" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
-          <folding />
+          <folding>
+            <element signature="e#2164#4505#0" expanded="true" />
+            <element signature="e#4501#4502#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -750,7 +644,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="462">
           <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -758,7 +651,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1078" max-vertical-offset="3674">
           <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#2164#4505#0" expanded="true" />
+            <element signature="e#4501#4502#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -811,7 +707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1166">
           <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -819,7 +714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2882">
           <caret line="151" column="53" selection-start-line="151" selection-start-column="53" selection-end-line="151" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -841,14 +735,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
           <caret line="13" column="26" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/fragment/HomeFragment.java">
+    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/util/GlobalVariable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2912" max-vertical-offset="7098">
-          <caret line="169" column="48" selection-start-line="169" selection-start-column="48" selection-end-line="169" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="572">
+          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -857,7 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="468">
           <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -865,7 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
           <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="12" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1026,34 +917,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/fragment/MeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1908" max-vertical-offset="4030">
-          <caret line="106" column="67" selection-start-line="106" selection-start-column="58" selection-end-line="106" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/RegisterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1187" max-vertical-offset="2210">
-          <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4625323" vertical-offset="1277" max-vertical-offset="1664">
           <caret line="56" column="34" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1889" max-vertical-offset="2444">
-          <caret line="85" column="55" selection-start-line="85" selection-start-column="55" selection-end-line="85" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -1063,26 +930,48 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="132" max-vertical-offset="506">
+        <state vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="598">
           <caret line="6" column="33" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/ChangeInfoActivity.java">
+    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="858" max-vertical-offset="1452">
-          <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.34862384" vertical-offset="2096" max-vertical-offset="2444">
+          <caret line="85" column="54" selection-start-line="85" selection-start-column="50" selection-end-line="85" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/LoginActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/RegisterActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2090">
-          <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.412731" vertical-offset="1073" max-vertical-offset="2210">
+          <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/fragment/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1664" max-vertical-offset="7098">
+          <caret line="108" column="46" selection-start-line="108" selection-start-column="46" selection-end-line="108" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/util/JsonCodec.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="722" max-vertical-offset="1118">
+          <caret line="25" column="32" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/fragment/MeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2451" max-vertical-offset="4056">
+          <caret line="114" column="28" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1092,17 +981,28 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="462" max-vertical-offset="2068">
-          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+        <state vertical-scroll-proportion="-0.96428573" vertical-offset="1793" max-vertical-offset="2444">
+          <caret line="70" column="40" selection-start-line="70" selection-start-column="40" selection-end-line="70" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/util/GlobalVariable.java">
+    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/ChangeInfoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24929178" vertical-offset="0" max-vertical-offset="462">
-          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1128" max-vertical-offset="1508">
+          <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3841962" vertical-offset="1575" max-vertical-offset="2548">
+          <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
+          <folding>
+            <element signature="e#2164#4505#0" expanded="true" />
+            <element signature="e#4501#4502#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
