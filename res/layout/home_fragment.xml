@@ -14,9 +14,10 @@
         android:text="@string/refresh"
         android:layout_gravity="center"
         android:layout_marginTop="160dp"/>
+
 	<com.crazyfish.extension.EListView android:id="@+id/allArticle"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    />
-	
+
 </LinearLayout>

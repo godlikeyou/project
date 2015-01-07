@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	private Button bt;
 	private ProgressBar pg;
 	private ProgressBar pbLoad;//载入中
+    private EditText etInput;//user comment
 	List<Map<String, Object>> lmap;
 	private View moreView;
 	private Handler handler;
@@ -115,6 +117,8 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+        //etInput = (EditText)view.findViewById(R.id.etInput);
+        //etInput.setVisibility(View.INVISIBLE);
 		if (NetUtil.checkNet(getActivity())) {
 			// dialogLoading = new HkDialogLoading(getActivity());
 			// dialogLoading.show();
@@ -220,7 +224,6 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			});
 		} else {
 			final EListView lv = (EListView) view.findViewById(R.id.allArticle);
-			// ?????????
 			moreView = getLayoutInflater(savedInstanceState).inflate(
 					R.layout.moredata, null);
 			bt = (Button) moreView.findViewById(R.id.bt_load);
