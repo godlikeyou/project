@@ -53,6 +53,10 @@
             android:name="com.crazyfish.activity.ChangeInfoActivity"
             android:label="修改信息">
         </activity>
+        <activity
+            android:name="com.crazyfish.activity.ChangeNicknameActivity"
+            android:label="修改用户昵称">
+        </activity>
     </application>
 
 </manifest>

@@ -45,7 +45,7 @@ public class LoginActivity extends Activity {
 	private Button btnLogin;
 	private EditText customerName;
 	private EditText customerPasswd;
-	private String url = "http://192.168.0.108:8080/ssm_demo/customer/1.0/customerLogin";
+	private String url = "http://192.168.0.162:8080/ssm_demo/customer/1.0/customerLogin";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
