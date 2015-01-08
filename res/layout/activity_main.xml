@@ -78,4 +78,22 @@
                />
         </LinearLayout>
     </LinearLayout>
+    <FrameLayout
+        android:id="@+id/llUserPost"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bottombackground"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+        <EditText android:id="@+id/etInputA"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:lines="1"
+            android:hint="@string/posthint"
+            android:layout_alignParentBottom="true"
+            android:visibility="invisible"
+            />
+    </FrameLayout>
 </RelativeLayout>

@@ -12,6 +12,6 @@ public class GlobalVariable {
 	public static final String FILE_CACHE_LOCATION = "sdcard/aqi";
 	public static final String URLHEAD = "http://192.168.0.108:8080/ssm_demo";
 	public static final int HANDLER_GET_CODE = 1;
-    public static final String  LOGINURL = "http://192.168.0.162:8080/ssm_demo/customer/1.0/" +
+    public static final String  LOGINURL = "http://192.168.0.108:8080/ssm_demo/customer/1.0/" +
             "customerLogin";
 }

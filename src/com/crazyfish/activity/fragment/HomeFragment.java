@@ -19,6 +19,8 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -49,6 +51,8 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	private int lastVisibleIndex;
 	private int size;//
 	private String result;
+    private FrameLayout llUserPost;
+    private LinearLayout bottomList;
 	// private HkDialogLoading dialogLoading;
 	private Button btRefresh;
 
@@ -117,8 +121,9 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-        //etInput = (EditText)view.findViewById(R.id.etInput);
-        //etInput.setVisibility(View.INVISIBLE);
+        etInput = (EditText)getActivity().findViewById(R.id.etInputA);
+        llUserPost = (FrameLayout)getActivity().findViewById(R.id.llUserPost);
+        bottomList = (LinearLayout)getActivity().findViewById(R.id.bottomList);
 		if (NetUtil.checkNet(getActivity())) {
 			// dialogLoading = new HkDialogLoading(getActivity());
 			// dialogLoading.show();
@@ -139,7 +144,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			String url = GlobalVariable.URLHEAD + "/article/allarticle/1";
 			HttpGetTask task = new HttpGetTask(h);
 			task.execute(url);
-			allAdapter = new AllArticleAdapter(getActivity(), lmap);
+			allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList);
 			lv.addFooterView(moreView);
 			lv.setAdapter(allAdapter);
 			lv.setonRefreshListener(new OnRefreshListener() {
@@ -236,7 +241,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
 			// json decode
 			lmap = JsonCodec.deJson(str, type);
-			allAdapter = new AllArticleAdapter(getActivity(), lmap);
+			allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList);
 			lv.addFooterView(moreView);
 			lv.setAdapter(allAdapter);
 			bt.setOnClickListener(new OnClickListener() {

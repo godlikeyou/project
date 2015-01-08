@@ -13,7 +13,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crazyfish.asynctask.BitmapWorkerTask;
@@ -35,7 +37,9 @@ public class AllArticleAdapter extends BaseAdapter {
     private Context context;
     private List<Map<String, Object>> listItems;
     private LayoutInflater listContainer;
-
+    private EditText etInput;
+    private FrameLayout llUserPost;
+    private LinearLayout bottomList;
     public final class AllArticleView {
         public TextView title;
         public TextView content;
@@ -50,10 +54,13 @@ public class AllArticleAdapter extends BaseAdapter {
         // public ProgressBar picLoad;
     }
 
-    public AllArticleAdapter(Context context, List<Map<String, Object>> list) {
+    public AllArticleAdapter(Context context, List<Map<String, Object>> list,EditText etInput,FrameLayout llUserPost,LinearLayout bottomList) {
         this.context = context;
         listContainer = LayoutInflater.from(context);
         this.listItems = list;
+        this.etInput = etInput;
+        this.llUserPost = llUserPost;
+        this.bottomList = bottomList;
     }
 
     @Override
@@ -196,10 +203,12 @@ public class AllArticleAdapter extends BaseAdapter {
                     InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     //commentPop.dismiss();
-                    finalView.etInput.setVisibility(View.VISIBLE);
-                    finalView.etInput.setFocusableInTouchMode(true);
-                    finalView.etInput.requestFocus();
-
+                    etInput.setVisibility(View.VISIBLE);
+                    llUserPost.setVisibility(View.VISIBLE);
+                    bottomList.setVisibility(View.INVISIBLE);
+                    //finalView.etInput.setVisibility(View.VISIBLE);
+                    //finalView.etInput.setFocusableInTouchMode(true);
+                    //finalView.etInput.requestFocus();
                     recGag(String.valueOf(listItems.get(p).get("gId")));
                 }
             });

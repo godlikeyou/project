@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.crazyfish.activity.fragment.FindFragment;
@@ -228,5 +229,18 @@ public class MainActivity extends FragmentActivity {
             }
         }
     };*/
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+                /*隐藏软键盘*/
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+            if(inputMethodManager.isActive()){
+                inputMethodManager.hideSoftInputFromWindow(MainActivity.this.getCurrentFocus().getWindowToken(), 0);
+            }
 
+            return true;
+        }
+        //if( event.getKeyCode() == KeyEvent.)
+        return super.dispatchKeyEvent(event);
+    }
 }
