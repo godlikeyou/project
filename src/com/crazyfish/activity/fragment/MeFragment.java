@@ -1,12 +1,11 @@
 package com.crazyfish.activity.fragment;
 
 import com.crazyfish.activity.ChangeInfoActivity;
-import com.crazyfish.activity.CustomerFansActivity;
 import com.crazyfish.activity.LoginActivity;
+import com.crazyfish.activity.MyArticleActivity;
 import com.crazyfish.demo.R;
 import com.crazyfish.util.PicHandler;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +24,17 @@ import android.widget.Toast;
 
 public class MeFragment extends Fragment {
 	private static final int REQUEST_CODE = 1;
-	private Button login = null;
-	private View view = null;
-	private TextView meFans = null;
-	private TextView mePost = null;
-	private TextView meCollection = null;
-	private TextView meFocus = null;
-	private TextView meChangeInfo = null;
+	private Button login;
+	private View view;
+	private TextView meFans;
+	private TextView mePost;
+	private TextView meCollection;
+	private TextView meFocus;
+	private TextView meChangeInfo;
 	private final int CLICK_LOGIN = 1;
 	private final int CLICK_FANS = 2;
     private final int CLICK_CHANGE_INFO = 3;
+    private final int CLICK_MYPOST = 4 ;
 	ImageView imageview;
 	Bitmap bitmap;
 
@@ -83,7 +82,11 @@ public class MeFragment extends Fragment {
 			}else if(tag == CLICK_CHANGE_INFO){
                 intent.setClass(getActivity(), ChangeInfoActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
-            } else {
+            } else if(tag == CLICK_MYPOST){
+                intent.setClass(getActivity(), MyArticleActivity.class);
+                startActivityForResult(intent,REQUEST_CODE);
+            }
+            else {
 				Toast.makeText(getActivity(), "登录!",
 						Toast.LENGTH_LONG).show();
 			}
@@ -106,7 +109,6 @@ public class MeFragment extends Fragment {
 		SharedPreferences preferences;
 		preferences = getActivity().getSharedPreferences("loginInfo", 0);
 		int iflogin = preferences.getInt("login", 0);
-        //int iflogin = 2;
 		if (iflogin == 001) {
 			String customername = preferences.getString("customerName", null);
 			int fansCount = preferences.getInt("fansCount", 0);
@@ -147,6 +149,8 @@ public class MeFragment extends Fragment {
                     R.id.changeInfo);
             changeInfo.setOnClickListener(listener);
             changeInfo.setTag(CLICK_CHANGE_INFO);
+            post.setOnClickListener(listener);
+            post.setTag(CLICK_MYPOST);
 		} else {
 			imageview = (ImageView) getView().findViewById(R.id.myPic);
 			TextView userName = (TextView) getView()

@@ -58,4 +58,5 @@
     <string name="usersiguration">个性签名:</string>
     <string name="nickwarninfo">以中文或英文字母开头，限4－16个字符，一个汉字为两个字符</string>
     <string name="surebutton">确定</string>
+    <string name="signaturewarninfo">个性签名，彰显你的个性</string>
 </resources>

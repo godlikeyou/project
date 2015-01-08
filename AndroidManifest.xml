@@ -57,6 +57,14 @@
             android:name="com.crazyfish.activity.ChangeNicknameActivity"
             android:label="修改用户昵称">
         </activity>
+        <activity
+            android:name="com.crazyfish.activity.ChangeSignatureActivity"
+            android:label="修改用户个性签名">
+        </activity>
+        <activity
+            android:name="com.crazyfish.activity.MyArticleActivity"
+            android:label="我的帖子">
+        </activity>
     </application>
 
 </manifest>
