@@ -18,15 +18,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bba31d80-e611-4900-ab8e-95cbd3a6a9a5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crazyfish/useradapter/AllArticleAdapter.java" afterPath="$PROJECT_DIR$/src/com/crazyfish/useradapter/AllArticleAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crazyfish/util/GlobalVariable.java" afterPath="$PROJECT_DIR$/src/com/crazyfish/util/GlobalVariable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crazyfish/activity/fragment/HomeFragment.java" afterPath="$PROJECT_DIR$/src/com/crazyfish/activity/fragment/HomeFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crazyfish/util/JsonCodec.java" afterPath="$PROJECT_DIR$/src/com/crazyfish/util/JsonCodec.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crazyfish/activity/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/crazyfish/activity/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/all_article.xml" afterPath="$PROJECT_DIR$/res/layout/all_article.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/crazyfish/extension/ResizeLayout.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="demo.iws" />
@@ -91,8 +83,8 @@
       <file leaf-file-name="HomeFragment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/fragment/HomeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.87616825" vertical-offset="2199" max-vertical-offset="7062">
-              <caret line="153" column="21" selection-start-line="153" selection-start-column="21" selection-end-line="153" selection-end-column="21" />
+            <state vertical-scroll-proportion="6.0654206" vertical-offset="0" max-vertical-offset="7062">
+              <caret line="154" column="22" selection-start-line="154" selection-start-column="22" selection-end-line="154" selection-end-column="22" />
               <folding>
                 <element signature="e#2167#6050#0" expanded="true" />
                 <element signature="e#6046#6047#0" expanded="true" />
@@ -401,20 +393,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -679,7 +657,11 @@
       <created>1420695276016</created>
       <updated>1420695276016</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Squashed commit of the following:&#10;&#10;commit 48ec4706edc445e717664e291acd33233fa3adf9&#10;Author: godlikeyou &lt;841483234@qq.com&gt;&#10;Date:   Wed Dec 24 11:40:18 2014 +0800&#10;&#10;&#9;Merge remote-tracking branch 'origin/master'&#10;&#10;commit 62b06e87e3394207d8ee15c69625993144c3e200&#10;Author: godlikeyou &lt;841483234@qq.com&gt;&#10;Date:   Wed Dec 24 11:34:57 2014 +0800&#10;&#10;&#9;用户&#10;&#10;commit 8b1a6903890505e57edc8e0f82e65a88cd0074e8&#10;Author: godlikeyou &lt;841483234@qq.com&gt;&#10;Date:   Wed Dec 24 11:27:05 2014 +0800&#10;&#10;&#9;Merge remote-tracking branch 'origin/master'&#10;&#10;commit ae0822d8d245644b2e2cdfd03b3955f3e406f7bf&#10;Author: godlikeyou &lt;841483234@qq.com&gt;&#10;Date:   Wed Dec 24 11:23:41 2014 +0800&#10;&#10;&#9;login&#10;">
+      <created>1420710233177</created>
+      <updated>1420710233177</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1267,8 +1249,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crazyfish/activity/fragment/HomeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.87616825" vertical-offset="2199" max-vertical-offset="7062">
-          <caret line="153" column="21" selection-start-line="153" selection-start-column="21" selection-end-line="153" selection-end-column="21" />
+        <state vertical-scroll-proportion="6.0654206" vertical-offset="0" max-vertical-offset="7062">
+          <caret line="154" column="22" selection-start-line="154" selection-start-column="22" selection-end-line="154" selection-end-column="22" />
           <folding>
             <element signature="e#2167#6050#0" expanded="true" />
             <element signature="e#6046#6047#0" expanded="true" />
