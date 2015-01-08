@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.nfc.FormatException;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crazyfish.asynctask.BitmapWorkerTask;
 import com.crazyfish.demo.R;
@@ -38,8 +43,11 @@ public class AllArticleAdapter extends BaseAdapter {
     private List<Map<String, Object>> listItems;
     private LayoutInflater listContainer;
     private EditText etInput;
-    private FrameLayout llUserPost;
+    private LinearLayout llUserPost;
     private LinearLayout bottomList;
+    private Button btUserRec;
+    private String gid;
+    private Handler h;
     public final class AllArticleView {
         public TextView title;
         public TextView content;
@@ -50,17 +58,20 @@ public class AllArticleAdapter extends BaseAdapter {
         public TextView userName;
         public TextView signature;
         public ImageView userUpload;
-        public EditText etInput;
+        //public EditText etInput;
         // public ProgressBar picLoad;
     }
 
-    public AllArticleAdapter(Context context, List<Map<String, Object>> list,EditText etInput,FrameLayout llUserPost,LinearLayout bottomList) {
+    public AllArticleAdapter(Context context, List<Map<String, Object>> list,EditText etInput,LinearLayout llUserPost,
+                             LinearLayout bottomList,Button btPostRec,Handler h) {
         this.context = context;
         listContainer = LayoutInflater.from(context);
         this.listItems = list;
         this.etInput = etInput;
         this.llUserPost = llUserPost;
         this.bottomList = bottomList;
+        this.btUserRec = btPostRec;
+        this.h = h;
     }
 
     @Override
@@ -109,15 +120,29 @@ public class AllArticleAdapter extends BaseAdapter {
                 coll.startServiceThread();
                 String result = coll.getResultData();
                 Log.i("result",result);
+                if( result.equals("\"success\"")){
+                    Message m = new Message();
+                    m.what = GlobalVariable.HANDLER_COLLECTION_CODE;
+                    Bundle b = new Bundle();
+                    b.putInt("sf",GlobalVariable.SUCCESS);
+                    b.putString("gid",g);
+                    m.setData(b);
+                    h.sendMessage(m);
+                }
+                if( result.equals("\"failure\"")){
+                    Message m = new Message();
+                    m.what = GlobalVariable.HANDLER_COLLECTION_CODE;
+                    Bundle b = new Bundle();
+                    b.putInt("sf",GlobalVariable.FAILURE);
+                    m.setData(b);
+                    h.sendMessage(m);
+                }
             }
         });
         builder.setNegativeButton("取消", null)
                 .show();
     }
     private void goodGag(String gid){
-
-    }
-    private void recGag(String gid){
 
     }
     @Override
@@ -142,7 +167,7 @@ public class AllArticleAdapter extends BaseAdapter {
                     .findViewById(R.id.tvSignature);
             view.userUpload = (ImageView) convertView
                     .findViewById(R.id.ivUserUpload);
-            view.etInput = (EditText)convertView.findViewById(R.id.etInput);
+            //view.etInput = (EditText)convertView.findViewById(R.id.etInput);
             // view.picLoad = (ProgressBar) convertView
             // .findViewById(R.id.pbPicLoad);
             convertView.setTag(view);
@@ -205,14 +230,82 @@ public class AllArticleAdapter extends BaseAdapter {
                     //commentPop.dismiss();
                     etInput.setVisibility(View.VISIBLE);
                     llUserPost.setVisibility(View.VISIBLE);
-                    bottomList.setVisibility(View.INVISIBLE);
-                    //finalView.etInput.setVisibility(View.VISIBLE);
-                    //finalView.etInput.setFocusableInTouchMode(true);
-                    //finalView.etInput.requestFocus();
-                    recGag(String.valueOf(listItems.get(p).get("gId")));
+                    gid = String.valueOf(listItems.get(p).get("gId"));
+                    btUserRec.setOnClickListener(RecListener);
+                }
+            });
+            view.btnGood.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("woshi","hh");
+                    gid = String.valueOf(listItems.get(p).get("gId"));
+                    SharedPreferences sp = context.getSharedPreferences("loginInfo",0);
+                    String uid = sp.getString("customerId",null);
+                    String url = GlobalVariable.URLHEAD + "/gagnausea/addGagNausea";
+                    List<NameValuePair> params = new ArrayList<NameValuePair>();
+                    params.add(new BasicNameValuePair("type","1"));
+                    params.add(new BasicNameValuePair("gid",gid));
+                    params.add(new BasicNameValuePair("uid",uid));
+                    POSTThread pt = new POSTThread(url,params);
+                    pt.startServiceThread();
+                    String result = pt.getResultData();
+                    Log.i("result",result);
+                    if( result.equals("\"success\"")){
+                        int goodc = Integer.valueOf(listItems.get(p).get("gtGoodcount").toString());
+                        Message m = new Message();
+                        m.what = GlobalVariable.HANDLER_GOOD_CODE;
+                        Bundle b = new Bundle();
+                        b.putInt("sf", GlobalVariable.SUCCESS);
+                        b.putInt("goodc", goodc + 1);
+                        b.putString("gid", gid);
+                        m.setData(b);
+                        h.sendMessage(m);
+                    }
+                    if( result.equals("\"failure\"")){
+                        Message m = new Message();
+                        m.what = GlobalVariable.HANDLER_GOOD_CODE;
+                        Bundle b = new Bundle();
+                        b.putInt("sf", GlobalVariable.FAILURE);
+                        m.setData(b);
+                        h.sendMessage(m);
+                    }
                 }
             });
         }
         return convertView;
     }
+    private View.OnClickListener RecListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String info = etInput.getText().toString();
+            SharedPreferences sp = context.getSharedPreferences("loginInfo",0);
+            String uid = sp.getString("customerId",null);
+            String url = GlobalVariable.URLHEAD + "/gagreply/addGagReply";
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("gid",gid));
+            params.add(new BasicNameValuePair("uid",uid));
+            params.add(new BasicNameValuePair("content",info));
+            POSTThread pt = new POSTThread(url,params);
+            pt.startServiceThread();
+            String result = pt.getResultData();
+            Log.i("result",result);
+            if( result.equals("\"success\"")){
+                Message m = new Message();
+                m.what = GlobalVariable.HANDLER_REC_CODE;
+                Bundle b = new Bundle();
+                b.putInt("sf",GlobalVariable.SUCCESS);
+                b.putString("gid",gid);
+                m.setData(b);
+                h.sendMessage(m);
+            }
+            if( result.equals("\"failure\"")){
+                Message m = new Message();
+                m.what = GlobalVariable.HANDLER_REC_CODE;
+                Bundle b = new Bundle();
+                b.putInt("sf",GlobalVariable.FAILURE);
+                m.setData(b);
+                h.sendMessage(m);
+            }
+        }
+    };
 }

@@ -1,16 +1,19 @@
 package com.crazyfish.util;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * @description jsonÊý¾Ý½âÎö
+ * @description jsonï¿½ï¿½Ý½ï¿½ï¿½ï¿½
  * @author kamal
  * @time 2014.12.22
  * @version1.0
@@ -41,4 +44,13 @@ public class JsonCodec {
 		}
 		return lmap;
 	}
+    public static List<Map<String,Object>> changeList(List<Map<String,Object>> lmap,String gid,int goodc){
+        for(int i = 0;i < lmap.size();i ++){
+            Map<String,Object> map = lmap.get(i);
+            if( map.get("gId").toString().equals(gid)){
+                map.put("gtGoodcount",goodc);
+            }
+        }
+        return lmap;
+    }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
@@ -51,8 +53,9 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	private int lastVisibleIndex;
 	private int size;//
 	private String result;
-    private FrameLayout llUserPost;
+    private LinearLayout llUserPost;
     private LinearLayout bottomList;
+    private Button btUserRec;
 	// private HkDialogLoading dialogLoading;
 	private Button btRefresh;
 
@@ -114,6 +117,42 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 					btRefresh.setVisibility(View.GONE);
 				}
 				break;
+                case GlobalVariable.HANDLER_GOOD_CODE:
+                    Bundle b = msg.getData();
+                    if( b.getInt("sf") == GlobalVariable.SUCCESS){
+                        int goodc = b.getInt("goodc");
+                        String gid = b.getString("gid");
+                        lmap = JsonCodec.changeList(lmap,gid,goodc);
+                        allAdapter.notifyDataSetChanged();
+                        Toast.makeText(getActivity(),"点赞成功,恭喜",Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getActivity(),"点赞失败,悲剧，请检查网络",Toast.LENGTH_LONG).show();
+                    }
+                break;
+                case GlobalVariable.HANDLER_COLLECTION_CODE:
+                    Bundle bu = msg.getData();
+                    if( bu.getInt("sf") == GlobalVariable.SUCCESS){
+                        String gid = bu.getString("gid");
+                        Toast.makeText(getActivity(),"收藏成功,恭喜",Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getActivity(),"收藏失败,悲剧，请检查网络",Toast.LENGTH_LONG).show();
+                    }
+                break;
+                case GlobalVariable.HANDLER_REC_CODE:
+                    Bundle bun = msg.getData();
+                    if( bun.getInt("sf") == GlobalVariable.SUCCESS){
+                        String gid = bun.getString("gid");
+                        LinearLayout bottomList = (LinearLayout)getActivity().findViewById(R.id.bottomList);
+                        LinearLayout flPost = (LinearLayout)getActivity().findViewById(R.id.llUserPost);
+                        bottomList.setVisibility(View.VISIBLE);
+                        flPost.setVisibility(View.INVISIBLE);
+                        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
+                        Toast.makeText(getActivity(),"评论成功,恭喜",Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getActivity(),"评论失败,悲剧，请检查网络",Toast.LENGTH_LONG).show();
+                    }
+                break;
 			}
 		}
 	};
@@ -122,8 +161,9 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
         etInput = (EditText)getActivity().findViewById(R.id.etInputA);
-        llUserPost = (FrameLayout)getActivity().findViewById(R.id.llUserPost);
+        llUserPost = (LinearLayout)getActivity().findViewById(R.id.llUserPost);
         bottomList = (LinearLayout)getActivity().findViewById(R.id.bottomList);
+        btUserRec = (Button)getActivity().findViewById(R.id.btUserRec);
 		if (NetUtil.checkNet(getActivity())) {
 			// dialogLoading = new HkDialogLoading(getActivity());
 			// dialogLoading.show();
@@ -144,7 +184,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			String url = GlobalVariable.URLHEAD + "/article/allarticle/1";
 			HttpGetTask task = new HttpGetTask(h);
 			task.execute(url);
-			allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList);
+			allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
 			lv.addFooterView(moreView);
 			lv.setAdapter(allAdapter);
 			lv.setonRefreshListener(new OnRefreshListener() {
@@ -241,7 +281,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
 			// json decode
 			lmap = JsonCodec.deJson(str, type);
-			allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList);
+			allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
 			lv.addFooterView(moreView);
 			lv.setAdapter(allAdapter);
 			bt.setOnClickListener(new OnClickListener() {

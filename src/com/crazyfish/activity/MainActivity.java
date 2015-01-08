@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.crazyfish.activity.fragment.FindFragment;
@@ -22,12 +26,47 @@ import com.crazyfish.activity.fragment.MeFragment;
 import com.crazyfish.activity.fragment.SettingFragment;
 import com.crazyfish.activity.fragment.TakePhotoFragment;
 import com.crazyfish.demo.R;
+import com.crazyfish.extension.ResizeLayout;
 //import com.crazyfish.extension.HkDialogLoading;
 
 public class MainActivity extends FragmentActivity {
 	private static FragmentManager fm;
 	private static final int REQUEST_CODE = 1;
+    private static final int BIGGER = 1;
+    private static final int SMALLER = 2;
+    private static final int MSG_RESIZE = 1;
+    private static final int HEIGHT_THREADHOLD = 30;
+    class InputHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_RESIZE: {
+                    if (msg.arg1 == BIGGER) {
+                        Toast.makeText(MainActivity.this,"隐藏软键盘",Toast.LENGTH_LONG).show();
+                        LinearLayout bottomList = (LinearLayout)findViewById(R.id.bottomList);
+                        LinearLayout flPost = (LinearLayout)findViewById(R.id.llUserPost);
+                        bottomList.setVisibility(View.VISIBLE);
+                        flPost.setVisibility(View.INVISIBLE);
+                        //findViewById(R.id.bottom_layout).setVisibility(View.VISIBLE);
+                    } else {
+                        Toast.makeText(MainActivity.this,"显示软键盘",Toast.LENGTH_LONG).show();
+                        LinearLayout bottomList = (LinearLayout)findViewById(R.id.bottomList);
+                        LinearLayout flPost = (LinearLayout)findViewById(R.id.llUserPost);
+                        bottomList.setVisibility(View.INVISIBLE);
+                        flPost.setVisibility(View.VISIBLE);
+                        //findViewById(R.id.bottom_layout).setVisibility(View.GONE);
+                    }
+                }
+                break;
 
+                default:
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    }
+
+    private InputHandler mHandler = new InputHandler();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,7 +75,23 @@ public class MainActivity extends FragmentActivity {
 		fm = getSupportFragmentManager();
 		initFragment();
 		this.dealBottomButtonClickEvent();
-	}
+
+        ResizeLayout layout = (ResizeLayout) findViewById(R.id.resizeLL);
+        layout.setOnResizeListener(new ResizeLayout.OnResizeListener() {
+
+            public void OnResize(int w, int h, int oldw, int oldh) {
+                int change = BIGGER;
+                if (h < oldh) {
+                    change = SMALLER;
+                }
+
+                Message msg = new Message();
+                msg.what = 1;
+                msg.arg1 = change;
+                mHandler.sendMessage(msg);
+            }
+        });
+    }
 
 	private void initFragment() {
 		FragmentTransaction ft = fm.beginTransaction();
@@ -149,6 +204,12 @@ public class MainActivity extends FragmentActivity {
             isExit.show();*/
             super.openOptionsMenu();
         }else if(keyCode == KeyEvent.KEYCODE_BACK){
+            LinearLayout post = (LinearLayout)findViewById(R.id.llUserPost);
+            LinearLayout bot = (LinearLayout)findViewById(R.id.bottomList);
+            if( post.getVisibility() == View.VISIBLE){
+                bot.setVisibility(View.VISIBLE);
+                post.setVisibility(View.INVISIBLE);
+            }
             AlertDialog isExit = new AlertDialog.Builder(this).create();
             // 设置对话框标题
             isExit.setTitle("系统提示");
@@ -239,5 +300,9 @@ public class MainActivity extends FragmentActivity {
             }
         }
     };
-
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        Log.i("key pressed", String.valueOf(event.getKeyCode()));
+        return super.dispatchKeyEvent(event);
+    }
 }
