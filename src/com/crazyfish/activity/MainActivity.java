@@ -148,6 +148,17 @@ public class MainActivity extends FragmentActivity {
             // 显示对话框
             isExit.show();*/
             super.openOptionsMenu();
+        }else if(keyCode == KeyEvent.KEYCODE_BACK){
+            AlertDialog isExit = new AlertDialog.Builder(this).create();
+            // 设置对话框标题
+            isExit.setTitle("系统提示");
+            // 设置对话框消息
+            isExit.setMessage("确定要退出吗");
+            // 添加选择按钮并注册监听
+            isExit.setButton("确定", listener);
+            isExit.setButton2("取消", listener);
+            // 显示对话框
+            isExit.show();
         }
         return true;
     }
@@ -213,7 +224,7 @@ public class MainActivity extends FragmentActivity {
         editor.commit();
     }
     //弹出对话框
-    /*DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
+    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
         public void onClick(DialogInterface dialog, int which)
         {
             switch (which)
@@ -227,6 +238,6 @@ public class MainActivity extends FragmentActivity {
                     break;
             }
         }
-    };*/
+    };
 
 }
