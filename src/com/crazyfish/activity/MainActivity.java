@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.crazyfish.activity.fragment.FindFragment;
@@ -149,6 +148,17 @@ public class MainActivity extends FragmentActivity {
             // 显示对话框
             isExit.show();*/
             super.openOptionsMenu();
+        }else if(keyCode == KeyEvent.KEYCODE_BACK){
+            AlertDialog isExit = new AlertDialog.Builder(this).create();
+            // 设置对话框标题
+            isExit.setTitle("系统提示");
+            // 设置对话框消息
+            isExit.setMessage("确定要退出吗");
+            // 添加选择按钮并注册监听
+            isExit.setButton("确定", listener);
+            isExit.setButton2("取消", listener);
+            // 显示对话框
+            isExit.show();
         }
         return true;
     }
@@ -214,7 +224,7 @@ public class MainActivity extends FragmentActivity {
         editor.commit();
     }
     //弹出对话框
-    /*DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
+    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
         public void onClick(DialogInterface dialog, int which)
         {
             switch (which)
@@ -228,19 +238,6 @@ public class MainActivity extends FragmentActivity {
                     break;
             }
         }
-    };*/
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
-                /*隐藏软键盘*/
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
-            if(inputMethodManager.isActive()){
-                inputMethodManager.hideSoftInputFromWindow(MainActivity.this.getCurrentFocus().getWindowToken(), 0);
-            }
+    };
 
-            return true;
-        }
-        //if( event.getKeyCode() == KeyEvent.)
-        return super.dispatchKeyEvent(event);
-    }
 }

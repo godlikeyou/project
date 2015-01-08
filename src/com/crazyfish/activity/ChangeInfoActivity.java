@@ -4,12 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.crazyfish.demo.R;
@@ -24,7 +21,8 @@ public class ChangeInfoActivity extends Activity {
     TextView email;
     TextView tvTop;
     TextView usersiguration;
-    EditText editnick;
+    private final int CLICK_NiCKNAME = 1;
+    private final int CLICK_SIGNATURE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +66,9 @@ public class ChangeInfoActivity extends Activity {
         else
             usersiguration.setText(siguration);
         nickname.setOnClickListener(listener);
+        nickname.setTag(CLICK_NiCKNAME);
+        usersiguration.setOnClickListener(listener);
+        usersiguration.setTag(CLICK_SIGNATURE);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -76,7 +77,13 @@ public class ChangeInfoActivity extends Activity {
             //editnick = (EditText) findViewById(R.id.editnickname);
             //editnick.setVisibility(View.VISIBLE);
             //nickname.setVisibility(View.GONE);
-            Intent intent = new Intent(ChangeInfoActivity.this,ChangeNicknameActivity.class);
+            Intent intent = new Intent();
+            int tag = (Integer) v.getTag();
+            if(tag == CLICK_NiCKNAME) {
+                intent.setClass(ChangeInfoActivity.this, ChangeNicknameActivity.class);
+            }else if(tag == CLICK_SIGNATURE){
+                intent.setClass(ChangeInfoActivity.this, ChangeSignatureActivity.class);
+            }
             startActivity(intent);
         }
     };
