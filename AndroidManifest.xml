@@ -66,6 +66,9 @@
             android:name="com.crazyfish.activity.MyArticleActivity"
             android:label="我的帖子">
         </activity>
+        <activity android:name="com.crazyfish.activity.TextPostActivity"
+            android:label="纯文本提交">
+        </activity>
     </application>
 
 </manifest>

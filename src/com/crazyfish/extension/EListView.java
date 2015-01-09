@@ -1,3 +1,4 @@
+
 package com.crazyfish.extension;
 
 import java.util.Date;
@@ -22,355 +23,316 @@ import android.widget.ListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
- * 
- * ×Ô¶¨ÒåMsgListView£¬¼Ì³ĞÁËListView£¬ µ«Ìî³äÁËlistviewµÄÍ·²¿£¬¼´ÏÂÀ­Ë¢ĞÂÑùÊ½£¬²¢ÊµÏÖÆä¹¦ÄÜ
- * 
+ * è‡ªå®šä¹‰MsgListViewï¼Œç»§æ‰¿äº†ListViewï¼Œ ä½†å¡«å……äº†listviewçš„å¤´éƒ¨ï¼Œå³ä¸‹æ‹‰åˆ·æ–°æ ·å¼ï¼Œå¹¶å®ç°å…¶åŠŸèƒ½
+ *
  * @author yanbo
- * 
  */
-
 public class EListView extends ListView implements OnScrollListener {
-	private final static int RELEASE_To_REFRESH = 0;
-	private final static int PULL_To_REFRESH = 1;
-	private final static int REFRESHING = 2;
-	private final static int DONE = 3;
-	private final static int NET_STATE_ON = 1;//1ÔÚÏß£¬0ÀëÏß
-	private final static int NET_STATE_OUT = 0;
-	private LayoutInflater inflater;
+    private final static int RELEASE_To_REFRESH = 0;
+    private final static int PULL_To_REFRESH = 1;
+    private final static int REFRESHING = 2;
+    private final static int DONE = 3;
+    private final static int NET_STATE_ON = 1;//1åœ¨çº¿ï¼Œ0ç¦»çº¿
+    private final static int NET_STATE_OUT = 0;
+    private LayoutInflater inflater;
+    private LinearLayout headView; // å¤´éƒ¨
+    private TextView tipsTextview;// ä¸‹æ‹‰åˆ·æ–°
+    private TextView lastUpdatedTextView;// æœ€æ–°æ›´æ–°
+    private ImageView arrowImageView;// ç®­å¤´
+    private ProgressBar progressBar;// åˆ·æ–°è¿›åº¦æ¡
+    private RotateAnimation animation;// æ—‹è½¬ç‰¹æ•ˆ åˆ·æ–°ä¸­ç®­å¤´ç¿»è½¬ å‘ä¸‹å˜å‘ä¸Š
+    private RotateAnimation reverseAnimation;
+    // ç”¨äºä¿è¯startYçš„å€¼åœ¨ä¸€ä¸ªå®Œæ•´çš„touchäº‹ä»¶ä¸­åªè¢«è®°å½•ä¸€æ¬¡
+    private boolean isRecored;
+    private int headContentWidth;// å¤´éƒ¨å®½åº¦
+    private int headContentHeight;// å¤´éƒ¨é«˜åº¦
+    private int startY;// é«˜åº¦èµ·å§‹ä½ç½®ï¼Œç”¨æ¥è®°å½•ä¸å¤´éƒ¨è·ç¦»
+    private int firstItemIndex;// åˆ—è¡¨ä¸­é¦–è¡Œç´¢å¼•ï¼Œç”¨æ¥è®°å½•å…¶ä¸å¤´éƒ¨è·ç¦»
+    private int state;// ä¸‹æ‹‰åˆ·æ–°ä¸­ã€æ¾å¼€åˆ·æ–°ä¸­ã€æ­£åœ¨åˆ·æ–°ä¸­ã€å®Œæˆåˆ·æ–°
+    private int netstate = NET_STATE_ON;//ç½‘ç»œçŠ¶æ€
+    private boolean isBack;
+    private Context context;
+    public OnRefreshListener refreshListener;// åˆ·æ–°ç›‘å¬
+    private final static String TAG = "abc";
 
-	private LinearLayout headView; // Í·²¿
+    public EListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
 
-	private TextView tipsTextview;// ÏÂÀ­Ë¢ĞÂ
-	private TextView lastUpdatedTextView;// ×îĞÂ¸üĞÂ
-	private ImageView arrowImageView;// ¼ıÍ·
-	private ProgressBar progressBar;// Ë¢ĞÂ½ø¶ÈÌõ
+    private void init(Context context) {
+        this.context = context;
+        inflater = LayoutInflater.from(context);
+        headView = (LinearLayout) inflater
+                .inflate(R.layout.headerrefresh, null);// listviewæ‹¼æ¥headview
+        arrowImageView = (ImageView) headView
+                .findViewById(R.id.head_arrowImageView);// headviewä¸­å„view
+        arrowImageView.setMinimumWidth(50);
+        arrowImageView.setMinimumHeight(50);
+        progressBar = (ProgressBar) headView
+                .findViewById(R.id.head_progressBar);// headviewä¸­å„view
+        tipsTextview = (TextView) headView.findViewById(R.id.head_tipsTextView);// headviewä¸­å„view
+        lastUpdatedTextView = (TextView) headView
+                .findViewById(R.id.head_lastUpdatedTextView);// headviewä¸­å„view
+        measureView(headView);
+        headContentHeight = headView.getMeasuredHeight();// å¤´éƒ¨é«˜åº¦
+        headContentWidth = headView.getMeasuredWidth();// å¤´éƒ¨å®½åº¦
+        headView.setPadding(0, -1 * headContentHeight, 0, 0);// setPadding(int
+// left, int
+// top, int
+// right, int
+// bottom)
+        headView.invalidate();// Invalidate the whole view
+        Log.v("size", "width:" + headContentWidth + " height:"
+                + headContentHeight);
+        addHeaderView(headView);// æ·»åŠ è¿›headview
+        setOnScrollListener(this);// æ»šåŠ¨ç›‘å¬
+        animation = new RotateAnimation(0, -180,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setDuration(250);
+        animation.setFillAfter(true);// ç‰¹æ•ˆanimationè®¾ç½®
+        reverseAnimation = new RotateAnimation(-180, 0,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+        reverseAnimation.setInterpolator(new LinearInterpolator());
+        reverseAnimation.setDuration(250);
+        reverseAnimation.setFillAfter(true);// ç‰¹æ•ˆreverseAnimationè®¾ç½®
+    }
 
-	private RotateAnimation animation;// Ğı×ªÌØĞ§ Ë¢ĞÂÖĞ¼ıÍ··­×ª ÏòÏÂ±äÏòÉÏ
-	private RotateAnimation reverseAnimation;
+    public void onScroll(AbsListView arg0, int firstVisiableItem, int arg2,// æ»šåŠ¨äº‹ä»¶
+                         int arg3) {
+        firstItemIndex = firstVisiableItem;// å¾—åˆ°é¦–itemç´¢å¼•
+        //Toast.makeText(context,"æ”¶"+firstVisiableItem,Toast.LENGTH_LONG).show();
+    }
 
-	// ÓÃÓÚ±£Ö¤startYµÄÖµÔÚÒ»¸öÍêÕûµÄtouchÊÂ¼şÖĞÖ»±»¼ÇÂ¼Ò»´Î
-	private boolean isRecored;
+    public void onScrollStateChanged(AbsListView arg0, int arg1) {
+    }
 
-	private int headContentWidth;// Í·²¿¿í¶È
-	private int headContentHeight;// Í·²¿¸ß¶È
+    public boolean onTouchEvent(MotionEvent event) {// è§¦æ‘¸äº‹ä»¶
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:// æ‰‹æŒ‰ä¸‹ å¯¹åº”ä¸‹æ‹‰åˆ·æ–°çŠ¶æ€
+                if (firstItemIndex == 0 && !isRecored) {// å¦‚æœé¦–itemç´¢å¼•ä¸º0ï¼Œä¸”å°šæœªè®°å½•startY,åˆ™åœ¨ä¸‹æ‹‰æ—¶è®°å½•ä¹‹ï¼Œå¹¶æ‰§è¡ŒisRecored
+// = true;
+                    startY = (int) event.getY() + 200;
+                    isRecored = true;
+                    Log.v(TAG, "åœ¨downæ—¶å€™è®°å½•å½“å‰ä½ç½®â€˜");
+                }
+                break;
+            case MotionEvent.ACTION_UP:// æ‰‹æ¾å¼€ å¯¹åº”æ¾å¼€åˆ·æ–°çŠ¶æ€
+                if (state != REFRESHING) {// æ‰‹æ¾å¼€æœ‰4ä¸ªçŠ¶æ€ï¼šä¸‹æ‹‰åˆ·æ–°ã€æ¾å¼€åˆ·æ–°ã€æ­£åœ¨åˆ·æ–°ã€å®Œæˆåˆ·æ–°ã€‚å¦‚æœå½“å‰ä¸æ˜¯æ­£åœ¨åˆ·æ–°
+                    if (state == DONE) {// å¦‚æœå½“å‰æ˜¯å®Œæˆåˆ·æ–°ï¼Œä»€ä¹ˆéƒ½ä¸åš
+                    }
+                    if (state == PULL_To_REFRESH) {// å¦‚æœå½“å‰æ˜¯ä¸‹æ‹‰åˆ·æ–°ï¼ŒçŠ¶æ€è®¾ä¸ºå®Œæˆåˆ·æ–°ï¼ˆæ„å³ä¸‹æ‹‰åˆ·æ–°ä¸­å°±æ¾å¼€äº†ï¼Œå®é™…æœªå®Œæˆåˆ·æ–°ï¼‰ï¼Œæ‰§è¡ŒchangeHeaderViewByState()
+                        state = DONE;
+                        if (!NetUtil.checkNet(context)) {
+                            netstate = NET_STATE_OUT;
+                        }
+                        changeHeaderViewByState();
+                        Log.v(TAG, "ç”±ä¸‹æ‹‰åˆ·æ–°çŠ¶æ€ï¼Œåˆ°doneçŠ¶æ€");
+                    }
+                    if (state == RELEASE_To_REFRESH) {// å¦‚æœå½“å‰æ˜¯æ¾å¼€åˆ·æ–°ï¼ŒçŠ¶æ€è®¾ä¸ºæ­£åœ¨åˆ·æ–°ï¼ˆæ„å³æ¾å¼€åˆ·æ–°ä¸­æ¾å¼€æ‰‹ï¼Œæ‰æ˜¯çœŸæ­£åœ°åˆ·æ–°ï¼‰ï¼Œæ‰§è¡ŒchangeHeaderViewByState()
+                        state = REFRESHING;
+                        if (!NetUtil.checkNet(context)) {
+                            netstate = NET_STATE_OUT;
+                        }
+                        changeHeaderViewByState();
+                        onRefresh();// çœŸæ­£åˆ·æ–°ï¼Œæ‰€ä»¥æ‰§è¡Œonrefreshï¼Œæ‰§è¡ŒåçŠ¶æ€è®¾ä¸ºå®Œæˆåˆ·æ–°
+                        Log.v(TAG, "ç”±æ¾å¼€åˆ·æ–°çŠ¶æ€ï¼Œåˆ°doneçŠ¶æ€");
+                    }
+                }
+                isRecored = false;// æ‰‹æ¾å¼€ï¼Œåˆ™æ— è®ºæ€æ ·ï¼Œå¯ä»¥é‡æ–°è®°å½•startY,å› ä¸ºåªè¦æ‰‹æ¾å¼€å°±è®¤ä¸ºä¸€æ¬¡åˆ·æ–°å·²å®Œæˆ
+                isBack = false;
+                break;
+            case MotionEvent.ACTION_MOVE:// æ‰‹æ‹–åŠ¨ï¼Œæ‹–åŠ¨è¿‡ç¨‹ä¸­ä¸æ–­åœ°å®æ—¶è®°å½•å½“å‰ä½ç½®
+                int tempY = (int) event.getY();
+                if (!isRecored && firstItemIndex == 0) {// å¦‚æœé¦–itemç´¢å¼•ä¸º0ï¼Œä¸”å°šæœªè®°å½•startY,åˆ™åœ¨æ‹–åŠ¨æ—¶è®°å½•ä¹‹ï¼Œå¹¶æ‰§è¡ŒisRecored
+// = true;
+                    Log.v(TAG, "åœ¨moveæ—¶å€™è®°å½•ä¸‹ä½ç½®");
+                    isRecored = true;
+                    startY = tempY;
+                }
+                if (state != REFRESHING && isRecored) {// å¦‚æœçŠ¶æ€ä¸æ˜¯æ­£åœ¨åˆ·æ–°ï¼Œä¸”å·²è®°å½•startYï¼štempYä¸ºæ‹–åŠ¨è¿‡ç¨‹ä¸­ä¸€ç›´åœ¨å˜çš„é«˜åº¦ï¼ŒstartYä¸ºæ‹–åŠ¨èµ·å§‹é«˜åº¦
+// å¯ä»¥æ¾æ‰‹å»åˆ·æ–°äº†
+                    if (state == RELEASE_To_REFRESH) {// å¦‚æœçŠ¶æ€æ˜¯æ¾å¼€åˆ·æ–°
+// å¾€ä¸Šæ¨äº†ï¼Œæ¨åˆ°äº†å±å¹•è¶³å¤Ÿæ©ç›–headçš„ç¨‹åº¦ï¼Œä½†æ˜¯è¿˜æ²¡æœ‰æ¨åˆ°å…¨éƒ¨æ©ç›–çš„åœ°æ­¥
+                        if ((tempY - startY < headContentHeight)// å¦‚æœå®æ—¶é«˜åº¦å¤§äºèµ·å§‹é«˜åº¦ï¼Œä¸”ä¸¤è€…ä¹‹å·®å°äºå¤´éƒ¨é«˜åº¦ï¼Œåˆ™çŠ¶æ€è®¾ä¸ºä¸‹æ‹‰åˆ·æ–°
+                                && (tempY - startY) > 0) {
+                            state = PULL_To_REFRESH;
+                            netstate = 1;
+                            changeHeaderViewByState();
+                            Log.v(TAG, "ç”±æ¾å¼€åˆ·æ–°çŠ¶æ€è½¬å˜åˆ°ä¸‹æ‹‰åˆ·æ–°çŠ¶æ€");
+                        }
+// ä¸€ä¸‹å­æ¨åˆ°é¡¶äº†
+                        else if (tempY - startY <= 0) {// å¦‚æœå®æ—¶é«˜åº¦å°äºç­‰äºèµ·å§‹é«˜åº¦äº†ï¼Œåˆ™è¯´æ˜åˆ°é¡¶äº†ï¼ŒçŠ¶æ€è®¾ä¸ºå®Œæˆåˆ·æ–°
+                            state = DONE;
+                            changeHeaderViewByState();
+                            Log.v(TAG, "ç”±æ¾å¼€åˆ·æ–°çŠ¶æ€è½¬å˜åˆ°doneçŠ¶æ€");
+                        }
+// å¾€ä¸‹æ‹‰äº†ï¼Œæˆ–è€…è¿˜æ²¡æœ‰ä¸Šæ¨åˆ°å±å¹•é¡¶éƒ¨æ©ç›–headçš„åœ°æ­¥
+                        else {// å¦‚æœå½“å‰æ‹–åŠ¨è¿‡ç¨‹ä¸­æ—¢æ²¡æœ‰åˆ°ä¸‹æ‹‰åˆ·æ–°çš„åœ°æ­¥ï¼Œä¹Ÿæ²¡æœ‰åˆ°å®Œæˆåˆ·æ–°ï¼ˆåˆ°é¡¶ï¼‰çš„åœ°æ­¥ï¼Œåˆ™ä¿æŒæ¾å¼€åˆ·æ–°çŠ¶æ€
+// ä¸ç”¨è¿›è¡Œç‰¹åˆ«çš„æ“ä½œï¼Œåªç”¨æ›´æ–°paddingTopçš„å€¼å°±è¡Œäº†
+                        }
+                    }
+// è¿˜æ²¡æœ‰åˆ°è¾¾æ˜¾ç¤ºæ¾å¼€åˆ·æ–°çš„æ—¶å€™,DONEæˆ–è€…æ˜¯PULL_To_REFRESHçŠ¶æ€
+                    if (state == PULL_To_REFRESH) {// å¦‚æœçŠ¶æ€æ˜¯ä¸‹æ‹‰åˆ·æ–°
+// ä¸‹æ‹‰åˆ°å¯ä»¥è¿›å…¥RELEASE_TO_REFRESHçš„çŠ¶æ€
+                        if (tempY - startY >= headContentHeight) {// å¦‚æœå®æ—¶é«˜åº¦ä¸èµ·å§‹é«˜åº¦ä¹‹å·®å¤§äºç­‰äºå¤´éƒ¨é«˜åº¦ï¼Œåˆ™çŠ¶æ€è®¾ä¸ºæ¾å¼€åˆ·æ–°
+                            state = RELEASE_To_REFRESH;
+                            isBack = true;
+                            changeHeaderViewByState();
+                            Log.v(TAG, "ç”±doneæˆ–è€…ä¸‹æ‹‰åˆ·æ–°çŠ¶æ€è½¬å˜åˆ°æ¾å¼€åˆ·æ–°");
+                        }
+// ä¸Šæ¨åˆ°é¡¶äº†
+                        else if (tempY - startY <= 0) {// å¦‚æœå®æ—¶é«˜åº¦å°äºç­‰äºèµ·å§‹é«˜åº¦äº†ï¼Œåˆ™è¯´æ˜åˆ°é¡¶äº†ï¼ŒçŠ¶æ€è®¾ä¸ºå®Œæˆåˆ·æ–°
+                            state = DONE;
+                            changeHeaderViewByState();
+                            Log.v(TAG, "ç”±DOneæˆ–è€…ä¸‹æ‹‰åˆ·æ–°çŠ¶æ€è½¬å˜åˆ°doneçŠ¶æ€");
+                        }
+                    }
+// doneçŠ¶æ€ä¸‹
+                    if (state == DONE) {// å¦‚æœçŠ¶æ€æ˜¯å®Œæˆåˆ·æ–°
+                        if (tempY - startY > 0) {// å¦‚æœå®æ—¶é«˜åº¦å¤§äºèµ·å§‹é«˜åº¦äº†ï¼Œåˆ™çŠ¶æ€è®¾ä¸ºä¸‹æ‹‰åˆ·æ–°
+                            state = PULL_To_REFRESH;
+                            changeHeaderViewByState();
+                        }
+                    }
+// æ›´æ–°headViewçš„size
+                    if (state == PULL_To_REFRESH) {// å¦‚æœçŠ¶æ€æ˜¯ä¸‹æ‹‰åˆ·æ–°ï¼Œæ›´æ–°headviewçš„size ?
+                        headView.setPadding(0, -1 * headContentHeight
+                                + (tempY - startY), 0, 0);
+                        headView.invalidate();
+                    }
+// æ›´æ–°headViewçš„paddingTop
+                    if (state == RELEASE_To_REFRESH) {// å¦‚æœçŠ¶æ€æ˜¯æ¾å¼€åˆ·æ–°ï¼Œæ›´æ–°
+// headviewçš„paddingtop ?
+                        headView.setPadding(0, tempY - startY - headContentHeight,
+                                0, 0);
+                        headView.invalidate();
+                    }
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
 
-	private int startY;// ¸ß¶ÈÆğÊ¼Î»ÖÃ£¬ÓÃÀ´¼ÇÂ¼ÓëÍ·²¿¾àÀë
-	private int firstItemIndex;// ÁĞ±íÖĞÊ×ĞĞË÷Òı£¬ÓÃÀ´¼ÇÂ¼ÆäÓëÍ·²¿¾àÀë
+    // å½“çŠ¶æ€æ”¹å˜æ—¶å€™ï¼Œè°ƒç”¨è¯¥æ–¹æ³•ï¼Œä»¥æ›´æ–°ç•Œé¢
+    private void changeHeaderViewByState() {
+        switch (state) {
+            case RELEASE_To_REFRESH:
+                if (netstate == NET_STATE_OUT) {
+                    progressBar.setVisibility(View.GONE);
+                    tipsTextview.setVisibility(View.VISIBLE);
+                    arrowImageView.setVisibility(View.GONE);
+                    tipsTextview.setText("æ²¡æœ‰ç½‘ç»œ");
+                    break;
+                }
+                arrowImageView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                tipsTextview.setVisibility(View.VISIBLE);
+                lastUpdatedTextView.setVisibility(View.VISIBLE);
+                arrowImageView.clearAnimation();
+                arrowImageView.startAnimation(animation);
+                tipsTextview.setText("æ¾å¼€åˆ·æ–°");
+                Log.v(TAG, "å½“å‰çŠ¶æ€ï¼Œæ¾å¼€åˆ·æ–°");
+                break;
+            case PULL_To_REFRESH:
+                if (netstate == NET_STATE_OUT) {
+                    progressBar.setVisibility(View.GONE);
+                    tipsTextview.setVisibility(View.VISIBLE);
+                    arrowImageView.setVisibility(View.GONE);
+                    tipsTextview.setText("æ²¡æœ‰ç½‘ç»œ");
+                    break;
+                }
+                progressBar.setVisibility(View.GONE);
+                tipsTextview.setVisibility(View.VISIBLE);
+                lastUpdatedTextView.setVisibility(View.VISIBLE);
+                arrowImageView.clearAnimation();
+                arrowImageView.setVisibility(View.VISIBLE);
+// æ˜¯ç”±RELEASE_To_REFRESHçŠ¶æ€è½¬å˜æ¥çš„
+                if (isBack) {
+                    isBack = false;
+                    arrowImageView.clearAnimation();
+                    arrowImageView.startAnimation(reverseAnimation);
+                    tipsTextview.setText("ä¸‹æ‹‰åˆ·æ–°");
+                } else {
+                    tipsTextview.setText("ä¸‹æ‹‰åˆ·æ–°");
+                }
+                Log.v(TAG, "å½“å‰çŠ¶æ€ï¼Œä¸‹æ‹‰åˆ·æ–°");
+                break;
+            case REFRESHING:
+                if (netstate == NET_STATE_OUT) {
+                    progressBar.setVisibility(View.GONE);
+                    tipsTextview.setVisibility(View.VISIBLE);
+                    arrowImageView.setVisibility(View.GONE);
+                    tipsTextview.setText("æ²¡æœ‰ç½‘ç»œ");
+                    break;
+                }
+                headView.setPadding(0, 0, 0, 0);
+                headView.invalidate();
+                progressBar.setVisibility(View.VISIBLE);
+                arrowImageView.clearAnimation();
+                arrowImageView.setVisibility(View.GONE);
+                tipsTextview.setText("æ­£åœ¨åˆ·æ–°...");
+                lastUpdatedTextView.setVisibility(View.VISIBLE);
+                Log.v(TAG, "å½“å‰çŠ¶æ€,æ­£åœ¨åˆ·æ–°...");
+                break;
+            case DONE:
+                headView.setPadding(0, -1 * headContentHeight, 0, 0);
+                headView.invalidate();
+                progressBar.setVisibility(View.GONE);
+                arrowImageView.clearAnimation();
+                arrowImageView.setImageResource(R.drawable.home);
+                tipsTextview.setText("ä¸‹æ‹‰åˆ·æ–°");
+                lastUpdatedTextView.setVisibility(View.VISIBLE);
+                Log.v(TAG, "å½“å‰çŠ¶æ€ï¼Œdone");
+                break;
+        }
+    }
 
-	private int state;// ÏÂÀ­Ë¢ĞÂÖĞ¡¢ËÉ¿ªË¢ĞÂÖĞ¡¢ÕıÔÚË¢ĞÂÖĞ¡¢Íê³ÉË¢ĞÂ
-	private int netstate = NET_STATE_ON;//ÍøÂç×´Ì¬
-	private boolean isBack;
-	private Context context;
-	public OnRefreshListener refreshListener;// Ë¢ĞÂ¼àÌı
+    public void setonRefreshListener(OnRefreshListener refreshListener) {
+        this.refreshListener = refreshListener;
+    }
 
-	private final static String TAG = "abc";
+    public interface OnRefreshListener {
+        public void onRefresh();
+    }
 
-	public EListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(context);
-	}
+    public void onRefreshComplete() {
+        state = DONE;
+        lastUpdatedTextView.setText("æœ€è¿‘æ›´æ–°:" + new Date().toLocaleString());// åˆ·æ–°å®Œæˆæ—¶ï¼Œå¤´éƒ¨æé†’çš„åˆ·æ–°æ—¥æœŸ
+        changeHeaderViewByState();
+    }
 
-	private void init(Context context) {
-		this.context = context;
-		inflater = LayoutInflater.from(context);
+    private void onRefresh() {
+        if (refreshListener != null) {
+            refreshListener.onRefresh();
+        }
+    }
 
-		headView = (LinearLayout) inflater
-				.inflate(R.layout.headerrefresh, null);// listviewÆ´½Óheadview
-
-		arrowImageView = (ImageView) headView
-				.findViewById(R.id.head_arrowImageView);// headviewÖĞ¸÷view
-		arrowImageView.setMinimumWidth(50);
-		arrowImageView.setMinimumHeight(50);
-		progressBar = (ProgressBar) headView
-				.findViewById(R.id.head_progressBar);// headviewÖĞ¸÷view
-		tipsTextview = (TextView) headView.findViewById(R.id.head_tipsTextView);// headviewÖĞ¸÷view
-		lastUpdatedTextView = (TextView) headView
-				.findViewById(R.id.head_lastUpdatedTextView);// headviewÖĞ¸÷view
-
-		measureView(headView);
-		headContentHeight = headView.getMeasuredHeight();// Í·²¿¸ß¶È
-		headContentWidth = headView.getMeasuredWidth();// Í·²¿¿í¶È
-
-		headView.setPadding(0, -1 * headContentHeight, 0, 0);// setPadding(int
-																// left, int
-																// top, int
-																// right, int
-																// bottom)
-		headView.invalidate();// Invalidate the whole view
-
-		Log.v("size", "width:" + headContentWidth + " height:"
-				+ headContentHeight);
-
-		addHeaderView(headView);// Ìí¼Ó½øheadview
-		setOnScrollListener(this);// ¹ö¶¯¼àÌı
-
-		animation = new RotateAnimation(0, -180,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-		animation.setInterpolator(new LinearInterpolator());
-		animation.setDuration(250);
-		animation.setFillAfter(true);// ÌØĞ§animationÉèÖÃ
-
-		reverseAnimation = new RotateAnimation(-180, 0,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-		reverseAnimation.setInterpolator(new LinearInterpolator());
-		reverseAnimation.setDuration(250);
-		reverseAnimation.setFillAfter(true);// ÌØĞ§reverseAnimationÉèÖÃ
-	}
-
-	public void onScroll(AbsListView arg0, int firstVisiableItem, int arg2,// ¹ö¶¯ÊÂ¼ş
-			int arg3) {
-		firstItemIndex = firstVisiableItem;// µÃµ½Ê×itemË÷Òı
-	}
-
-	public void onScrollStateChanged(AbsListView arg0, int arg1) {
-	}
-
-	public boolean onTouchEvent(MotionEvent event) {// ´¥ÃşÊÂ¼ş
-		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:// ÊÖ°´ÏÂ ¶ÔÓ¦ÏÂÀ­Ë¢ĞÂ×´Ì¬
-			if (firstItemIndex == 0 && !isRecored) {// Èç¹ûÊ×itemË÷ÒıÎª0£¬ÇÒÉĞÎ´¼ÇÂ¼startY,ÔòÔÚÏÂÀ­Ê±¼ÇÂ¼Ö®£¬²¢Ö´ĞĞisRecored
-													// = true;
-				startY = (int) event.getY();
-				isRecored = true;
-
-				Log.v(TAG, "ÔÚdownÊ±ºò¼ÇÂ¼µ±Ç°Î»ÖÃ¡®");
-			}
-			break;
-
-		case MotionEvent.ACTION_UP:// ÊÖËÉ¿ª ¶ÔÓ¦ËÉ¿ªË¢ĞÂ×´Ì¬
-
-			if (state != REFRESHING) {// ÊÖËÉ¿ªÓĞ4¸ö×´Ì¬£ºÏÂÀ­Ë¢ĞÂ¡¢ËÉ¿ªË¢ĞÂ¡¢ÕıÔÚË¢ĞÂ¡¢Íê³ÉË¢ĞÂ¡£Èç¹ûµ±Ç°²»ÊÇÕıÔÚË¢ĞÂ
-				if (state == DONE) {// Èç¹ûµ±Ç°ÊÇÍê³ÉË¢ĞÂ£¬Ê²Ã´¶¼²»×ö
-				}
-				if (state == PULL_To_REFRESH) {// Èç¹ûµ±Ç°ÊÇÏÂÀ­Ë¢ĞÂ£¬×´Ì¬ÉèÎªÍê³ÉË¢ĞÂ£¨Òâ¼´ÏÂÀ­Ë¢ĞÂÖĞ¾ÍËÉ¿ªÁË£¬Êµ¼ÊÎ´Íê³ÉË¢ĞÂ£©£¬Ö´ĞĞchangeHeaderViewByState()
-					state = DONE;
-					if( !NetUtil.checkNet(context)){
-						netstate = NET_STATE_OUT;
-					}
-					changeHeaderViewByState();
-
-					Log.v(TAG, "ÓÉÏÂÀ­Ë¢ĞÂ×´Ì¬£¬µ½done×´Ì¬");
-				}
-				if (state == RELEASE_To_REFRESH) {// Èç¹ûµ±Ç°ÊÇËÉ¿ªË¢ĞÂ£¬×´Ì¬ÉèÎªÕıÔÚË¢ĞÂ£¨Òâ¼´ËÉ¿ªË¢ĞÂÖĞËÉ¿ªÊÖ£¬²ÅÊÇÕæÕıµØË¢ĞÂ£©£¬Ö´ĞĞchangeHeaderViewByState()
-					state = REFRESHING;
-					if( !NetUtil.checkNet(context)){
-						netstate = NET_STATE_OUT;
-					}
-					changeHeaderViewByState();
-					onRefresh();// ÕæÕıË¢ĞÂ£¬ËùÒÔÖ´ĞĞonrefresh£¬Ö´ĞĞºó×´Ì¬ÉèÎªÍê³ÉË¢ĞÂ
-
-					Log.v(TAG, "ÓÉËÉ¿ªË¢ĞÂ×´Ì¬£¬µ½done×´Ì¬");
-				}
-			}
-
-			isRecored = false;// ÊÖËÉ¿ª£¬ÔòÎŞÂÛÔõÑù£¬¿ÉÒÔÖØĞÂ¼ÇÂ¼startY,ÒòÎªÖ»ÒªÊÖËÉ¿ª¾ÍÈÏÎªÒ»´ÎË¢ĞÂÒÑÍê³É
-			isBack = false;
-
-			break;
-
-		case MotionEvent.ACTION_MOVE:// ÊÖÍÏ¶¯£¬ÍÏ¶¯¹ı³ÌÖĞ²»¶ÏµØÊµÊ±¼ÇÂ¼µ±Ç°Î»ÖÃ
-			int tempY = (int) event.getY();
-			if (!isRecored && firstItemIndex == 0) {// Èç¹ûÊ×itemË÷ÒıÎª0£¬ÇÒÉĞÎ´¼ÇÂ¼startY,ÔòÔÚÍÏ¶¯Ê±¼ÇÂ¼Ö®£¬²¢Ö´ĞĞisRecored
-													// = true;
-				Log.v(TAG, "ÔÚmoveÊ±ºò¼ÇÂ¼ÏÂÎ»ÖÃ");
-				isRecored = true;
-				startY = tempY;
-			}
-			if (state != REFRESHING && isRecored) {// Èç¹û×´Ì¬²»ÊÇÕıÔÚË¢ĞÂ£¬ÇÒÒÑ¼ÇÂ¼startY£ºtempYÎªÍÏ¶¯¹ı³ÌÖĞÒ»Ö±ÔÚ±äµÄ¸ß¶È£¬startYÎªÍÏ¶¯ÆğÊ¼¸ß¶È
-				// ¿ÉÒÔËÉÊÖÈ¥Ë¢ĞÂÁË
-				if (state == RELEASE_To_REFRESH) {// Èç¹û×´Ì¬ÊÇËÉ¿ªË¢ĞÂ
-					// ÍùÉÏÍÆÁË£¬ÍÆµ½ÁËÆÁÄ»×ã¹»ÑÚ¸ÇheadµÄ³Ì¶È£¬µ«ÊÇ»¹Ã»ÓĞÍÆµ½È«²¿ÑÚ¸ÇµÄµØ²½
-					if ((tempY - startY < headContentHeight)// Èç¹ûÊµÊ±¸ß¶È´óÓÚÆğÊ¼¸ß¶È£¬ÇÒÁ½ÕßÖ®²îĞ¡ÓÚÍ·²¿¸ß¶È£¬Ôò×´Ì¬ÉèÎªÏÂÀ­Ë¢ĞÂ
-							&& (tempY - startY) > 0) {
-						state = PULL_To_REFRESH;
-						netstate = 1;
-						changeHeaderViewByState();
-
-						Log.v(TAG, "ÓÉËÉ¿ªË¢ĞÂ×´Ì¬×ª±äµ½ÏÂÀ­Ë¢ĞÂ×´Ì¬");
-					}
-					// Ò»ÏÂ×ÓÍÆµ½¶¥ÁË
-					else if (tempY - startY <= 0) {// Èç¹ûÊµÊ±¸ß¶ÈĞ¡ÓÚµÈÓÚÆğÊ¼¸ß¶ÈÁË£¬ÔòËµÃ÷µ½¶¥ÁË£¬×´Ì¬ÉèÎªÍê³ÉË¢ĞÂ
-						state = DONE;
-						changeHeaderViewByState();
-
-						Log.v(TAG, "ÓÉËÉ¿ªË¢ĞÂ×´Ì¬×ª±äµ½done×´Ì¬");
-					}
-					// ÍùÏÂÀ­ÁË£¬»òÕß»¹Ã»ÓĞÉÏÍÆµ½ÆÁÄ»¶¥²¿ÑÚ¸ÇheadµÄµØ²½
-					else {// Èç¹ûµ±Ç°ÍÏ¶¯¹ı³ÌÖĞ¼ÈÃ»ÓĞµ½ÏÂÀ­Ë¢ĞÂµÄµØ²½£¬Ò²Ã»ÓĞµ½Íê³ÉË¢ĞÂ£¨µ½¶¥£©µÄµØ²½£¬Ôò±£³ÖËÉ¿ªË¢ĞÂ×´Ì¬
-						// ²»ÓÃ½øĞĞÌØ±ğµÄ²Ù×÷£¬Ö»ÓÃ¸üĞÂpaddingTopµÄÖµ¾ÍĞĞÁË
-					}
-				}
-				// »¹Ã»ÓĞµ½´ïÏÔÊ¾ËÉ¿ªË¢ĞÂµÄÊ±ºò,DONE»òÕßÊÇPULL_To_REFRESH×´Ì¬
-				if (state == PULL_To_REFRESH) {// Èç¹û×´Ì¬ÊÇÏÂÀ­Ë¢ĞÂ
-					// ÏÂÀ­µ½¿ÉÒÔ½øÈëRELEASE_TO_REFRESHµÄ×´Ì¬
-					if (tempY - startY >= headContentHeight) {// Èç¹ûÊµÊ±¸ß¶ÈÓëÆğÊ¼¸ß¶ÈÖ®²î´óÓÚµÈÓÚÍ·²¿¸ß¶È£¬Ôò×´Ì¬ÉèÎªËÉ¿ªË¢ĞÂ
-						state = RELEASE_To_REFRESH;
-						isBack = true;
-						changeHeaderViewByState();
-
-						Log.v(TAG, "ÓÉdone»òÕßÏÂÀ­Ë¢ĞÂ×´Ì¬×ª±äµ½ËÉ¿ªË¢ĞÂ");
-					}
-					// ÉÏÍÆµ½¶¥ÁË
-					else if (tempY - startY <= 0) {// Èç¹ûÊµÊ±¸ß¶ÈĞ¡ÓÚµÈÓÚÆğÊ¼¸ß¶ÈÁË£¬ÔòËµÃ÷µ½¶¥ÁË£¬×´Ì¬ÉèÎªÍê³ÉË¢ĞÂ
-						state = DONE;
-						changeHeaderViewByState();
-
-						Log.v(TAG, "ÓÉDOne»òÕßÏÂÀ­Ë¢ĞÂ×´Ì¬×ª±äµ½done×´Ì¬");
-					}
-				}
-
-				// done×´Ì¬ÏÂ
-				if (state == DONE) {// Èç¹û×´Ì¬ÊÇÍê³ÉË¢ĞÂ
-					if (tempY - startY > 0) {// Èç¹ûÊµÊ±¸ß¶È´óÓÚÆğÊ¼¸ß¶ÈÁË£¬Ôò×´Ì¬ÉèÎªÏÂÀ­Ë¢ĞÂ
-						state = PULL_To_REFRESH;
-						changeHeaderViewByState();
-					}
-				}
-
-				// ¸üĞÂheadViewµÄsize
-				if (state == PULL_To_REFRESH) {// Èç¹û×´Ì¬ÊÇÏÂÀ­Ë¢ĞÂ£¬¸üĞÂheadviewµÄsize ?
-					headView.setPadding(0, -1 * headContentHeight
-							+ (tempY - startY), 0, 0);
-					headView.invalidate();
-				}
-
-				// ¸üĞÂheadViewµÄpaddingTop
-				if (state == RELEASE_To_REFRESH) {// Èç¹û×´Ì¬ÊÇËÉ¿ªË¢ĞÂ£¬¸üĞÂ
-													// headviewµÄpaddingtop ?
-					headView.setPadding(0, tempY - startY - headContentHeight,
-							0, 0);
-					headView.invalidate();
-				}
-			}
-			break;
-		}
-		return super.onTouchEvent(event);
-	}
-
-	// µ±×´Ì¬¸Ä±äÊ±ºò£¬µ÷ÓÃ¸Ã·½·¨£¬ÒÔ¸üĞÂ½çÃæ
-	private void changeHeaderViewByState() {
-		switch (state) {
-		case RELEASE_To_REFRESH:
-			if( netstate == NET_STATE_OUT){
-				progressBar.setVisibility(View.GONE);
-				tipsTextview.setVisibility(View.VISIBLE);
-				arrowImageView.setVisibility(View.GONE);
-				tipsTextview.setText("Ã»ÓĞÍøÂç");
-				break;
-			}
-			arrowImageView.setVisibility(View.VISIBLE);
-			progressBar.setVisibility(View.GONE);
-			tipsTextview.setVisibility(View.VISIBLE);
-			lastUpdatedTextView.setVisibility(View.VISIBLE);
-
-			arrowImageView.clearAnimation();
-			arrowImageView.startAnimation(animation);
-
-			tipsTextview.setText("ËÉ¿ªË¢ĞÂ");
-
-			Log.v(TAG, "µ±Ç°×´Ì¬£¬ËÉ¿ªË¢ĞÂ");
-			break;
-		case PULL_To_REFRESH:
-			if( netstate == NET_STATE_OUT){
-				progressBar.setVisibility(View.GONE);
-				tipsTextview.setVisibility(View.VISIBLE);
-				arrowImageView.setVisibility(View.GONE);
-				tipsTextview.setText("Ã»ÓĞÍøÂç");
-				break;
-			}
-			progressBar.setVisibility(View.GONE);
-			tipsTextview.setVisibility(View.VISIBLE);
-			lastUpdatedTextView.setVisibility(View.VISIBLE);
-			arrowImageView.clearAnimation();
-			arrowImageView.setVisibility(View.VISIBLE);
-			// ÊÇÓÉRELEASE_To_REFRESH×´Ì¬×ª±äÀ´µÄ
-			if (isBack) {
-				isBack = false;
-				arrowImageView.clearAnimation();
-				arrowImageView.startAnimation(reverseAnimation);
-
-				tipsTextview.setText("ÏÂÀ­Ë¢ĞÂ");
-			} else {
-				tipsTextview.setText("ÏÂÀ­Ë¢ĞÂ");
-			}
-			Log.v(TAG, "µ±Ç°×´Ì¬£¬ÏÂÀ­Ë¢ĞÂ");
-			break;
-
-		case REFRESHING:
-			if( netstate == NET_STATE_OUT){
-				progressBar.setVisibility(View.GONE);
-				tipsTextview.setVisibility(View.VISIBLE);
-				arrowImageView.setVisibility(View.GONE);
-				tipsTextview.setText("Ã»ÓĞÍøÂç");
-				break;
-			}
-			headView.setPadding(0, 0, 0, 0);
-			headView.invalidate();
-
-			progressBar.setVisibility(View.VISIBLE);
-			arrowImageView.clearAnimation();
-			arrowImageView.setVisibility(View.GONE);
-			tipsTextview.setText("ÕıÔÚË¢ĞÂ...");
-			lastUpdatedTextView.setVisibility(View.VISIBLE);
-
-			Log.v(TAG, "µ±Ç°×´Ì¬,ÕıÔÚË¢ĞÂ...");
-			break;
-		case DONE:
-			headView.setPadding(0, -1 * headContentHeight, 0, 0);
-			headView.invalidate();
-
-			progressBar.setVisibility(View.GONE);
-			arrowImageView.clearAnimation();
-			arrowImageView.setImageResource(R.drawable.home);
-			tipsTextview.setText("ÏÂÀ­Ë¢ĞÂ");
-			lastUpdatedTextView.setVisibility(View.VISIBLE);
-
-			Log.v(TAG, "µ±Ç°×´Ì¬£¬done");
-			break;
-		}
-	}
-
-	public void setonRefreshListener(OnRefreshListener refreshListener) {
-		this.refreshListener = refreshListener;
-	}
-
-	public interface OnRefreshListener {
-		public void onRefresh();
-	}
-
-	public void onRefreshComplete() {
-		state = DONE;
-		lastUpdatedTextView.setText("×î½ü¸üĞÂ:" + new Date().toLocaleString());// Ë¢ĞÂÍê³ÉÊ±£¬Í·²¿ÌáĞÑµÄË¢ĞÂÈÕÆÚ
-		changeHeaderViewByState();
-	}
-
-	private void onRefresh() {
-		if (refreshListener != null) {
-			refreshListener.onRefresh();
-		}
-	}
-
-	// ´Ë·½·¨Ö±½ÓÕÕ°á×ÔÍøÂçÉÏµÄÒ»¸öÏÂÀ­Ë¢ĞÂµÄdemo£¬´Ë´¦ÊÇ¡°¹À¼Æ¡±headViewµÄwidthÒÔ¼°height
-	private void measureView(View child) {
-		ViewGroup.LayoutParams p = child.getLayoutParams();
-		if (p == null) {
-			p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-					ViewGroup.LayoutParams.WRAP_CONTENT);
-		}
-		int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0 + 0, p.width);
-		int lpHeight = p.height;
-		int childHeightSpec;
-		if (lpHeight > 0) {
-			childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight,
-					MeasureSpec.EXACTLY);
-		} else {
-			childHeightSpec = MeasureSpec.makeMeasureSpec(0,
-					MeasureSpec.UNSPECIFIED);
-		}
-		child.measure(childWidthSpec, childHeightSpec);
-	}
+    // æ­¤æ–¹æ³•ç›´æ¥ç…§æ¬è‡ªç½‘ç»œä¸Šçš„ä¸€ä¸ªä¸‹æ‹‰åˆ·æ–°çš„demoï¼Œæ­¤å¤„æ˜¯â€œä¼°è®¡â€headViewçš„widthä»¥åŠheight
+    private void measureView(View child) {
+        ViewGroup.LayoutParams p = child.getLayoutParams();
+        if (p == null) {
+            p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0 + 0, p.width);
+        int lpHeight = p.height;
+        int childHeightSpec;
+        if (lpHeight > 0) {
+            childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight,
+                    MeasureSpec.EXACTLY);
+        } else {
+            childHeightSpec = MeasureSpec.makeMeasureSpec(0,
+                    MeasureSpec.UNSPECIFIED);
+        }
+        child.measure(childWidthSpec, childHeightSpec);
+    }
 }
+
+

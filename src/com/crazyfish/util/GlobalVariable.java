@@ -10,7 +10,7 @@ public class GlobalVariable {
 	public static final String POST = "POST";
 	public static final int RESULT_CODE = 1;
 	public static final int SELECT_PIC = 2;
-	public static final int GAG_PAGE_SIZE = 2;
+	public static final int GAG_PAGE_SIZE = 3;
 	public static final String FILE_CACHE_LOCATION = "sdcard/aqi";
 	public static final String URLHEAD = "http://192.168.0.108:8080/ssm_demo";
     //what value

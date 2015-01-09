@@ -142,6 +142,9 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                     Bundle bun = msg.getData();
                     if( bun.getInt("sf") == GlobalVariable.SUCCESS){
                         String gid = bun.getString("gid");
+                        int recc = bun.getInt("recc");
+                        lmap = JsonCodec.changeListRecNumber(lmap,gid,recc);
+                        allAdapter.notifyDataSetChanged();
                         LinearLayout bottomList = (LinearLayout)getActivity().findViewById(R.id.bottomList);
                         LinearLayout flPost = (LinearLayout)getActivity().findViewById(R.id.llUserPost);
                         bottomList.setVisibility(View.VISIBLE);

@@ -12,8 +12,8 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:text="@string/fromfile"/>
-	<ImageView android:id="@+id/ivShow"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:contentDescription="@string/login"/>
+	<Button android:id="@+id/btnTextPost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/textpost"/>
 </LinearLayout>

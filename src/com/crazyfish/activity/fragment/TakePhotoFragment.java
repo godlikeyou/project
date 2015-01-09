@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crazyfish.activity.PostActivity;
+import com.crazyfish.activity.TextPostActivity;
 import com.crazyfish.demo.R;
 import com.crazyfish.util.GlobalVariable;
 import com.crazyfish.util.TakePhoto;
@@ -33,6 +34,7 @@ public class TakePhotoFragment extends Fragment {
 	private Uri fileUri = null;
 	private Button btnFromFile = null;
 	private ImageView imageView = null;
+    private Button btnTextPost = null;
 	@Override 
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		view = inflater.inflate(R.layout.takephoto_fragment,container, false);
@@ -41,11 +43,12 @@ public class TakePhotoFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
-		imageView = (ImageView) getActivity().findViewById(R.id.ivShow);  
 		btnTakePhoto = (Button)view.findViewById(R.id.takePhoto);
 		btnTakePhoto.setOnClickListener(listener);
 		btnFromFile = (Button)view.findViewById(R.id.btnFromFile);
 		btnFromFile.setOnClickListener(fromfile);
+        btnTextPost = (Button)view.findViewById(R.id.btnTextPost);
+        btnTextPost.setOnClickListener(textPost);
 	}
 	public OnClickListener listener = new OnClickListener(){
 		@Override
@@ -58,6 +61,14 @@ public class TakePhotoFragment extends Fragment {
             startActivityForResult(intent, GlobalVariable.CAPTURE_IMAGE_REQUEST_CODE);
 		}
 	};
+    public OnClickListener textPost = new OnClickListener(){
+        @Override
+        public void onClick(View v){
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), TextPostActivity.class);
+            startActivity(intent);
+        }
+    };
 	public OnClickListener fromfile = new OnClickListener(){
 		@Override
 		public void onClick(View v){

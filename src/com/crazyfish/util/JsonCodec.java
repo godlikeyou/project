@@ -53,4 +53,13 @@ public class JsonCodec {
         }
         return lmap;
     }
+    public static List<Map<String,Object>> changeListRecNumber(List<Map<String,Object>> lmap,String gid,int recc){
+        for(int i = 0;i < lmap.size();i ++){
+            Map<String,Object> map = lmap.get(i);
+            if( map.get("gId").toString().equals(gid)){
+                map.put("gtReccount",recc);
+            }
+        }
+        return lmap;
+    }
 }

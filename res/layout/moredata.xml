@@ -8,7 +8,7 @@
       android:layout_width="fill_parent"    
       android:layout_height="50dp"  
       android:text="@string/loadmoredata"
-      android:layout_marginBottom="50dp" /> 
+      android:layout_marginBottom="50dp" />
   <ProgressBar
       android:id="@+id/pg"
       android:layout_width="wrap_content"

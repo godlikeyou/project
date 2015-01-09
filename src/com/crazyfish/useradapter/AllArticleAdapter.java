@@ -48,6 +48,7 @@ public class AllArticleAdapter extends BaseAdapter {
     private Button btUserRec;
     private String gid;
     private Handler h;
+
     public final class AllArticleView {
         public TextView title;
         public TextView content;
@@ -62,8 +63,8 @@ public class AllArticleAdapter extends BaseAdapter {
         // public ProgressBar picLoad;
     }
 
-    public AllArticleAdapter(Context context, List<Map<String, Object>> list,EditText etInput,LinearLayout llUserPost,
-                             LinearLayout bottomList,Button btPostRec,Handler h) {
+    public AllArticleAdapter(Context context, List<Map<String, Object>> list, EditText etInput, LinearLayout llUserPost,
+                             LinearLayout bottomList, Button btPostRec, Handler h) {
         this.context = context;
         listContainer = LayoutInflater.from(context);
         this.listItems = list;
@@ -107,33 +108,33 @@ public class AllArticleAdapter extends BaseAdapter {
     private void collectGag(String gid) {
         final String g = gid;
         AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle("收藏").setMessage("是否收藏?");
-        builder.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog,int which){
+            public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences loginInfo = context.getSharedPreferences("loginInfo", 0);
                 String cid = loginInfo.getString("customerId", null);
                 String url = GlobalVariable.URLHEAD + "/collection/addGagCollection";
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("uid",cid));
-                params.add(new BasicNameValuePair("gid",g));
+                params.add(new BasicNameValuePair("uid", cid));
+                params.add(new BasicNameValuePair("gid", g));
                 POSTThread coll = new POSTThread(url, params);
                 coll.startServiceThread();
                 String result = coll.getResultData();
-                Log.i("result",result);
-                if( result.equals("\"success\"")){
+                Log.i("result", result);
+                if (result.equals("\"success\"")) {
                     Message m = new Message();
                     m.what = GlobalVariable.HANDLER_COLLECTION_CODE;
                     Bundle b = new Bundle();
-                    b.putInt("sf",GlobalVariable.SUCCESS);
-                    b.putString("gid",g);
+                    b.putInt("sf", GlobalVariable.SUCCESS);
+                    b.putString("gid", g);
                     m.setData(b);
                     h.sendMessage(m);
                 }
-                if( result.equals("\"failure\"")){
+                if (result.equals("\"failure\"")) {
                     Message m = new Message();
                     m.what = GlobalVariable.HANDLER_COLLECTION_CODE;
                     Bundle b = new Bundle();
-                    b.putInt("sf",GlobalVariable.FAILURE);
+                    b.putInt("sf", GlobalVariable.FAILURE);
                     m.setData(b);
                     h.sendMessage(m);
                 }
@@ -142,9 +143,11 @@ public class AllArticleAdapter extends BaseAdapter {
         builder.setNegativeButton("取消", null)
                 .show();
     }
-    private void goodGag(String gid){
+
+    private void goodGag(String gid) {
 
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
@@ -187,11 +190,16 @@ public class AllArticleAdapter extends BaseAdapter {
             view.userUpload.setTag(listItems.get(position).get("gPic")
                     .toString());
             view.ivGap.setTag(ulist.get(0).get("cPurl").toString());
+            if( listItems.get(position).get("gPic").equals("n")){
+                view.userUpload.setVisibility(View.GONE);
+            }else{
+                view.userUpload.setVisibility(View.VISIBLE);
+                BitmapWorkerTask asyncTask = new BitmapWorkerTask(view.userUpload,
+                        view.ivGap, context);
+                asyncTask.execute(listItems.get(position).get("gPic").toString(),
+                        ulist.get(0).get("cPurl").toString());
+            }
 
-            BitmapWorkerTask asyncTask = new BitmapWorkerTask(view.userUpload,
-                    view.ivGap, context);
-            asyncTask.execute(listItems.get(position).get("gPic").toString(),
-                    ulist.get(0).get("cPurl").toString());
 
             // set school name
             String data = "["
@@ -215,42 +223,77 @@ public class AllArticleAdapter extends BaseAdapter {
                     collectGag(String.valueOf(listItems.get(p).get("gId")));
                 }
             });
-            view.btnGood.setOnClickListener(new View.OnClickListener(){
+            view.btnGood.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v){
+                public void onClick(View v) {
                     goodGag(String.valueOf(listItems.get(p).get("gId")));
                 }
             });
             final AllArticleView finalView = view;
-            view.btnRec.setOnClickListener(new View.OnClickListener(){
+            view.btnRec.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v){
-                    InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                public void onClick(View v) {
+                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     //commentPop.dismiss();
                     etInput.setVisibility(View.VISIBLE);
                     llUserPost.setVisibility(View.VISIBLE);
                     gid = String.valueOf(listItems.get(p).get("gId"));
-                    btUserRec.setOnClickListener(RecListener);
+                    btUserRec.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String info = etInput.getText().toString();
+                            SharedPreferences sp = context.getSharedPreferences("loginInfo", 0);
+                            String uid = sp.getString("customerId", null);
+                            String url = GlobalVariable.URLHEAD + "/gagreply/addGagReply";
+                            List<NameValuePair> params = new ArrayList<NameValuePair>();
+                            params.add(new BasicNameValuePair("gid", gid));
+                            params.add(new BasicNameValuePair("uid", uid));
+                            params.add(new BasicNameValuePair("content", info));
+                            POSTThread pt = new POSTThread(url, params);
+                            pt.startServiceThread();
+                            String result = pt.getResultData();
+                            Log.i("result", result);
+                            if (result.equals("\"success\"")) {
+                                int recc = Integer.valueOf(listItems.get(p).get("gtReccount").toString());
+                                Message m = new Message();
+                                m.what = GlobalVariable.HANDLER_REC_CODE;
+                                Bundle b = new Bundle();
+                                b.putInt("sf", GlobalVariable.SUCCESS);
+                                b.putString("gid", gid);
+                                b.putInt("recc",recc + 1);
+                                m.setData(b);
+                                h.sendMessage(m);
+                            }
+                            if (result.equals("\"failure\"")) {
+                                Message m = new Message();
+                                m.what = GlobalVariable.HANDLER_REC_CODE;
+                                Bundle b = new Bundle();
+                                b.putInt("sf", GlobalVariable.FAILURE);
+                                m.setData(b);
+                                h.sendMessage(m);
+                            }
+                        }
+                    });
                 }
             });
             view.btnGood.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.i("woshi","hh");
+                    Log.i("woshi", "hh");
                     gid = String.valueOf(listItems.get(p).get("gId"));
-                    SharedPreferences sp = context.getSharedPreferences("loginInfo",0);
-                    String uid = sp.getString("customerId",null);
+                    SharedPreferences sp = context.getSharedPreferences("loginInfo", 0);
+                    String uid = sp.getString("customerId", null);
                     String url = GlobalVariable.URLHEAD + "/gagnausea/addGagNausea";
                     List<NameValuePair> params = new ArrayList<NameValuePair>();
-                    params.add(new BasicNameValuePair("type","1"));
-                    params.add(new BasicNameValuePair("gid",gid));
-                    params.add(new BasicNameValuePair("uid",uid));
-                    POSTThread pt = new POSTThread(url,params);
+                    params.add(new BasicNameValuePair("type", "1"));
+                    params.add(new BasicNameValuePair("gid", gid));
+                    params.add(new BasicNameValuePair("uid", uid));
+                    POSTThread pt = new POSTThread(url, params);
                     pt.startServiceThread();
                     String result = pt.getResultData();
-                    Log.i("result",result);
-                    if( result.equals("\"success\"")){
+                    Log.i("result", result);
+                    if (result.equals("\"success\"")) {
                         int goodc = Integer.valueOf(listItems.get(p).get("gtGoodcount").toString());
                         Message m = new Message();
                         m.what = GlobalVariable.HANDLER_GOOD_CODE;
@@ -261,7 +304,7 @@ public class AllArticleAdapter extends BaseAdapter {
                         m.setData(b);
                         h.sendMessage(m);
                     }
-                    if( result.equals("\"failure\"")){
+                    if (result.equals("\"failure\"")) {
                         Message m = new Message();
                         m.what = GlobalVariable.HANDLER_GOOD_CODE;
                         Bundle b = new Bundle();
@@ -274,38 +317,4 @@ public class AllArticleAdapter extends BaseAdapter {
         }
         return convertView;
     }
-    private View.OnClickListener RecListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String info = etInput.getText().toString();
-            SharedPreferences sp = context.getSharedPreferences("loginInfo",0);
-            String uid = sp.getString("customerId",null);
-            String url = GlobalVariable.URLHEAD + "/gagreply/addGagReply";
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("gid",gid));
-            params.add(new BasicNameValuePair("uid",uid));
-            params.add(new BasicNameValuePair("content",info));
-            POSTThread pt = new POSTThread(url,params);
-            pt.startServiceThread();
-            String result = pt.getResultData();
-            Log.i("result",result);
-            if( result.equals("\"success\"")){
-                Message m = new Message();
-                m.what = GlobalVariable.HANDLER_REC_CODE;
-                Bundle b = new Bundle();
-                b.putInt("sf",GlobalVariable.SUCCESS);
-                b.putString("gid",gid);
-                m.setData(b);
-                h.sendMessage(m);
-            }
-            if( result.equals("\"failure\"")){
-                Message m = new Message();
-                m.what = GlobalVariable.HANDLER_REC_CODE;
-                Bundle b = new Bundle();
-                b.putInt("sf",GlobalVariable.FAILURE);
-                m.setData(b);
-                h.sendMessage(m);
-            }
-        }
-    };
 }
