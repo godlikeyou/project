@@ -13,4 +13,5 @@
     <color name="bottomtext">#999</color>
   	<color name="bottombackground">#eee</color>
   	<color name="titlebackground">#fff</color>
+    <color name="content">#848484</color>
 </resources>
