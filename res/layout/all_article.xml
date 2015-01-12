@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 	<ImageView
             android:id="@+id/ivUserUpload"
@@ -24,24 +25,27 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
+                    android:paddingTop="10dp"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
                     android:gravity="right" />
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/focus"
+                    android:layout_width="45dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/focus"
                     android:layout_gravity="right"/>
             </LinearLayout>
 
@@ -61,24 +65,55 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
 
         <Button
             android:id="@+id/btnCollect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/articlecollect" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/coll"
+            android:layout_marginLeft="20dp"
+            />
 
         <Button
             android:id="@+id/btnGood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/good"
+             />
 
         <Button
             android:id="@+id/btnRec"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/rec"
+             />
+        <Button
+            android:id="@+id/btnMore"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="right"
+            android:background="@drawable/parent"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <TextView android:id="@+id/tvCollNum"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/articlerec" />
+            android:layout_height="wrap_content" />
+        <TextView android:id="@+id/tvGoodNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView android:id="@+id/tvRecNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

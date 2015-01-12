@@ -19,17 +19,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/bottombackground"
+        android:background="@color/head"
         android:orientation="horizontal" >
 
         <LinearLayout
             android:id="@+id/bottomHome"
             style="@style/main_bottom_item" >
 
-            <RadioButton
+            <ImageButton
                 android:id="@+id/rbHome"
-                style="@style/footbar"
-                android:drawableTop="@drawable/home"
+                android:background="@drawable/first"
+                android:layout_height="35dp"
+                android:layout_width="35dp"
+                android:layout_margin="8dp"
                 android:text="@string/home"
                 />
         </LinearLayout>
@@ -38,32 +40,38 @@
             android:id="@+id/bottomFind"
             style="@style/main_bottom_item" >
 
-            <RadioButton
+            <ImageButton
                 android:id="@+id/rbFind"
-                style="@style/footbar"
+                android:layout_height="35dp"
+                android:layout_width="35dp"
+                android:layout_margin="8dp"
                 android:text="@string/find"
-                android:drawableTop="@drawable/home"
+                android:background="@drawable/find"
                  />
         </LinearLayout>
 		
         <LinearLayout android:id="@+id/bottomCamera"
             style="@style/main_bottom_item">
         	
-            <RadioButton android:id="@+id/rbTakePhoto"
-                style="@style/footbar"
+            <ImageButton android:id="@+id/rbTakePhoto"
+                android:layout_height="35dp"
+                android:layout_width="35dp"
+                android:layout_margin="8dp"
                 android:text="@string/takephoto"
-                android:drawableTop="@drawable/home"/>
+                android:background="@drawable/post"/>
         </LinearLayout>
         
         <LinearLayout
             android:id="@+id/bottomMe"
             style="@style/main_bottom_item" >
 
-            <RadioButton
+            <ImageButton
                 android:id="@+id/rbMe"
-                style="@style/footbar"
+                android:layout_height="35dp"
+                android:layout_width="35dp"
+                android:layout_margin="8dp"
                 android:text="@string/me"
-                android:drawableTop="@drawable/home"
+                android:background="@drawable/me"
                  />
         </LinearLayout>
 
@@ -71,11 +79,13 @@
             android:id="@+id/bottomSetting"
             style="@style/main_bottom_item" >
 
-            <RadioButton
+            <ImageButton
                 android:id="@+id/rbSetting"
-                style="@style/footbar"
+                android:layout_height="35dp"
+                android:layout_width="35dp"
+                android:layout_margin="8dp"
                 android:text="@string/setting"
-                android:drawableTop="@drawable/home"
+                android:background="@drawable/setting"
                />
         </LinearLayout>
     </LinearLayout>

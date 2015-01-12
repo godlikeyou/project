@@ -59,6 +59,10 @@ public class AllArticleAdapter extends BaseAdapter {
         public TextView userName;
         public TextView signature;
         public ImageView userUpload;
+        public Button btnMore;
+        public TextView tvCollNum;
+        public TextView tvRecNum;
+        public TextView tvGoodNum;
         //public EditText etInput;
         // public ProgressBar picLoad;
     }
@@ -170,6 +174,10 @@ public class AllArticleAdapter extends BaseAdapter {
                     .findViewById(R.id.tvSignature);
             view.userUpload = (ImageView) convertView
                     .findViewById(R.id.ivUserUpload);
+            view.btnMore = (Button)convertView.findViewById(R.id.btnMore);
+            view.tvCollNum = (TextView)convertView.findViewById(R.id.tvCollNum);
+            view.tvGoodNum = (TextView)convertView.findViewById(R.id.tvGoodNum);
+            view.tvRecNum= (TextView)convertView.findViewById(R.id.tvRecNum);
             //view.etInput = (EditText)convertView.findViewById(R.id.etInput);
             // view.picLoad = (ProgressBar) convertView
             // .findViewById(R.id.pbPicLoad);
@@ -210,12 +218,13 @@ public class AllArticleAdapter extends BaseAdapter {
             view.title.setText(list.get(0).get("sName").toString());
             view.content.setText((String) listItems.get(position).get(
                     "gContent"));
-            view.btnGood.setText(String.valueOf(listItems.get(position).get(
+            view.tvGoodNum.setText(String.valueOf(listItems.get(position).get(
                     "gtGoodcount"))
                     + "赞");
-            view.btnRec.setText(String.valueOf(listItems.get(position).get(
+            view.tvRecNum.setText(String.valueOf(listItems.get(position).get(
                     "gtReccount"))
                     + "评");
+
             final int p = position;
             view.btnCollect.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -275,6 +284,38 @@ public class AllArticleAdapter extends BaseAdapter {
                             }
                         }
                     });
+                }
+            });
+            view.btnMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                    builder.setItems(context.getResources().getStringArray(R.array.more), new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface arg0, int arg1)
+                        {
+                            // TODO 自动生成的方法存根
+                            System.out.println(arg1);
+                            if (arg1 == 0)
+                            {
+                                AlertDialog.Builder builder2=new AlertDialog.Builder(context);
+                                builder2.setTitle("分享到新浪微博");
+                                builder2.setMessage("确定分享到新浪微博");
+                                builder2.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+
+                                    public void onClick(DialogInterface dialog, int which)
+                                    {
+                                        // TODO 自动生成的方法存根
+                                        dialog.dismiss();
+                                    }
+                                });
+                                builder2.show();
+                            }
+                            arg0.dismiss();
+                        }
+                    });
+                    builder.show();
                 }
             });
             view.btnGood.setOnClickListener(new View.OnClickListener() {

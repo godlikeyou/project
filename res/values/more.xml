@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="more">
+        <item>分享到新浪微博</item>
+        <item>分享到腾讯微博</item>
+        <item>分享到qq空间</item>
+        <item>分享到微信</item>
+        <item>复制文本</item>
+        <item>举报</item>
+    </array>
+</resources>

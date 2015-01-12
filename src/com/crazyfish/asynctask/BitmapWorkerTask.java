@@ -21,7 +21,7 @@ import com.crazyfish.cache.ImageMemoryCache;
 import com.crazyfish.util.PicHandler;
 
 /**
- * Í¼Æ¬Òì²½ÏÔÊ¾
+ * Í¼Æ¬ï¿½ì²½ï¿½ï¿½Ê¾
  * 
  */
 public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
@@ -42,12 +42,12 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 
 //	private Bitmap getDataFromService(String link) {
 //		Bitmap bitmap = null;
-//		Log.i("»º´æ¶¼Ã»ÓÐ", "»º´æ¶¼Ã»ÓÐÖ»ÄÜ´ÓÍøÂçÏÂÔØ");
+//		Log.i("ï¿½ï¿½ï¿½æ¶¼Ã»ï¿½ï¿½", "ï¿½ï¿½ï¿½æ¶¼Ã»ï¿½ï¿½Ö»ï¿½Ü´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 //		try {
 //			URL url = new URL(link);
-//			// ´ò¿ªURL¶ÔÓ¦µÄ×ÊÔ´ÊäÈëÁ÷
+//			// ï¿½ï¿½URLï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //			InputStream is = url.openStream();
-//			// ´ÓInputStreamÁ÷ÖÐ½âÎö³öÍ¼Æ¬
+//			// ï¿½ï¿½InputStreamï¿½ï¿½ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 //			bitmap = BitmapFactory.decodeStream(is);
 //			is.close();
 //			return bitmap;
@@ -64,9 +64,9 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 	
 
 	/**
-	 * ÕâÀïµÄInteger²ÎÊý¶ÔÓ¦AsyncTaskÖÐµÄµÚÒ»¸ö²ÎÊý ÕâÀïµÄString·µ»ØÖµ¶ÔÓ¦AsyncTaskµÄµÚÈý¸ö²ÎÊý
-	 * ¸Ã·½·¨²¢²»ÔËÐÐÔÚUIÏß³Ìµ±ÖÐ£¬Ö÷ÒªÓÃÓÚÒì²½²Ù×÷£¬ËùÓÐÔÚ¸Ã·½·¨ÖÐ²»ÄÜ¶ÔUIµ±ÖÐµÄ¿Õ¼ä½øÐÐÉèÖÃºÍÐÞ¸Ä
-	 * µ«ÊÇ¿ÉÒÔµ÷ÓÃpublishProgress·½·¨´¥·¢onProgressUpdate¶ÔUI½øÐÐ²Ù×÷
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Integerï¿½ï¿½ï¿½ï¿½ï¿½Ó¦AsyncTaskï¿½ÐµÄµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Stringï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Ó¦AsyncTaskï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UIï¿½ß³Ìµï¿½ï¿½Ð£ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ì²½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸Ã·ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½Ü¶ï¿½UIï¿½ï¿½ï¿½ÐµÄ¿Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãºï¿½ï¿½Þ¸ï¿½
+	 * ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½Ôµï¿½ï¿½ï¿½publishProgressï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½onProgressUpdateï¿½ï¿½UIï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
 	 */
 	@Override
 	protected List<Bitmap> doInBackground(String... params) {
@@ -74,7 +74,7 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 		try {
 			url1 = params[0].toString();
 			url2 = params[1].toString();
-			Bitmap userupload = PicHandler.getBitmap(url1,context);// ·ÅÈëµ½resultÖÐ,¶ÔÓ¦µÚÈý¸ö²ÎÊý
+			Bitmap userupload = PicHandler.getBitmap(url1,context);// ï¿½ï¿½ï¿½ëµ½resultï¿½ï¿½,ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Bitmap userhead = PicHandler.getBitmap(url2,context);
 			list = new ArrayList<Bitmap>();
 			list.add(userupload);
@@ -87,24 +87,26 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 	}
 
 	/**
-	 * ÕâÀïµÄString²ÎÊý¶ÔÓ¦AsyncTaskÖÐµÄµÚÈý¸ö²ÎÊý£¨Ò²¾ÍÊÇ½ÓÊÕdoInBackgroundµÄ·µ»ØÖµ£©
-	 * ÔÚdoInBackground·½·¨Ö´ÐÐ½áÊøÖ®ºóÔÚÔËÐÐ£¬²¢ÇÒÔËÐÐÔÚUIÏß³Ìµ±ÖÐ ¿ÉÒÔ¶ÔUI¿Õ¼ä½øÐÐÉèÖÃ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Stringï¿½ï¿½ï¿½ï¿½ï¿½Ó¦AsyncTaskï¿½ÐµÄµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½doInBackgroundï¿½Ä·ï¿½ï¿½ï¿½Öµï¿½ï¿½
+	 * ï¿½ï¿½doInBackgroundï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UIï¿½ß³Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¶ï¿½UIï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	protected void onPostExecute(List<Bitmap> result) {
 		// progressBar.setVisibility(View.GONE);
 		// imageView.setVisibility(View.VISIBLE);
 		try {
-			if (imageView.getTag().equals(url1))
-				imageView.setImageBitmap(result.get(0));
-			if (userHead.getTag().equals(url2))
-				userHead.setImageBitmap(result.get(1));
+			if (imageView.getTag().equals(url1)) {
+                imageView.setImageBitmap(result.get(0));
+            }
+			if (userHead.getTag().equals(url2)) {
+                userHead.setImageBitmap(result.get(1));
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	// ¸Ã·½·¨ÔËÐÐÔÚUIÏß³Ìµ±ÖÐ,²¢ÇÒÔËÐÐÔÚUIÏß³Ìµ±ÖÐ ¿ÉÒÔ¶ÔUI¿Õ¼ä½øÐÐÉèÖÃ
+	// ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UIï¿½ß³Ìµï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UIï¿½ß³Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¶ï¿½UIï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	protected void onPreExecute() {
 		// imageView.setVisibility(View.GONE);
@@ -113,9 +115,9 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 	}
 
 	/**
-	 * ÕâÀïµÄIntege²ÎÊý¶ÔÓ¦AsyncTaskÖÐµÄµÚ¶þ¸ö²ÎÊý
-	 * ÔÚdoInBackground·½·¨µ±ÖÐ£¬£¬Ã¿´Îµ÷ÓÃpublishProgress·½·¨¶¼»á´¥·¢onProgressUpdateÖ´ÐÐ
-	 * onProgressUpdateÊÇÔÚUIÏß³ÌÖÐÖ´ÐÐ£¬ËùÓÐ¿ÉÒÔ¶ÔUI¿Õ¼ä½øÐÐ²Ù×÷
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Integeï¿½ï¿½ï¿½ï¿½ï¿½Ó¦AsyncTaskï¿½ÐµÄµÚ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½doInBackgroundï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Ã¿ï¿½Îµï¿½ï¿½ï¿½publishProgressï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á´¥ï¿½ï¿½onProgressUpdateÖ´ï¿½ï¿½
+	 * onProgressUpdateï¿½ï¿½ï¿½ï¿½UIï¿½ß³ï¿½ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½Ô¶ï¿½UIï¿½Õ¼ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
 	 */
 	@Override
 	protected void onProgressUpdate(Integer... values) {
