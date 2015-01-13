@@ -92,15 +92,29 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 				String rtype = bundle.getString("type");
 				String url1 = GlobalVariable.URLHEAD + "/article/gagsize";
 				String url = GlobalVariable.URLHEAD + "/article/allarticle/1";
+                String url2 = GlobalVariable.URLHEAD + "/article/allarticle/havepic/1";
+                String url3 = GlobalVariable.URLHEAD + "/article/gagsize/havepic";
+                String url4 = GlobalVariable.URLHEAD + "/article/gagsize/puretext";
+                String url5 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
 				Log.i("handler", result + rtype);
 				if (result.equals("timeout")) {
-					Toast.makeText(getActivity(), "请检查网络",
+					Toast.makeText(getActivity(), "加载失败，为您加载了历史浏览信息，请检查网络",
 							Toast.LENGTH_LONG).show();
 					pbLoad.setVisibility(View.GONE);
-					btRefresh.setVisibility(View.VISIBLE);
+					//btRefresh.setVisibility(View.VISIBLE);
+                    String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
+                            + "allgag";
+                    String str = FileUtils.readCacheFile(link);
+                    Log.i("ifdata", str);
+                    String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                    // json decode
+                    lmap = JsonCodec.deJson(str, type);
+                    final EListView lv = (EListView) view.findViewById(R.id.allArticle);
+                    allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
+                    lv.setAdapter(allAdapter);
 					break;
 				}
-				if (rtype.equals(url1)) {
+				if (rtype.equals(url1)||rtype.equals(url3)||rtype.equals(url4)) {
 					try {
 						size = Integer.parseInt(result);
 						Log.i("hhwwyy", "" + size);
@@ -108,14 +122,6 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 						e.printStackTrace();
 					}
 				} else if (rtype.equals(url)) {
-					if (result.equals("timeout")) {
-						Toast.makeText(getActivity(), "网络不给力",
-								Toast.LENGTH_LONG).show();
-						// dialogLoading.hide();
-						pbLoad.setVisibility(View.GONE);
-						btRefresh.setVisibility(View.VISIBLE);
-						break;
-					}
 					if (FileUtils.fileCache("allgag", result) == null) {
 					}
 					String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
@@ -130,7 +136,39 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 					pbLoad.setVisibility(View.GONE);
 					bt.setVisibility(View.VISIBLE);
 					btRefresh.setVisibility(View.GONE);
-				}
+				}else if(rtype.equals(url2)){
+                    if (FileUtils.fileCache("allgag", result) == null) {
+                    }
+                    String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                    // json decode
+                    List<Map<String, Object>> tmp = JsonCodec.deJson(result,
+                            type);
+                    lmap.clear();
+                    lmap.addAll(tmp);
+                    allAdapter.notifyDataSetChanged();
+                    // dialogLoading.hide();
+                    pbLoad.setVisibility(View.GONE);
+                    bt.setVisibility(View.VISIBLE);
+                    bt.setEnabled(true);
+                    bt.setText("点击加载更多");
+                    btRefresh.setVisibility(View.GONE);
+                }else if(rtype.equals(url5)){
+                    if (FileUtils.fileCache("allgag", result) == null) {
+                    }
+                    String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                    // json decode
+                    List<Map<String, Object>> tmp = JsonCodec.deJson(result,
+                            type);
+                    lmap.clear();
+                    lmap.addAll(tmp);
+                    allAdapter.notifyDataSetChanged();
+                    // dialogLoading.hide();
+                    pbLoad.setVisibility(View.GONE);
+                    bt.setVisibility(View.VISIBLE);
+                    bt.setEnabled(true);
+                    bt.setText("点击加载更多");
+                    btRefresh.setVisibility(View.GONE);
+                }
 				break;
                 case GlobalVariable.HANDLER_GOOD_CODE:
                     Bundle b = msg.getData();
@@ -277,6 +315,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 								Toast.makeText(getActivity(),
 										"reload", Toast.LENGTH_LONG)
 										.show();
+
 							}
 						}
 					}.execute(null, null, null);
@@ -407,41 +446,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize";
-            GETThread th3 = new GETThread(url3);
-            th3.startServiceThread();
-            boolean flag = false;
-            if (th3 != null
-                    && !th3.getResultData().equals("timeout")) {
-                size = Integer.valueOf(th3.getResultData());
-                Log.i("size", String.valueOf(size));
-                String url4 = GlobalVariable.URLHEAD
-                        + "/article/allarticle/1";
-                GETThread th4 = new GETThread(url4);
-                th4.startServiceThread();
-                String xx4 = th4.getResultData();
-                if (xx4 != null && !xx4.equals("timeout")) {
-                    lmap.clear();
-                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
-                    // json decode
-                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
-                    lm = JsonCodec.deJson(xx4, type4);
-                    Log.i("return sizes", "" + lmap.size());
-                    lmap.addAll(lm);
-                    bt.setText("点击重新加载");
-                    bt.setEnabled(true);
-                    pbLoad.setVisibility(View.GONE);
-                    allAdapter.notifyDataSetChanged();// success
-                } else {
-                    flag = true;// outline
-                }
-            } else {
-                flag = true;// outline
-            }
-            if (flag) {// request failure
-                Toast.makeText(getActivity(),
-                        "reload", Toast.LENGTH_LONG)
-                        .show();
-            }
+            HttpGetTask task1 = new HttpGetTask(h);
+            task1.execute(url3);
+            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/1";
+            HttpGetTask task = new HttpGetTask(h);
+            task.execute(url4);
 
             tvAllGag.setTextColor(resources.getColor(R.color.head));
             llAllGag.setBackgroundColor(resources.getColor(R.color.head));
@@ -466,40 +475,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize/havepic";
-            GETThread th3 = new GETThread(url3);
-            th3.startServiceThread();
-            boolean flag = false;
-            if (th3 != null
-                    && !th3.getResultData().equals("timeout")) {
-                size = Integer.valueOf(th3.getResultData());
-                Log.i("size", String.valueOf(size));
-                String url4 = GlobalVariable.URLHEAD
-                        + "/article/allarticle/havepic/1";
-                GETThread th4 = new GETThread(url4);
-                th4.startServiceThread();
-                String xx4 = th4.getResultData();
-                if (xx4 != null && !xx4.equals("timeout")) {
-                    lmap.clear();
-                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
-                    // json decode
-                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
-                    lm = JsonCodec.deJson(xx4, type4);
-                    Log.i("return sizes", "" + lmap.size());
-                    lmap.addAll(lm);
-                    bt.setText("点击重新加载");
-                    bt.setEnabled(true);
-                    allAdapter.notifyDataSetChanged();// success
-                } else {
-                    flag = true;// outline
-                }
-            } else {
-                flag = true;// outline
-            }
-            if (flag) {// request failure
-                Toast.makeText(getActivity(),
-                        "reload", Toast.LENGTH_LONG)
-                        .show();
-            }
+            HttpGetTask task1 = new HttpGetTask(h);
+            task1.execute(url3);
+            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/havepic/1";
+            HttpGetTask task = new HttpGetTask(h);
+            task.execute(url4);
 
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
@@ -524,39 +504,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize/puretext";
-            GETThread th3 = new GETThread(url3);
-            th3.startServiceThread();
-            boolean flag = false;
-            if (th3 != null
-                    && !th3.getResultData().equals("timeout")) {
-                size = Integer.valueOf(th3.getResultData());
-                Log.i("size", String.valueOf(size));
-                String url4 = GlobalVariable.URLHEAD
-                        + "/article/allarticle/puretext/1";
-                GETThread th4 = new GETThread(url4);
-                th4.startServiceThread();
-                String xx4 = th4.getResultData();
-                if (xx4 != null && !xx4.equals("timeout")) {
-                    lmap.clear();
-                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
-                    // json decode
-                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
-                    lm = JsonCodec.deJson(xx4, type4);
-                    lmap.addAll(lm);
-                    bt.setText("点击重新加载");
-                    bt.setEnabled(true);
-                    allAdapter.notifyDataSetChanged();// success
-                } else {
-                    flag = true;// outline
-                }
-            } else {
-                flag = true;// outline
-            }
-            if (flag) {// request failure
-                Toast.makeText(getActivity(),
-                        "reload", Toast.LENGTH_LONG)
-                        .show();
-            }
+            HttpGetTask task1 = new HttpGetTask(h);
+            task1.execute(url3);
+            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
+            HttpGetTask task = new HttpGetTask(h);
+            task.execute(url4);
 
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
@@ -580,41 +532,12 @@ public class HomeFragment extends Fragment implements OnScrollListener {
             filterType = GlobalVariable.FILTER_SCHOOL;
 
             String url3 = GlobalVariable.URLHEAD
-                    + "/article/gagsize";
-            GETThread th3 = new GETThread(url3);
-            th3.startServiceThread();
-            boolean flag = false;
-            if (th3 != null
-                    && !th3.getResultData().equals("timeout")) {
-                size = Integer.valueOf(th3.getResultData());
-                Log.i("size", String.valueOf(size));
-                String url4 = GlobalVariable.URLHEAD
-                        + "/article/allarticle/1";
-                GETThread th4 = new GETThread(url4);
-                th4.startServiceThread();
-                String xx4 = th4.getResultData();
-                if (xx4 != null && !xx4.equals("timeout")) {
-                    lmap.clear();
-                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
-                    // json decode
-                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
-                    lm = JsonCodec.deJson(xx4, type4);
-                    Log.i("return sizes", "" + lmap.size());
-                    lmap.addAll(lm);
-                    bt.setText("点击重新加载");
-                    bt.setEnabled(true);
-                    allAdapter.notifyDataSetChanged();// success
-                } else {
-                    flag = true;// outline
-                }
-            } else {
-                flag = true;// outline
-            }
-            if (flag) {// request failure
-                Toast.makeText(getActivity(),
-                        "reload", Toast.LENGTH_LONG)
-                        .show();
-            }
+                    + "/article/gagsize/puretext";
+            HttpGetTask task1 = new HttpGetTask(h);
+            task1.execute(url3);
+            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
+            HttpGetTask task = new HttpGetTask(h);
+            task.execute(url4);
 
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
@@ -638,41 +561,12 @@ public class HomeFragment extends Fragment implements OnScrollListener {
             filterType = GlobalVariable.FILTER_SELECTED;
 
             String url3 = GlobalVariable.URLHEAD
-                    + "/article/gagsize";
-            GETThread th3 = new GETThread(url3);
-            th3.startServiceThread();
-            boolean flag = false;
-            if (th3 != null
-                    && !th3.getResultData().equals("timeout")) {
-                size = Integer.valueOf(th3.getResultData());
-                Log.i("size", String.valueOf(size));
-                String url4 = GlobalVariable.URLHEAD
-                        + "/article/allarticle/1";
-                GETThread th4 = new GETThread(url4);
-                th4.startServiceThread();
-                String xx4 = th4.getResultData();
-                if (xx4 != null && !xx4.equals("timeout")) {
-                    lmap.clear();
-                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
-                    // json decode
-                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
-                    lm = JsonCodec.deJson(xx4, type4);
-                    Log.i("return sizes", "" + lmap.size());
-                    lmap.addAll(lm);
-                    bt.setText("点击重新加载");
-                    bt.setEnabled(true);
-                    allAdapter.notifyDataSetChanged();// success
-                } else {
-                    flag = true;// outline
-                }
-            } else {
-                flag = true;// outline
-            }
-            if (flag) {// request failure
-                Toast.makeText(getActivity(),
-                        "reload", Toast.LENGTH_LONG)
-                        .show();
-            }
+                    + "/article/gagsize/puretext";
+            HttpGetTask task1 = new HttpGetTask(h);
+            task1.execute(url3);
+            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
+            HttpGetTask task = new HttpGetTask(h);
+            task.execute(url4);
 
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));

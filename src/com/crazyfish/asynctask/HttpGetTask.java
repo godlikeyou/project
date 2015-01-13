@@ -14,6 +14,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.crazyfish.util.GlobalVariable;
+
 public class HttpGetTask extends AsyncTask<String,Integer,String>{
 	private String url;
 	private Handler handler;
@@ -23,7 +25,7 @@ public class HttpGetTask extends AsyncTask<String,Integer,String>{
 	private String getDataFromService(String link){
 		 StringBuffer data = null;
 		try {
-			// ÊµÀý»¯URL
+			// Êµï¿½ï¿½URL
 			URL url = new URL(link);
 			URLConnection urlConnection = url.openConnection();
 			HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
@@ -32,13 +34,13 @@ public class HttpGetTask extends AsyncTask<String,Integer,String>{
 			httpUrlConnection.setReadTimeout(10000);//10s
 			httpUrlConnection.connect();
 			Log.i("resp", httpUrlConnection.getResponseCode()+"");
-			// ´ò¿ªURL¶ÔÓ¦µÄÊäÈëÁ÷
+			// ï¿½ï¿½URLï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			InputStream is = httpUrlConnection.getInputStream();
 			byte[] bbuf = new byte[1024];
-			// ÓÃÒÔÖ¸Ê¾ÊÇ·ñ»¹ÓÐÊý¾Ý
+			// ï¿½ï¿½ï¿½ï¿½Ö¸Ê¾ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			int hasRead = 0;
 			data = new StringBuffer("");
-			// Ñ­»·ÊäÈëÊý¾Ýµ½dataÖÐ
+			// Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½dataï¿½ï¿½
 			while ((hasRead = is.read(bbuf)) > 0) {
 				data.append(new String(bbuf, 0, hasRead));
 			}
@@ -51,7 +53,7 @@ public class HttpGetTask extends AsyncTask<String,Integer,String>{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		if( data == null)return null;
+		if( data == null)return "timeout";
 		return data.toString();
 	} 
 	@Override
@@ -63,9 +65,9 @@ public class HttpGetTask extends AsyncTask<String,Integer,String>{
 	}
 	@Override
 	protected void onPostExecute(String result){
-		Log.i("x111x",""+(handler==null));
+		Log.i("x111x",""+result);
 		Message ms = new Message();
-		ms.what = 1;
+		ms.what = GlobalVariable.HANDLER_GET_CODE;
 		Bundle bundle = new Bundle();
 		bundle.putString("type", url);
 		bundle.putString("result", result);
