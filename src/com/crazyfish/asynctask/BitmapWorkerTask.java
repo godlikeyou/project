@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import com.crazyfish.cache.ImageFileCache;
 import com.crazyfish.cache.ImageGetFromHttp;
 import com.crazyfish.cache.ImageMemoryCache;
+import com.crazyfish.util.GlobalVariable;
 import com.crazyfish.util.PicHandler;
 
 /**
@@ -26,17 +27,15 @@ import com.crazyfish.util.PicHandler;
  */
 public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 	private ImageView imageView;
-	private ImageView userHead;
 	private ProgressBar progressBar;
 	private Context context;
 	private String url1;
-	private String url2;
-
-	public BitmapWorkerTask(ImageView imageView, ImageView userHead,Context context) {
+    private int type;
+	public BitmapWorkerTask(ImageView imageView,Context context,int type) {
 		super();
-		this.userHead = userHead;
 		this.imageView = imageView;
 		this.context = context;
+        this.type = type;
 		// this.progressBar = progressBar;
 	}
 
@@ -72,13 +71,16 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 	protected List<Bitmap> doInBackground(String... params) {
 		List<Bitmap> list = new ArrayList<Bitmap>();
 		try {
+			//url1 = params[0].toString();
 			url1 = params[0].toString();
-			url2 = params[1].toString();
 			Bitmap userupload = PicHandler.getBitmap(url1,context);// ���뵽result��,��Ӧ���������
-			Bitmap userhead = PicHandler.getBitmap(url2,context);
+			//Bitmap userhead = PicHandler.getBitmap(url2,context);
 			list = new ArrayList<Bitmap>();
-			list.add(userupload);
-			list.add(PicHandler.toRoundCorner(userhead, 100));
+			//list.add(userupload);
+            if( type == GlobalVariable.PIC_USER_HEAD)
+			    list.add(PicHandler.toRoundCorner(userupload, 100));
+            else
+                list.add(userupload);
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,9 +100,6 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 			if (imageView.getTag().equals(url1)) {
                 imageView.setImageBitmap(result.get(0));
             }
-			if (userHead.getTag().equals(url2)) {
-                userHead.setImageBitmap(result.get(1));
-            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -111,7 +110,6 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 	protected void onPreExecute() {
 		// imageView.setVisibility(View.GONE);
 		imageView.setImageBitmap(null);
-		userHead.setImageBitmap(null);
 	}
 
 	/**

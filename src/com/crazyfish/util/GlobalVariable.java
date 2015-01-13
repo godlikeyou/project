@@ -12,13 +12,23 @@ public class GlobalVariable {
 	public static final int SELECT_PIC = 2;
 	public static final int GAG_PAGE_SIZE = 3;
 	public static final String FILE_CACHE_LOCATION = "sdcard/aqi";
-	public static final String URLHEAD = "http://192.168.1.6:8080/ssm_demo";
+	public static final String URLHEAD = "http://192.168.0.108:8080/ssm_demo";
     //what value
 	public static final int HANDLER_GET_CODE = 1;
     public static final int HANDLER_GOOD_CODE = 2;
     public static final int HANDLER_COLLECTION_CODE = 3;
     public static final int HANDLER_REC_CODE = 4;
 
+    //filter type
+    public static final int FILTER_ALL_GAG = 1;
+    public static final int FILTER_PURE_TEXT = 2;
+    public static final int FILTER_HAVE_PIC = 3;
+    public static final int FILTER_SCHOOL = 4;
+    public static final int FILTER_SELECTED = 5;
+
+    //pic type
+    public static final int PIC_USER_HEAD = 1;
+    public static final int PIC_USER_UPLOAD = 2;
     public static final String  LOGINURL = "http://192.168.0.108:8080/ssm_demo/customer/1.0/" +
             "customerLogin";
 }

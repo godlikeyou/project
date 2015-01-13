@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.nfc.FormatException;
 import android.os.Bundle;
@@ -202,12 +203,17 @@ public class AllArticleAdapter extends BaseAdapter {
                 view.userUpload.setVisibility(View.GONE);
             }else{
                 view.userUpload.setVisibility(View.VISIBLE);
-                BitmapWorkerTask asyncTask = new BitmapWorkerTask(view.userUpload,
-                        view.ivGap, context);
-                asyncTask.execute(listItems.get(position).get("gPic").toString(),
-                        ulist.get(0).get("cPurl").toString());
+                BitmapWorkerTask asyncTask = new BitmapWorkerTask(view.userUpload,context,GlobalVariable.PIC_USER_UPLOAD);
+                asyncTask.execute(listItems.get(position).get("gPic").toString());
             }
-
+            if( ulist.get(0).get("cPurl").toString().equals("")||ulist.get(0).get("cPurl").toString().equals(null)){
+                Resources resources = context.getResources();
+                Drawable pic = resources.getDrawable(R.drawable.ano);
+                view.ivGap.setImageDrawable(pic);
+            }else {
+                BitmapWorkerTask asyncTask = new BitmapWorkerTask(view.ivGap, context,GlobalVariable.PIC_USER_HEAD);
+                asyncTask.execute(ulist.get(0).get("cPurl").toString());
+            }
 
             // set school name
             String data = "["

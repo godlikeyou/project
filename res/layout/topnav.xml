@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvAllGag"
+            style="@style/topnav"
+            android:text="@string/allgag" />
+        <LinearLayout
+            android:id="@+id/llAllGag"
+            style="@style/line">
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@color/head"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvPureText"
+            style="@style/topnav"
+            android:text="@string/puretext" />
+
+        <LinearLayout
+            android:id="@+id/llPureText"
+            style="@style/line">
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHavePic"
+            style="@style/topnav"
+            android:text="@string/havepic" />
+
+        <LinearLayout
+            android:id="@+id/llHavePic"
+            style="@style/line">
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvSelSchool"
+            style="@style/topnav"
+            android:text="@string/school" />
+        <LinearLayout
+            android:id="@+id/llSchool"
+            style="@style/line">
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvSelected"
+            style="@style/topnav"
+            android:text="@string/selected"
+            android:clickable="true"
+            />
+        <LinearLayout
+            android:id="@+id/llSelected"
+            style="@style/line">
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

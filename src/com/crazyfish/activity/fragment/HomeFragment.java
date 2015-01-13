@@ -4,8 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPOutputStream;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +28,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crazyfish.asynctask.HttpGetTask;
@@ -56,9 +60,20 @@ public class HomeFragment extends Fragment implements OnScrollListener {
     private LinearLayout llUserPost;
     private LinearLayout bottomList;
     private Button btUserRec;
+    private TextView tvAllGag;
+    private LinearLayout llAllGag;
+    private TextView tvPureText;
+    private LinearLayout llPureText;
+    private TextView tvHavePic;
+    private LinearLayout llHavePic;
+    private TextView tvSchool;
+    private LinearLayout llSchool;
+    private TextView tvSelected;
+    private LinearLayout llSelected;
+    private Resources resources;
 	// private HkDialogLoading dialogLoading;
 	private Button btRefresh;
-
+    private int filterType = 1;//default all gag
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -167,6 +182,26 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         llUserPost = (LinearLayout)getActivity().findViewById(R.id.llUserPost);
         bottomList = (LinearLayout)getActivity().findViewById(R.id.bottomList);
         btUserRec = (Button)getActivity().findViewById(R.id.btUserRec);
+        tvAllGag = (TextView)getActivity().findViewById(R.id.tvAllGag);
+        llAllGag = (LinearLayout)getActivity().findViewById(R.id.llAllGag);
+        tvPureText = (TextView)getActivity().findViewById(R.id.tvPureText);
+        llPureText = (LinearLayout)getActivity().findViewById(R.id.llPureText);
+        tvHavePic = (TextView)getActivity().findViewById(R.id.tvHavePic);
+        llHavePic = (LinearLayout)getActivity().findViewById(R.id.llHavePic);
+        tvSchool = (TextView)getActivity().findViewById(R.id.tvSelSchool);
+        llSchool = (LinearLayout)getActivity().findViewById(R.id.llSchool);
+        tvSelected = (TextView)getActivity().findViewById(R.id.tvSelected);
+        llSelected = (LinearLayout)getActivity().findViewById(R.id.llSelected);
+
+        tvAllGag.setOnClickListener(showAllGag);
+        tvPureText.setOnClickListener(showPureText);
+        tvHavePic.setOnClickListener(showHavePic);
+        tvSchool.setOnClickListener(showSchool);
+        tvSelected.setOnClickListener(showSelected);
+
+        resources = getResources();
+        tvAllGag.setTextColor(resources.getColor(R.color.head));
+        llAllGag.setBackgroundColor(resources.getColor(R.color.head));
 		if (NetUtil.checkNet(getActivity())) {
 			// dialogLoading = new HkDialogLoading(getActivity());
 			// dialogLoading.show();
@@ -363,4 +398,296 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			// }, 2000);
 		}
 	}
+    public View.OnClickListener showAllGag =  new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            filterType = GlobalVariable.FILTER_ALL_GAG;
+
+            pbLoad.setVisibility(View.VISIBLE);
+
+            String url3 = GlobalVariable.URLHEAD
+                    + "/article/gagsize";
+            GETThread th3 = new GETThread(url3);
+            th3.startServiceThread();
+            boolean flag = false;
+            if (th3 != null
+                    && !th3.getResultData().equals("timeout")) {
+                size = Integer.valueOf(th3.getResultData());
+                Log.i("size", String.valueOf(size));
+                String url4 = GlobalVariable.URLHEAD
+                        + "/article/allarticle/1";
+                GETThread th4 = new GETThread(url4);
+                th4.startServiceThread();
+                String xx4 = th4.getResultData();
+                if (xx4 != null && !xx4.equals("timeout")) {
+                    lmap.clear();
+                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                    // json decode
+                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
+                    lm = JsonCodec.deJson(xx4, type4);
+                    Log.i("return sizes", "" + lmap.size());
+                    lmap.addAll(lm);
+                    bt.setText("点击重新加载");
+                    bt.setEnabled(true);
+                    pbLoad.setVisibility(View.GONE);
+                    allAdapter.notifyDataSetChanged();// success
+                } else {
+                    flag = true;// outline
+                }
+            } else {
+                flag = true;// outline
+            }
+            if (flag) {// request failure
+                Toast.makeText(getActivity(),
+                        "reload", Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            tvAllGag.setTextColor(resources.getColor(R.color.head));
+            llAllGag.setBackgroundColor(resources.getColor(R.color.head));
+
+            tvHavePic.setTextColor(resources.getColor(R.color.content));
+            llHavePic.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvPureText.setTextColor(resources.getColor(R.color.content));
+            llPureText.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvSchool.setTextColor(resources.getColor(R.color.content));
+            llSchool.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvSelected.setTextColor(resources.getColor(R.color.content));
+            llSelected.setBackgroundColor(resources.getColor(R.color.white));
+        }
+    };
+    public View.OnClickListener showHavePic =  new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            filterType = GlobalVariable.FILTER_HAVE_PIC;
+
+            String url3 = GlobalVariable.URLHEAD
+                    + "/article/gagsize/havepic";
+            GETThread th3 = new GETThread(url3);
+            th3.startServiceThread();
+            boolean flag = false;
+            if (th3 != null
+                    && !th3.getResultData().equals("timeout")) {
+                size = Integer.valueOf(th3.getResultData());
+                Log.i("size", String.valueOf(size));
+                String url4 = GlobalVariable.URLHEAD
+                        + "/article/allarticle/havepic/1";
+                GETThread th4 = new GETThread(url4);
+                th4.startServiceThread();
+                String xx4 = th4.getResultData();
+                if (xx4 != null && !xx4.equals("timeout")) {
+                    lmap.clear();
+                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                    // json decode
+                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
+                    lm = JsonCodec.deJson(xx4, type4);
+                    Log.i("return sizes", "" + lmap.size());
+                    lmap.addAll(lm);
+                    bt.setText("点击重新加载");
+                    bt.setEnabled(true);
+                    allAdapter.notifyDataSetChanged();// success
+                } else {
+                    flag = true;// outline
+                }
+            } else {
+                flag = true;// outline
+            }
+            if (flag) {// request failure
+                Toast.makeText(getActivity(),
+                        "reload", Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            tvAllGag.setTextColor(resources.getColor(R.color.content));
+            llAllGag.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvHavePic.setTextColor(resources.getColor(R.color.head));
+            llHavePic.setBackgroundColor(resources.getColor(R.color.head));
+
+            tvPureText.setTextColor(resources.getColor(R.color.content));
+            llPureText.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvSchool.setTextColor(resources.getColor(R.color.content));
+            llSchool.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvSelected.setTextColor(resources.getColor(R.color.content));
+            llSelected.setBackgroundColor(resources.getColor(R.color.white));
+        }
+    };
+    public View.OnClickListener showPureText =  new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            filterType = GlobalVariable.FILTER_PURE_TEXT;
+
+            String url3 = GlobalVariable.URLHEAD
+                    + "/article/gagsize/puretext";
+            GETThread th3 = new GETThread(url3);
+            th3.startServiceThread();
+            boolean flag = false;
+            if (th3 != null
+                    && !th3.getResultData().equals("timeout")) {
+                size = Integer.valueOf(th3.getResultData());
+                Log.i("size", String.valueOf(size));
+                String url4 = GlobalVariable.URLHEAD
+                        + "/article/allarticle/puretext/1";
+                GETThread th4 = new GETThread(url4);
+                th4.startServiceThread();
+                String xx4 = th4.getResultData();
+                if (xx4 != null && !xx4.equals("timeout")) {
+                    lmap.clear();
+                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                    // json decode
+                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
+                    lm = JsonCodec.deJson(xx4, type4);
+                    lmap.addAll(lm);
+                    bt.setText("点击重新加载");
+                    bt.setEnabled(true);
+                    allAdapter.notifyDataSetChanged();// success
+                } else {
+                    flag = true;// outline
+                }
+            } else {
+                flag = true;// outline
+            }
+            if (flag) {// request failure
+                Toast.makeText(getActivity(),
+                        "reload", Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            tvAllGag.setTextColor(resources.getColor(R.color.content));
+            llAllGag.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvHavePic.setTextColor(resources.getColor(R.color.content));
+            llHavePic.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvPureText.setTextColor(resources.getColor(R.color.head));
+            llPureText.setBackgroundColor(resources.getColor(R.color.head));
+
+            tvSchool.setTextColor(resources.getColor(R.color.content));
+            llSchool.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvSelected.setTextColor(resources.getColor(R.color.content));
+            llSelected.setBackgroundColor(resources.getColor(R.color.white));
+        }
+    };
+    public View.OnClickListener showSchool =  new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            filterType = GlobalVariable.FILTER_SCHOOL;
+
+            String url3 = GlobalVariable.URLHEAD
+                    + "/article/gagsize";
+            GETThread th3 = new GETThread(url3);
+            th3.startServiceThread();
+            boolean flag = false;
+            if (th3 != null
+                    && !th3.getResultData().equals("timeout")) {
+                size = Integer.valueOf(th3.getResultData());
+                Log.i("size", String.valueOf(size));
+                String url4 = GlobalVariable.URLHEAD
+                        + "/article/allarticle/1";
+                GETThread th4 = new GETThread(url4);
+                th4.startServiceThread();
+                String xx4 = th4.getResultData();
+                if (xx4 != null && !xx4.equals("timeout")) {
+                    lmap.clear();
+                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                    // json decode
+                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
+                    lm = JsonCodec.deJson(xx4, type4);
+                    Log.i("return sizes", "" + lmap.size());
+                    lmap.addAll(lm);
+                    bt.setText("点击重新加载");
+                    bt.setEnabled(true);
+                    allAdapter.notifyDataSetChanged();// success
+                } else {
+                    flag = true;// outline
+                }
+            } else {
+                flag = true;// outline
+            }
+            if (flag) {// request failure
+                Toast.makeText(getActivity(),
+                        "reload", Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            tvAllGag.setTextColor(resources.getColor(R.color.content));
+            llAllGag.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvHavePic.setTextColor(resources.getColor(R.color.content));
+            llHavePic.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvPureText.setTextColor(resources.getColor(R.color.content));
+            llPureText.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvSchool.setTextColor(resources.getColor(R.color.head));
+            llSchool.setBackgroundColor(resources.getColor(R.color.head));
+
+            tvSelected.setTextColor(resources.getColor(R.color.content));
+            llSelected.setBackgroundColor(resources.getColor(R.color.white));
+        }
+    };
+    public View.OnClickListener showSelected =  new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            filterType = GlobalVariable.FILTER_SELECTED;
+
+            String url3 = GlobalVariable.URLHEAD
+                    + "/article/gagsize";
+            GETThread th3 = new GETThread(url3);
+            th3.startServiceThread();
+            boolean flag = false;
+            if (th3 != null
+                    && !th3.getResultData().equals("timeout")) {
+                size = Integer.valueOf(th3.getResultData());
+                Log.i("size", String.valueOf(size));
+                String url4 = GlobalVariable.URLHEAD
+                        + "/article/allarticle/1";
+                GETThread th4 = new GETThread(url4);
+                th4.startServiceThread();
+                String xx4 = th4.getResultData();
+                if (xx4 != null && !xx4.equals("timeout")) {
+                    lmap.clear();
+                    String type4 = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                    // json decode
+                    List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
+                    lm = JsonCodec.deJson(xx4, type4);
+                    Log.i("return sizes", "" + lmap.size());
+                    lmap.addAll(lm);
+                    bt.setText("点击重新加载");
+                    bt.setEnabled(true);
+                    allAdapter.notifyDataSetChanged();// success
+                } else {
+                    flag = true;// outline
+                }
+            } else {
+                flag = true;// outline
+            }
+            if (flag) {// request failure
+                Toast.makeText(getActivity(),
+                        "reload", Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            tvAllGag.setTextColor(resources.getColor(R.color.content));
+            llAllGag.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvHavePic.setTextColor(resources.getColor(R.color.content));
+            llHavePic.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvPureText.setTextColor(resources.getColor(R.color.content));
+            llPureText.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvSchool.setTextColor(resources.getColor(R.color.content));
+            llSchool.setBackgroundColor(resources.getColor(R.color.white));
+
+            tvSelected.setTextColor(resources.getColor(R.color.head));
+            llSelected.setBackgroundColor(resources.getColor(R.color.head));
+        }
+    };
 }

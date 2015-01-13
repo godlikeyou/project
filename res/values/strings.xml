@@ -62,4 +62,10 @@
     <string name="nickwarninfo">以中文或英文字母开头，限4－16个字符，一个汉字为两个字符</string>
     <string name="surebutton">确定</string>
     <string name="signaturewarninfo">个性签名，彰显你的个性</string>
+
+    <string name="allgag">所有</string>
+    <string name="puretext">文字</string>
+    <string name="havepic">图片</string>
+    <string name="school">学校</string>
+    <string name="selected">热门</string>
 </resources>

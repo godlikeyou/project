@@ -9,7 +9,16 @@
         android:id="@+id/ivUserUpload"
         style="@style/uploadpic"
         android:contentDescription="@string/post" />
-
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:typeface="sans"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/content"/>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -27,7 +36,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:orientation="horizontal"
                 android:textAlignment="center">
 
@@ -45,9 +54,10 @@
                     android:gravity="right" />
 
                 <Button
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="right"
+                    android:layout_marginLeft="20dp"
                     android:background="@drawable/focus" />
             </LinearLayout>
 
@@ -58,16 +68,6 @@
                 android:layout_marginBottom="10dp" />
         </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="17dp"
-        android:typeface="sans"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="@color/content"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
