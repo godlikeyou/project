@@ -473,6 +473,8 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_HAVE_PIC;
 
+            pbLoad.setVisibility(View.VISIBLE);
+
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize/havepic";
             HttpGetTask task1 = new HttpGetTask(h);
@@ -501,7 +503,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         @Override
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_PURE_TEXT;
-
+            pbLoad.setVisibility(View.VISIBLE);
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize/puretext";
             HttpGetTask task1 = new HttpGetTask(h);
@@ -530,7 +532,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         @Override
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_SCHOOL;
-
+            pbLoad.setVisibility(View.VISIBLE);
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize/puretext";
             HttpGetTask task1 = new HttpGetTask(h);
@@ -559,7 +561,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         @Override
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_SELECTED;
-
+            pbLoad.setVisibility(View.VISIBLE);
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize/puretext";
             HttpGetTask task1 = new HttpGetTask(h);

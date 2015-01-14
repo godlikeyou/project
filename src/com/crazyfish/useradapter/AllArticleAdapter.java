@@ -3,8 +3,10 @@ package com.crazyfish.useradapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.nfc.FormatException;
 import android.os.Bundle;
@@ -24,13 +26,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crazyfish.activity.RecommendationActivity;
 import com.crazyfish.asynctask.BitmapWorkerTask;
 import com.crazyfish.demo.R;
 import com.crazyfish.util.GlobalVariable;
 import com.crazyfish.util.JsonCodec;
 import com.crazyfish.util.POSTThread;
+import com.crazyfish.util.PicHandler;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.client.protocol.ResponseProcessCookies;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.InputStream;
@@ -38,6 +43,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
+import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 public class AllArticleAdapter extends BaseAdapter {
     private Context context;
@@ -192,7 +200,7 @@ public class AllArticleAdapter extends BaseAdapter {
                     + String.valueOf(listItems.get(position).get("customer"))
                     + "]";
             String types = "cId,cName,cNickname,cPurl,cSignature";
-            List<Map<String, Object>> ulist = JsonCodec.deJson(user, types);
+            final List<Map<String, Object>> ulist = JsonCodec.deJson(user, types);
             view.userName.setText(ulist.get(0).get("cName").toString());
             view.signature.setText(ulist.get(0).get("cSignature").toString());
             // test
@@ -236,6 +244,24 @@ public class AllArticleAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     collectGag(String.valueOf(listItems.get(p).get("gId")));
+                }
+            });
+            view.tvRecNum.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Toast.makeText(context,"进入该主题评论列表"+listItems.get(p).get("gPic").toString(),Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent();
+                    intent.setClass(context, RecommendationActivity.class);
+                    Bundle bundle = new Bundle();
+                    Bitmap image = PicHandler.getBitmap(listItems.get(p).get("gPic").toString(),context);
+                    bundle.putParcelable("image",image);
+                    bundle.putString("gid",listItems.get(p).get("gId").toString());
+                    bundle.putString("content",listItems.get(p).get("gContent").toString());
+                    bundle.putString("name",ulist.get(0).get("cName").toString());
+                    bundle.putString("recnum",listItems.get(p).get("gtReccount").toString());
+                    bundle.putString("goodnum",listItems.get(p).get("gtGoodcount").toString());
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
                 }
             });
             view.btnGood.setOnClickListener(new View.OnClickListener() {

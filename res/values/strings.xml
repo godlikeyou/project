@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">demo</string>
+    <string name="app_name">十九楼</string>
     <string name="action_settings">Settings</string>
 	<string name="name">姓名</string>
 	<string name="passwd">密码</string>
@@ -68,4 +68,6 @@
     <string name="havepic">图片</string>
     <string name="school">学校</string>
     <string name="selected">热门</string>
+
+    <string name="idea">快乐无处不在</string>
 </resources>

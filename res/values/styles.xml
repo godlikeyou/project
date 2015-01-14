@@ -103,4 +103,10 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:padding">0dp</item>
     </style>
+
+    <style name="ContentOverlay" parent="@android:style/Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>
