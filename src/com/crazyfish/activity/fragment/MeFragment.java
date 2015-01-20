@@ -8,6 +8,7 @@ import com.crazyfish.util.PicHandler;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ public class MeFragment extends Fragment {
     private final int CLICK_CHANGE_INFO = 3;
     private final int CLICK_MYPOST = 4 ;
 	ImageView imageview;
+    private Resources resources;
 	Bitmap bitmap;
 
 	public MeFragment() {
@@ -67,6 +70,17 @@ public class MeFragment extends Fragment {
 	// @Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+        resources = getResources();
+        ImageButton ibHome = (ImageButton)getActivity().findViewById(R.id.rbHome);
+        ibHome.setBackgroundDrawable(resources.getDrawable(R.drawable.first));
+        ImageButton ibFind = (ImageButton)getActivity().findViewById(R.id.rbFind);
+        ibFind.setBackgroundDrawable(resources.getDrawable(R.drawable.find));
+        ImageButton ibPost = (ImageButton)getActivity().findViewById(R.id.rbTakePhoto);
+        ibPost.setBackgroundDrawable(resources.getDrawable(R.drawable.post));
+        ImageButton ibMe = (ImageButton)getActivity().findViewById(R.id.rbMe);
+        ibMe.setBackgroundDrawable(resources.getDrawable(R.drawable.atme));
+        ImageButton ibSetting = (ImageButton)getActivity().findViewById(R.id.rbSetting);
+        ibSetting.setBackgroundDrawable(resources.getDrawable(R.drawable.setting));
 		loginReturn();
 	}
 

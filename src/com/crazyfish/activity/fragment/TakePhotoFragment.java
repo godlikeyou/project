@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ public class TakePhotoFragment extends Fragment {
 	private Button btnFromFile = null;
 	private ImageView imageView = null;
     private Button btnTextPost = null;
+    private Resources resources;
 	@Override 
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		view = inflater.inflate(R.layout.takephoto_fragment,container, false);
@@ -43,6 +46,18 @@ public class TakePhotoFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
+        resources = getResources();
+        ImageButton ibHome = (ImageButton)getActivity().findViewById(R.id.rbHome);
+        ibHome.setBackgroundDrawable(resources.getDrawable(R.drawable.first));
+        ImageButton ibFind = (ImageButton)getActivity().findViewById(R.id.rbFind);
+        ibFind.setBackgroundDrawable(resources.getDrawable(R.drawable.find));
+        ImageButton ibPost = (ImageButton)getActivity().findViewById(R.id.rbTakePhoto);
+        ibPost.setBackgroundDrawable(resources.getDrawable(R.drawable.atpost));
+        ImageButton ibMe = (ImageButton)getActivity().findViewById(R.id.rbMe);
+        ibMe.setBackgroundDrawable(resources.getDrawable(R.drawable.me));
+        ImageButton ibSetting = (ImageButton)getActivity().findViewById(R.id.rbSetting);
+        ibSetting.setBackgroundDrawable(resources.getDrawable(R.drawable.setting));
+
 		btnTakePhoto = (Button)view.findViewById(R.id.takePhoto);
 		btnTakePhoto.setOnClickListener(listener);
 		btnFromFile = (Button)view.findViewById(R.id.btnFromFile);
@@ -92,6 +107,7 @@ public class TakePhotoFragment extends Fragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode,Intent data){
 		super.onActivityResult(requestCode, resultCode, data);
+
 		Log.i("bug",String.valueOf(requestCode)+":"+ String.valueOf(resultCode)+":"+String.valueOf(FragmentActivity.RESULT_CANCELED));
 		if(GlobalVariable.CAPTURE_IMAGE_REQUEST_CODE == requestCode){
 			Bitmap thumbnail = null;

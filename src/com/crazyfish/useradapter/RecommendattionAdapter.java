@@ -87,7 +87,6 @@ public class RecommendattionAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.i("wochacha","xxxxxxxxxxxxxxxx");
         // TODO Auto-generated method stub
         final int selectID = position;
         RecommendattionView view = null;
@@ -104,7 +103,6 @@ public class RecommendattionAdapter extends BaseAdapter {
         } else {
             view = (RecommendattionView) convertView.getTag();
         }
-        Log.i("items",""+listItems.size());
         if (listItems != null) {
             // set user name
             String user = "["
@@ -127,7 +125,6 @@ public class RecommendattionAdapter extends BaseAdapter {
             String d = format.format(timex);
 
             view.recTime.setText(d);
-            Log.i("hhhhh",t.get(0).get("time").toString());
             view.ivGap.setTag(ulist.get(0).get("cPurl").toString());
             if (ulist.get(0).get("cPurl").toString().equals("") || ulist.get(0).get("cPurl").toString().equals(null)) {
                 Resources resources = context.getResources();

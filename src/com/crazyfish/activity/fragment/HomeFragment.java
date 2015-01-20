@@ -25,6 +25,8 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -150,7 +152,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                     pbLoad.setVisibility(View.GONE);
                     bt.setVisibility(View.VISIBLE);
                     bt.setEnabled(true);
-                    bt.setText("点击加载更多");
+                    //bt.setText("点击加载更多");
                     btRefresh.setVisibility(View.GONE);
                 }else if(rtype.equals(url5)){
                     if (FileUtils.fileCache("allgag", result) == null) {
@@ -166,7 +168,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                     pbLoad.setVisibility(View.GONE);
                     bt.setVisibility(View.VISIBLE);
                     bt.setEnabled(true);
-                    bt.setText("点击加载更多");
+                    //bt.setText("点击加载更多");
                     btRefresh.setVisibility(View.GONE);
                 }
 				break;
@@ -216,6 +218,19 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
+        resources = getResources();
+        ImageButton ibHome = (ImageButton)getActivity().findViewById(R.id.rbHome);
+        ibHome.setBackgroundDrawable(resources.getDrawable(R.drawable.atfirst));
+        ImageButton ibFind = (ImageButton)getActivity().findViewById(R.id.rbFind);
+        ibFind.setBackgroundDrawable(resources.getDrawable(R.drawable.find));
+        ImageButton ibPost = (ImageButton)getActivity().findViewById(R.id.rbTakePhoto);
+        ibPost.setBackgroundDrawable(resources.getDrawable(R.drawable.post));
+        ImageButton ibMe = (ImageButton)getActivity().findViewById(R.id.rbMe);
+        ibMe.setBackgroundDrawable(resources.getDrawable(R.drawable.me));
+        ImageButton ibSetting = (ImageButton)getActivity().findViewById(R.id.rbSetting);
+        ibSetting.setBackgroundDrawable(resources.getDrawable(R.drawable.setting));
+
         etInput = (EditText)getActivity().findViewById(R.id.etInputA);
         llUserPost = (LinearLayout)getActivity().findViewById(R.id.llUserPost);
         bottomList = (LinearLayout)getActivity().findViewById(R.id.bottomList);
@@ -237,7 +252,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         tvSchool.setOnClickListener(showSchool);
         tvSelected.setOnClickListener(showSelected);
 
-        resources = getResources();
+
         tvAllGag.setTextColor(resources.getColor(R.color.head));
         llAllGag.setBackgroundColor(resources.getColor(R.color.head));
 		if (NetUtil.checkNet(getActivity())) {
@@ -301,7 +316,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 									lm = JsonCodec.deJson(xx4, type4);
 									Log.i("return sizes", "" + lmap.size());
 									lmap.addAll(lm);
-									bt.setText("点击重新加载");
+									//bt.setText("点击重新加载");
 									bt.setEnabled(true);
 									allAdapter.notifyDataSetChanged();// success
 								} else {
@@ -382,7 +397,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	private String loadMoreData() {
 		int count = allAdapter.getCount();
 		Log.i("currrentsize", "" + count);
-		if (count + GlobalVariable.GAG_PAGE_SIZE < (size + 2)) {
+		if (count + GlobalVariable.GAG_PAGE_SIZE <= (size + 2)) {
 			int currentPage = count / GlobalVariable.GAG_PAGE_SIZE + 1;
 			Log.i("currentpage", "" + currentPage);
 			String url = GlobalVariable.URLHEAD + "/article/allarticle/"
@@ -415,7 +430,10 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			// lv.removeFooterView(moreView);
 			bt.setText("没有更多了");
 			bt.setEnabled(false);
-		}
+		}else{
+            bt.setText("加载更多");
+            bt.setEnabled(true);
+        }
 	}
 
 	@Override

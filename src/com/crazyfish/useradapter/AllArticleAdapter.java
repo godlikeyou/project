@@ -31,6 +31,7 @@ import com.crazyfish.asynctask.BitmapWorkerTask;
 import com.crazyfish.demo.R;
 import com.crazyfish.util.GlobalVariable;
 import com.crazyfish.util.JsonCodec;
+import com.crazyfish.util.LoginUtil;
 import com.crazyfish.util.POSTThread;
 import com.crazyfish.util.PicHandler;
 
@@ -124,7 +125,8 @@ public class AllArticleAdapter extends BaseAdapter {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences loginInfo = context.getSharedPreferences("loginInfo", 0);
+                SharedPreferences loginInfo = LoginUtil.testLogin(context);
+                if(loginInfo == null)return;
                 String cid = loginInfo.getString("customerId", null);
                 String url = GlobalVariable.URLHEAD + "/collection/addGagCollection";
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -249,7 +251,6 @@ public class AllArticleAdapter extends BaseAdapter {
             view.tvRecNum.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    Toast.makeText(context,"进入该主题评论列表"+listItems.get(p).get("gPic").toString(),Toast.LENGTH_LONG).show();
                     Intent intent = new Intent();
                     intent.setClass(context, RecommendationActivity.class);
                     Bundle bundle = new Bundle();
@@ -262,12 +263,6 @@ public class AllArticleAdapter extends BaseAdapter {
                     bundle.putString("goodnum",listItems.get(p).get("gtGoodcount").toString());
                     intent.putExtras(bundle);
                     context.startActivity(intent);
-                }
-            });
-            view.btnGood.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    goodGag(String.valueOf(listItems.get(p).get("gId")));
                 }
             });
             final AllArticleView finalView = view;
@@ -284,7 +279,8 @@ public class AllArticleAdapter extends BaseAdapter {
                         @Override
                         public void onClick(View v) {
                             String info = etInput.getText().toString();
-                            SharedPreferences sp = context.getSharedPreferences("loginInfo", 0);
+                            SharedPreferences sp = LoginUtil.testLogin(context);
+                            if( sp == null)return;
                             String uid = sp.getString("customerId", null);
                             String url = GlobalVariable.URLHEAD + "/gagreply/addGagReply";
                             List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -355,7 +351,10 @@ public class AllArticleAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     Log.i("woshi", "hh");
                     gid = String.valueOf(listItems.get(p).get("gId"));
-                    SharedPreferences sp = context.getSharedPreferences("loginInfo", 0);
+                    SharedPreferences sp = LoginUtil.testLogin(context);
+                    if( sp == null) {
+                        return;
+                    }
                     String uid = sp.getString("customerId", null);
                     String url = GlobalVariable.URLHEAD + "/gagnausea/addGagNausea";
                     List<NameValuePair> params = new ArrayList<NameValuePair>();

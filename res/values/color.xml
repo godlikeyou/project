@@ -14,4 +14,5 @@
   	<color name="bottombackground">#eee</color>
   	<color name="titlebackground">#fff</color>
     <color name="content">#848484</color>
+    <color name="divider">#fff3f1f0</color>
 </resources>

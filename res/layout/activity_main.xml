@@ -19,7 +19,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/head"
+        android:background="@color/divider"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -28,11 +28,8 @@
 
             <ImageButton
                 android:id="@+id/rbHome"
+                style="@style/bottomItemStyle"
                 android:background="@drawable/first"
-                android:layout_height="35dp"
-                android:layout_width="35dp"
-                android:layout_margin="8dp"
-                android:text="@string/home"
                 />
         </LinearLayout>
 
@@ -42,10 +39,7 @@
 
             <ImageButton
                 android:id="@+id/rbFind"
-                android:layout_height="35dp"
-                android:layout_width="35dp"
-                android:layout_margin="8dp"
-                android:text="@string/find"
+                style="@style/bottomItemStyle"
                 android:background="@drawable/find"
                  />
         </LinearLayout>
@@ -54,10 +48,7 @@
             style="@style/main_bottom_item">
         	
             <ImageButton android:id="@+id/rbTakePhoto"
-                android:layout_height="35dp"
-                android:layout_width="35dp"
-                android:layout_margin="8dp"
-                android:text="@string/takephoto"
+                style="@style/bottomItemStyle"
                 android:background="@drawable/post"/>
         </LinearLayout>
         
@@ -67,10 +58,7 @@
 
             <ImageButton
                 android:id="@+id/rbMe"
-                android:layout_height="35dp"
-                android:layout_width="35dp"
-                android:layout_margin="8dp"
-                android:text="@string/me"
+                style="@style/bottomItemStyle"
                 android:background="@drawable/me"
                  />
         </LinearLayout>
@@ -81,10 +69,7 @@
 
             <ImageButton
                 android:id="@+id/rbSetting"
-                android:layout_height="35dp"
-                android:layout_width="35dp"
-                android:layout_margin="8dp"
-                android:text="@string/setting"
+                style="@style/bottomItemStyle"
                 android:background="@drawable/setting"
                />
         </LinearLayout>

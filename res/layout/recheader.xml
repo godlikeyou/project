@@ -2,10 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
     <ImageView android:id="@+id/ivPicRec"
+        android:adjustViewBounds="true"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/aboutsoft"/>
     <LinearLayout
         android:layout_width="fill_parent"
@@ -21,5 +24,30 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="17dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/oneCollNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/oneGoodNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/oneRecNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
     </LinearLayout>
 </LinearLayout>

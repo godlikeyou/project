@@ -16,8 +16,10 @@
         android:layout_below="@id/tvTop"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="@android:color/transparent"
+        android:divider="@color/divider"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:dividerHeight="10dp"/>
+        android:dividerHeight="1dp"
+        android:background="@color/white"
+        android:paddingTop="0dp"/>
 </RelativeLayout>
