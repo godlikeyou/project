@@ -2,36 +2,67 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/bottombackground" >
-    <include layout="@layout/top_title"/>
-	<TextView android:id="@+id/recTitle"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/rectitle"
-	    style="@style/title"
-	    />
-	<GridView android:id="@+id/recPerson"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:background="@color/red">
-	</GridView>
-	<TextView android:id="@+id/gridContent"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/newpost"/>
-	<TextView android:id="@+id/hotTitle"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    style="@style/title"
-	    android:text="@string/hottitle"/>
-	<TextView android:id="@+id/godPost"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/godpost"/>
-	<TextView android:id="@+id/newPost"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/newpost"/>
-	
+    android:background="@color/bottombackground"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout style="@style/topitem">
+
+            <TextView
+                android:id="@+id/recTitle"
+                style="@style/topnav"
+                android:text="@string/rectitle" />
+
+            <LinearLayout
+                android:id="@+id/recTitleLine"
+                style="@style/line"></LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout style="@style/topitem">
+
+            <TextView
+                android:id="@+id/hotTitle"
+                style="@style/topnav"
+                android:clickable="true"
+                android:text="@string/hottitle" />
+
+            <LinearLayout
+                android:id="@+id/hotTitleLine"
+                style="@style/line"></LinearLayout>
+        </LinearLayout>
+        <LinearLayout style="@style/topitem">
+
+            <TextView
+                android:id="@+id/findSome"
+                style="@style/topnav"
+                android:clickable="true"
+                android:text="@string/findsome" />
+
+            <LinearLayout
+                android:id="@+id/findSomeLine"
+                style="@style/line"></LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <ProgressBar android:id="@+id/userRecPro"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" />
+    <GridView
+        android:id="@+id/recPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        android:background="@color/nearwhite"
+        android:verticalSpacing="4dp"
+        android:horizontalSpacing="4dp"
+        android:padding="5dp"
+        >
+
+    </GridView>
 </LinearLayout>

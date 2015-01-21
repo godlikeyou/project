@@ -4,10 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     <include layout="@layout/top_title"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@color/nearwhite"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
     <Button android:id="@+id/toLogin"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
+	    android:layout_width="180dp"
+	    android:layout_height="45dp"
+        android:background="@drawable/loginbutonstate"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
 	    android:text="@string/login"/>
+    </LinearLayout>
 	<ImageView
 	    android:id="@+id/myPic"
 	    style="@style/meuserpic"

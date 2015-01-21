@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +33,11 @@ import com.crazyfish.util.TakePhoto;
 public class TakePhotoFragment extends Fragment {
 	
 	private View view = null;
-	private Button btnTakePhoto = null;
+	private LinearLayout btnTakePhoto = null;
 	private Uri fileUri = null;
-	private Button btnFromFile = null;
+	private LinearLayout btnFromFile = null;
 	private ImageView imageView = null;
-    private Button btnTextPost = null;
+    private LinearLayout btnTextPost = null;
     private Resources resources;
 	@Override 
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
@@ -47,22 +48,33 @@ public class TakePhotoFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
         resources = getResources();
-        ImageButton ibHome = (ImageButton)getActivity().findViewById(R.id.rbHome);
+        ImageView ibHome = (ImageView)getActivity().findViewById(R.id.rbHome);
         ibHome.setBackgroundDrawable(resources.getDrawable(R.drawable.first));
-        ImageButton ibFind = (ImageButton)getActivity().findViewById(R.id.rbFind);
+        TextView tvHomeText = (TextView)getActivity().findViewById(R.id.rbHomeText);
+        tvHomeText.setTextColor(resources.getColor(R.color.content));
+        //ibHome.setColor(resources.getColor(R.color.head));
+        ImageView ibFind = (ImageView)getActivity().findViewById(R.id.rbFind);
         ibFind.setBackgroundDrawable(resources.getDrawable(R.drawable.find));
-        ImageButton ibPost = (ImageButton)getActivity().findViewById(R.id.rbTakePhoto);
+        TextView tvFindText = (TextView)getActivity().findViewById(R.id.rbFindText);
+        tvFindText.setTextColor(resources.getColor(R.color.content));
+        ImageView ibPost = (ImageView)getActivity().findViewById(R.id.rbTakePhoto);
         ibPost.setBackgroundDrawable(resources.getDrawable(R.drawable.atpost));
-        ImageButton ibMe = (ImageButton)getActivity().findViewById(R.id.rbMe);
+        TextView tvPostText = (TextView)getActivity().findViewById(R.id.rbTakePhotoText);
+        tvPostText.setTextColor(resources.getColor(R.color.bottomfocus));
+        ImageView ibMe = (ImageView)getActivity().findViewById(R.id.rbMe);
         ibMe.setBackgroundDrawable(resources.getDrawable(R.drawable.me));
-        ImageButton ibSetting = (ImageButton)getActivity().findViewById(R.id.rbSetting);
+        TextView tvMeText = (TextView)getActivity().findViewById(R.id.rbMeText);
+        tvMeText.setTextColor(resources.getColor(R.color.content));
+        ImageView ibSetting = (ImageView)getActivity().findViewById(R.id.rbSetting);
         ibSetting.setBackgroundDrawable(resources.getDrawable(R.drawable.setting));
+        TextView tvSettingText = (TextView)getActivity().findViewById(R.id.rbSettingText);
+        tvSettingText.setTextColor(resources.getColor(R.color.content));
 
-		btnTakePhoto = (Button)view.findViewById(R.id.takePhoto);
+		btnTakePhoto = (LinearLayout)view.findViewById(R.id.takePhoto);
 		btnTakePhoto.setOnClickListener(listener);
-		btnFromFile = (Button)view.findViewById(R.id.btnFromFile);
+		btnFromFile = (LinearLayout)view.findViewById(R.id.btnFromFile);
 		btnFromFile.setOnClickListener(fromfile);
-        btnTextPost = (Button)view.findViewById(R.id.btnTextPost);
+        btnTextPost = (LinearLayout)view.findViewById(R.id.btnTextPost);
         btnTextPost.setOnClickListener(textPost);
 	}
 	public OnClickListener listener = new OnClickListener(){

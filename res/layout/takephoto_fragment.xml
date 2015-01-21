@@ -2,19 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
-    <include layout="@layout/top_title"/>
-	<Button android:id="@+id/takePhoto"
-	    android:layout_width="140dp"
-	    android:layout_height="140dp"
-        android:background="@drawable/takephoto"/>
-	<Button android:id="@+id/btnFromFile"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-	    android:background="@drawable/fromphone"/>
-	<Button android:id="@+id/btnTextPost"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:background="@drawable/fromphone"/>
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_title" />
+
+    <LinearLayout android:id="@+id/takePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:background="@drawable/linearlayout_focus">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/takephoto"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post_takephoto"
+            android:padding="10dp"
+            android:textSize="17dp"/>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/btnFromFile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        android:background="@drawable/linearlayout_focus">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/fromphone"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post_fromphone"
+            android:padding="10dp"
+            android:textSize="17dp"/>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/btnTextPost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        android:background="@drawable/linearlayout_focus">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/puretext"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post_puretext"
+            android:padding="10dp"
+            android:textSize="17dp"/>
+    </LinearLayout>
 </LinearLayout>

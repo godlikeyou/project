@@ -3,6 +3,7 @@ package com.crazyfish.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,7 +18,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crazyfish.activity.fragment.FindFragment;
@@ -27,6 +30,8 @@ import com.crazyfish.activity.fragment.SettingFragment;
 import com.crazyfish.activity.fragment.TakePhotoFragment;
 import com.crazyfish.demo.R;
 import com.crazyfish.extension.ResizeLayout;
+
+import org.w3c.dom.Text;
 //import com.crazyfish.extension.HkDialogLoading;
 
 public class MainActivity extends FragmentActivity {
@@ -36,6 +41,7 @@ public class MainActivity extends FragmentActivity {
     private static final int SMALLER = 2;
     private static final int MSG_RESIZE = 1;
     private static final int HEIGHT_THREADHOLD = 30;
+    private Resources resources;
     class InputHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -103,7 +109,7 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void dealBottomButtonClickEvent() {
-		findViewById(R.id.rbHome).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.bottomHome).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (fm.findFragmentByTag("hf") != null
@@ -111,9 +117,31 @@ public class MainActivity extends FragmentActivity {
 					return;
 				}
 				popAllFragmentsExceptTheBottomOne();
+                resources = getResources();
+                ImageView ibHome = (ImageView)findViewById(R.id.rbHome);
+                ibHome.setBackgroundDrawable(resources.getDrawable(R.drawable.atfirst));
+                TextView tvHomeText = (TextView)findViewById(R.id.rbHomeText);
+                tvHomeText.setTextColor(resources.getColor(R.color.bottomfocus));
+                //ibHome.setColor(resources.getColor(R.color.head));
+                ImageView ibFind = (ImageView)findViewById(R.id.rbFind);
+                ibFind.setBackgroundDrawable(resources.getDrawable(R.drawable.find));
+                TextView tvFindText = (TextView)findViewById(R.id.rbFindText);
+                tvFindText.setTextColor(resources.getColor(R.color.content));
+                ImageView ibPost = (ImageView)findViewById(R.id.rbTakePhoto);
+                ibPost.setBackgroundDrawable(resources.getDrawable(R.drawable.post));
+                TextView tvPostText = (TextView)findViewById(R.id.rbTakePhotoText);
+                tvPostText.setTextColor(resources.getColor(R.color.content));
+                ImageView ibMe = (ImageView)findViewById(R.id.rbMe);
+                ibMe.setBackgroundDrawable(resources.getDrawable(R.drawable.me));
+                TextView tvMeText = (TextView)findViewById(R.id.rbMeText);
+                tvMeText.setTextColor(resources.getColor(R.color.content));
+                ImageView ibSetting = (ImageView)findViewById(R.id.rbSetting);
+                ibSetting.setBackgroundDrawable(resources.getDrawable(R.drawable.setting));
+                TextView tvSettingText = (TextView)findViewById(R.id.rbSettingText);
+                tvSettingText.setTextColor(resources.getColor(R.color.content));
 			}
 		});
-		findViewById(R.id.rbFind).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.bottomFind).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				popAllFragmentsExceptTheBottomOne();
@@ -125,7 +153,7 @@ public class MainActivity extends FragmentActivity {
 				ft.commit();
 			}
 		});
-		findViewById(R.id.rbTakePhoto).setOnClickListener(
+		findViewById(R.id.bottomCamera).setOnClickListener(
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {

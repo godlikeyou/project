@@ -12,9 +12,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            style="@style/topitem">
 
             <TextView
                 android:id="@+id/tvAllGag"
@@ -27,9 +25,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            style="@style/topitem"
             android:textColor="@color/head">
 
             <TextView
@@ -43,9 +39,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            style="@style/topitem">
 
             <TextView
                 android:id="@+id/tvHavePic"
@@ -58,9 +52,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            style="@style/topitem">
 
             <TextView
                 android:id="@+id/tvSelSchool"
@@ -73,9 +65,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            style="@style/topitem">
 
             <TextView
                 android:id="@+id/tvSelected"

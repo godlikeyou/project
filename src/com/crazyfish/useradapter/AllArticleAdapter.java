@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
 import android.nfc.FormatException;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -162,6 +164,23 @@ public class AllArticleAdapter extends BaseAdapter {
     private void goodGag(String gid) {
 
     }
+    /***
+     * 按钮被按下
+    */
+    private final static float[] BUTTON_PRESSED = new float[] {
+            2.0f, 0, 0, 0, -50,
+            0, 2.0f, 0, 0, -50,
+            0, 0, 2.0f, 0, -50,
+            0, 0, 0, 5, 0 };
+
+    /**
+     * 按钮恢复原状
+     */
+    private final static float[] BUTTON_RELEASED = new float[] {
+            1, 0, 0, 0, 0,
+            0, 1, 0, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 0, 1, 0 };
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -346,6 +365,19 @@ public class AllArticleAdapter extends BaseAdapter {
                     builder.show();
                 }
             });
+//            view.btnGood.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    if(event.getAction() == MotionEvent.ACTION_DOWN) {
+//                        v.getBackground().setColorFilter(new ColorMatrixColorFilter(BUTTON_PRESSED));
+//                        v.setBackgroundDrawable(v.getBackground());
+//                    }else if(event.getAction() == MotionEvent.ACTION_UP) {
+//                        v.getBackground().setColorFilter(new ColorMatrixColorFilter(BUTTON_RELEASED));
+//                        v.setBackgroundDrawable(v.getBackground());
+//                    }
+//                    return false;
+//                }
+//            });
             view.btnGood.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

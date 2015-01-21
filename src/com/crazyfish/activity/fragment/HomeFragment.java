@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.crazyfish.asynctask.HttpGetTask;
 import com.crazyfish.demo.R;
+import com.crazyfish.extension.EImageButton;
 import com.crazyfish.extension.EListView;
 import com.crazyfish.extension.EListView.OnRefreshListener;
 import com.crazyfish.useradapter.AllArticleAdapter;
@@ -215,21 +216,13 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 		}
 	};
 
-	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
         resources = getResources();
-        ImageButton ibHome = (ImageButton)getActivity().findViewById(R.id.rbHome);
+        ImageView ibHome = (ImageView)getActivity().findViewById(R.id.rbHome);
         ibHome.setBackgroundDrawable(resources.getDrawable(R.drawable.atfirst));
-        ImageButton ibFind = (ImageButton)getActivity().findViewById(R.id.rbFind);
-        ibFind.setBackgroundDrawable(resources.getDrawable(R.drawable.find));
-        ImageButton ibPost = (ImageButton)getActivity().findViewById(R.id.rbTakePhoto);
-        ibPost.setBackgroundDrawable(resources.getDrawable(R.drawable.post));
-        ImageButton ibMe = (ImageButton)getActivity().findViewById(R.id.rbMe);
-        ibMe.setBackgroundDrawable(resources.getDrawable(R.drawable.me));
-        ImageButton ibSetting = (ImageButton)getActivity().findViewById(R.id.rbSetting);
-        ibSetting.setBackgroundDrawable(resources.getDrawable(R.drawable.setting));
+        TextView tvHomeText = (TextView)getActivity().findViewById(R.id.rbHomeText);
+        tvHomeText.setTextColor(resources.getColor(R.color.bottomfocus));
 
         etInput = (EditText)getActivity().findViewById(R.id.etInputA);
         llUserPost = (LinearLayout)getActivity().findViewById(R.id.llUserPost);
@@ -431,7 +424,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			bt.setText("没有更多了");
 			bt.setEnabled(false);
 		}else{
-            bt.setText("加载更多");
+            bt.setText("点击加载更多...");
             bt.setEnabled(true);
         }
 	}

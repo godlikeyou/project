@@ -8,6 +8,8 @@
       android:layout_width="fill_parent"    
       android:layout_height="50dp"  
       android:text="@string/loadmoredata"
+      android:background="@color/transparent"
+        android:textColor="@color/content"
       android:layout_marginBottom="50dp" />
   <ProgressBar
       android:id="@+id/pg"

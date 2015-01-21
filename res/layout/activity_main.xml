@@ -1,100 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com.crazyfish.extension.ResizeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resizeLL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/resizeLL"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/fragmentRoot"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="false"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottomList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/divider"
-        android:orientation="horizontal" >
+        android:background="@color/bottombackground"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/bottomHome"
-            style="@style/main_bottom_item" >
-
-            <ImageButton
-                android:id="@+id/rbHome"
-                style="@style/bottomItemStyle"
-                android:background="@drawable/first"
-                />
-        </LinearLayout>
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/bottomtopline"
+            android:orientation="vertical" />
 
         <LinearLayout
-            android:id="@+id/bottomFind"
-            style="@style/main_bottom_item" >
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/rbFind"
-                style="@style/bottomItemStyle"
-                android:background="@drawable/find"
-                 />
-        </LinearLayout>
-		
-        <LinearLayout android:id="@+id/bottomCamera"
-            style="@style/main_bottom_item">
-        	
-            <ImageButton android:id="@+id/rbTakePhoto"
-                style="@style/bottomItemStyle"
-                android:background="@drawable/post"/>
-        </LinearLayout>
-        
-        <LinearLayout
-            android:id="@+id/bottomMe"
-            style="@style/main_bottom_item" >
+            <LinearLayout
+                android:id="@+id/bottomHome"
+                style="@style/main_bottom_item">
 
-            <ImageButton
-                android:id="@+id/rbMe"
-                style="@style/bottomItemStyle"
-                android:background="@drawable/me"
-                 />
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/rbHome"
+                    style="@style/bottomItemStyle"
+                    android:background="@drawable/first" />
 
-        <LinearLayout
-            android:id="@+id/bottomSetting"
-            style="@style/main_bottom_item" >
+                <TextView
+                    android:id="@+id/rbHomeText"
+                    style="@style/bottomtextstyle"
+                    android:text="@string/home" />
+            </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/rbSetting"
-                style="@style/bottomItemStyle"
-                android:background="@drawable/setting"
-               />
+            <LinearLayout
+                android:id="@+id/bottomFind"
+                style="@style/main_bottom_item">
+
+                <ImageView
+                    android:id="@+id/rbFind"
+                    style="@style/bottomItemStyle"
+                    android:background="@drawable/find" />
+
+                <TextView
+                    android:id="@+id/rbFindText"
+                    style="@style/bottomtextstyle"
+                    android:text="@string/find" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottomCamera"
+                style="@style/main_bottom_item">
+
+                <ImageView
+                    android:id="@+id/rbTakePhoto"
+                    style="@style/bottomItemStyle"
+                    android:background="@drawable/post" />
+
+                <TextView
+                    android:id="@+id/rbTakePhotoText"
+                    style="@style/bottomtextstyle"
+                    android:text="@string/takephoto" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottomMe"
+                style="@style/main_bottom_item">
+
+                <ImageView
+                    android:id="@+id/rbMe"
+                    style="@style/bottomItemStyle"
+                    android:background="@drawable/me" />
+
+                <TextView
+                    android:id="@+id/rbMeText"
+                    style="@style/bottomtextstyle"
+                    android:text="@string/me" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottomSetting"
+                style="@style/main_bottom_item">
+
+                <ImageView
+                    android:id="@+id/rbSetting"
+                    style="@style/bottomItemStyle"
+                    android:background="@drawable/postbuttonstate" />
+
+                <TextView
+                    android:id="@+id/rbSettingText"
+                    style="@style/bottomtextstyle"
+                    android:text="@string/setting" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/llUserPost"
         android:layout_width="fill_parent"
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:background="@color/bottombackground"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         android:visibility="invisible">
-        <EditText android:id="@+id/etInputA"
+
+        <EditText
+            android:id="@+id/etInputA"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:ems="20"
-            android:lines="2"
             android:hint="@string/posthint"
-            android:visibility="invisible"
-            />
+            android:lines="2"
+            android:visibility="invisible" />
+
         <Button
+            android:id="@+id/btUserRec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btUserRec"
-            android:text="@string/postrec"/>
+            android:text="@string/postrec" />
     </LinearLayout>
 </com.crazyfish.extension.ResizeLayout>

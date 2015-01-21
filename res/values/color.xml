@@ -9,10 +9,14 @@
     <color name="black">#000</color>
     <color name="transparent">#00000000</color>
     <color name="white">#fff</color>
-    <color name="head">#3199E8</color>
+    <color name="head">#ff6005</color>
     <color name="bottomtext">#999</color>
-  	<color name="bottombackground">#eee</color>
+  	<color name="bottombackground">#fffbfbfb</color>
   	<color name="titlebackground">#fff</color>
     <color name="content">#848484</color>
     <color name="divider">#fff3f1f0</color>
+    <color name="llfocus">#6ADEA6</color>
+    <color name="bottomfocus">#ff6005</color>
+    <color name="bottomtopline">#ffe9e9e9</color>
+    <color name="nearwhite">#fff7f7f7</color>
 </resources>

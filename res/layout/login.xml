@@ -2,25 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical" >
 
 	<EditText android:id="@+id/name"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
 	    android:hint="@string/readName"
-	    android:singleLine="true"
+        style="@style/edittext"
 	    android:inputType="text"/>
 	<EditText android:id="@+id/passwd"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:singleLine="true"
 	    android:hint="@string/readPasswd"
+        style="@style/edittext"
 	    android:inputType="textPassword"/>"
     <Button
         android:id="@+id/Login"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:background="@drawable/loginbutonstate"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="@string/login" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp">
     <TextView android:id="@+id/toReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,13 +35,14 @@
         android:layout_gravity="left"
         android:onClick="goRegister"
         android:text="@string/register"
-        android:paddingLeft="20dp"/>
+        android:paddingLeft="25dp"/>
     <TextView android:id="@+id/otherLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:layout_gravity="right"
+        android:layout_marginLeft="120dp"
         android:onClick="goOtherLogin"
         android:text="@string/otherlogin"/>
-
+    </LinearLayout>
 </LinearLayout>

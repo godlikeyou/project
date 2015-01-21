@@ -74,6 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="bottom"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Button
@@ -81,36 +82,38 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/coll" />
+            android:background="@drawable/collbuttonstate" />
 
         <Button
             android:id="@+id/btnGood"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/good" />
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/imagebuttonstate"
+            />
 
         <Button
             android:id="@+id/btnRec"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/rec" />
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/postbuttonstate" />
 
         <Button
             android:id="@+id/btnMore"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="right"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/parent" />
+            android:layout_marginLeft="50dp"
+            android:gravity="right"
+            android:background="@drawable/morebuttonstate" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="14dp"
         android:gravity="bottom"
         android:orientation="horizontal">
 

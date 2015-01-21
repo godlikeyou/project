@@ -27,11 +27,16 @@
 	    <item name="android:layout_height">fill_parent</item>
 	    <item name="android:layout_weight">1</item>
 	    <item name="android:orientation">vertical</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingBottom">3dp</item>
 	</style>
     <style name="bottomItemStyle">
         <item name="android:layout_width">30dp</item>
         <item name="android:layout_height">30dp</item>
-        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_marginTop">3dp</item>
         <item name="android:text">@string/home</item>
     </style>
 	<style name="footbar">
@@ -92,13 +97,14 @@
         <item name="android:layout_height">100dp</item>
     </style>
     <style name="topnav">
-        <item name="android:padding">12dp</item>
+        <item name="android:padding">10dp</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_height">42dp</item>
         <item name="android:paddingRight">20dp</item>
         <item name="android:paddingLeft">20dp</item>
         <item name="android:textSize">17dp</item>
         <item name="android:textColor">@color/content</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="line">
@@ -114,5 +120,37 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="topitem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="bottomtextstyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">11dp</item>
+        <item name="android:textColor">@color/content</item>
+    </style>
+
+    <style name="findtype">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="edittext">
+        <item name="android:layout_width">280dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/content</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@drawable/edittextstate</item>
+        <item name="android:singleLine">true</item>
     </style>
 </resources>

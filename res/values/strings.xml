@@ -23,8 +23,9 @@
 	
 	<string name="rectitle">推荐用户</string>
 	<string name="hottitle">热门帖子</string>
-	<string name="godpost">热门</string>
+	<string name="godpost">爆笑</string>
 	<string name="newpost">新帖子</string>
+    <string name="findsome">找些什么</string>
 	
 	<string name="myPic">个人头像</string>
 	<string name="mypost">我的帖子</string>
@@ -50,7 +51,7 @@
 
     <string name="textpost">纯文字</string>
 	<string name="fromfile">从本地图片选择</string>
-	<string name="loadmoredata">加载更多</string>
+	<string name="loadmoredata">点击加载更多...</string>
 	<string name="refresh">刷新</string>
     <string name="postrec">提交</string>
 
@@ -70,4 +71,8 @@
     <string name="selected">热门</string>
 
     <string name="idea">快乐无处不在</string>
+
+    <string name="post_takephoto">点击图标抓拍有趣的事情上传分享</string>
+    <string name="post_fromphone">点击图标在手机中选择图片上传</string>
+    <string name="post_puretext">文本上传，单纯上传文字消息</string>
 </resources>
