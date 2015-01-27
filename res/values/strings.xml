@@ -8,7 +8,7 @@
 	<string name="readPasswd">输入密码</string>
 	<string name="login">登录</string>
 	
-	<string name="me">我</string>
+	<string name="me">我的</string>
 	<string name="find">发现</string>
 	<string name="takephoto">抓拍</string>
 	<string name="setting">设置</string>
@@ -26,6 +26,10 @@
 	<string name="godpost">爆笑</string>
 	<string name="newpost">新帖子</string>
     <string name="findsome">找些什么</string>
+    <string name="godgag">神吐槽</string>
+    <string name="finduser">查找用户</string>
+    <string name="findgag">查找帖子</string>
+    <string name="gofind">查找</string>
 	
 	<string name="myPic">个人头像</string>
 	<string name="mypost">我的帖子</string>
@@ -75,4 +79,9 @@
     <string name="post_takephoto">点击图标抓拍有趣的事情上传分享</string>
     <string name="post_fromphone">点击图标在手机中选择图片上传</string>
     <string name="post_puretext">文本上传，单纯上传文字消息</string>
+
+    <string name="user_home_fans">粉丝</string>
+    <string name="user_home_focus">关注</string>
+    <string name="user_home_post">发布</string>
+    <string name="user_home_info">信息</string>
 </resources>

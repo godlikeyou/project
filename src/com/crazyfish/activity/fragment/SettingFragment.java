@@ -16,11 +16,11 @@ import com.crazyfish.demo.R;
 
 public class SettingFragment extends Fragment{
 	private View view = null;
-	private ListView list = null;
     private Resources resources;
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		view =  inflater.inflate(R.layout.setting_fragment, container, false);
+        ((TextView)view.findViewById(R.id.tvTop)).setText("设置");
 		return view;
 	}
 	@Override
@@ -48,11 +48,5 @@ public class SettingFragment extends Fragment{
         ibSetting.setBackgroundDrawable(resources.getDrawable(R.drawable.atsetting));
         TextView tvSettingText = (TextView)getActivity().findViewById(R.id.rbSettingText);
         tvSettingText.setTextColor(resources.getColor(R.color.bottomfocus));
-		list = (ListView)getView().findViewById(R.id.btnTest);
-		String[] strs = new String[] {
-			    "first", "second", "third", "fourth", "fifth"
-			    };
-		list.setAdapter(new ArrayAdapter<String>(getActivity(),
-		                android.R.layout.simple_gallery_item, strs));
 	}
 }

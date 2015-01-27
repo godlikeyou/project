@@ -23,6 +23,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
@@ -36,6 +37,7 @@ public class RegisterActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.register);
+        ((TextView)findViewById(R.id.tvTop)).setText("用户注册");
 		registerButton = (Button) findViewById(R.id.Register);
 		registerButton.setOnClickListener(listener);
 	}

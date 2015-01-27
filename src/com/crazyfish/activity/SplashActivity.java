@@ -21,7 +21,7 @@ public class SplashActivity extends Activity {
             public void run() {
                 // TODO Auto-generated method stub
                 try {
-                    sleep(3000);
+                    sleep(2000);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 } catch (InterruptedException e) {

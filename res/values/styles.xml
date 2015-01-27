@@ -34,9 +34,10 @@
         <item name="android:paddingBottom">3dp</item>
 	</style>
     <style name="bottomItemStyle">
-        <item name="android:layout_width">30dp</item>
-        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_height">26dp</item>
         <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_margin">7dp</item>
         <item name="android:text">@string/home</item>
     </style>
 	<style name="footbar">
@@ -75,7 +76,7 @@
 	     <item name="android:adjustViewBounds">true</item>
 	    <item name="android:layout_gravity">center</item>
 	    <item name="android:scaleType">centerCrop</item>
-	    <item name="android:background">@color/contentcolor</item>
+	    <item name="android:background">@color/white</item>
 	</style>
 	<style name="HKDialogLoading" parent="@android:style/Theme.Dialog">  
     <item name="android:windowFrame">@null</item>  
@@ -108,14 +109,21 @@
     </style>
 
     <style name="line">
-        <item name="android:layout_height">3dp</item>
-        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_width">40dp</item>
         <item name="android:background">@color/white</item>
         <item name="android:layout_margin">0dp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:padding">0dp</item>
     </style>
-
+    <style name="line_find">
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_width">68dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">0dp</item>
+    </style>
     <style name="ContentOverlay" parent="@android:style/Theme.Light">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -152,5 +160,93 @@
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:background">@drawable/edittextstate</item>
         <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="hottitle">
+        <item name="android:layout_height">90dp</item>
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/imageshape</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="userhomenav">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/content</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="userhomenavbottomline">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">4dp</item>
+    </style>
+    <style name="userhomenavbottomnum">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">21</item>
+        <item name="android:textSize">10dp</item>
+    </style>
+    <style name="verticalsplit">
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:background">@color/splitcolor</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+    </style>
+    <style name="actionbartext">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">10dp</item>
+    </style>
+    <style name="actionbarline">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="actionbarbutton">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+    </style>
+
+    <style name="ImageloadingDialogStyle" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item><!--无边框-->
+        <item name="android:windowNoTitle">true</item><!--没有标题-->
+        <item name="android:windowIsFloating">true</item><!--是否浮在activity之上-->
+        <item name="android:windowIsTranslucent">true</item><!--背景是否半透明-->
+        <item name="android:windowContentOverlay">@null</item><!--对话框是否有遮盖 -->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item><!--动画样式-->
+        <item name="android:backgroundDimEnabled">true</item><!--背景是否模糊-->
+    </style>
+
+    <style name="ImageScale" parent="android:Theme.Black.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/AnimHead</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowFullscreen">true</item>
+        <!-- 设置全屏显示 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">false</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- 模糊 -->
+    </style>
+
+    <style name="AnimHead" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/head_in</item>
+        <item name="android:windowExitAnimation">@anim/head_out</item>
     </style>
 </resources>

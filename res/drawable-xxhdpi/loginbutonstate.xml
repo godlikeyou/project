@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_window_focused="true"
-        android:drawable="@drawable/loginbutton">
+    <item android:state_window_focused="false"
+        >
         <shape>
+            <solid android:color="@color/loginbutton"></solid>
             <corners android:radius="15dp" />
         </shape>
         </item>
     <item android:state_pressed="true"
-        android:drawable="@drawable/loginbutton">
+        >
+        <shape>
+            <solid android:color="@color/red"></solid>
+            <corners android:radius="15dp" />
+        </shape>
     </item>
     <item android:state_focused="true"
         android:drawable="@drawable/loginbutton">

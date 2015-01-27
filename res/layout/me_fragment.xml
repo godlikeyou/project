@@ -17,7 +17,7 @@
         android:background="@drawable/loginbutonstate"
         android:layout_margin="10dp"
         android:layout_gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/butonforeground"
 	    android:text="@string/login"/>
     </LinearLayout>
 	<ImageView

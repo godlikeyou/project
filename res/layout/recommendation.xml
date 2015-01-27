@@ -2,23 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView android:id="@+id/tvTop"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/home"
-        android:padding="8dp"
-        android:textSize="18sp"
-        android:background="@color/head"
-        android:textColor="@android:color/white"
-        />
+    <include layout="@layout/top_title"></include>
     <ListView android:id="@+id/lvOneAllRec"
-        android:layout_below="@id/tvTop"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:divider="@color/divider"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:dividerHeight="1dp"
         android:background="@color/white"
         android:paddingTop="0dp"/>

@@ -9,6 +9,7 @@ import com.crazyfish.useradapter.GridViewAdapter;
 import com.crazyfish.util.FileUtils;
 import com.crazyfish.util.GlobalVariable;
 import com.crazyfish.util.JsonCodec;
+import com.crazyfish.util.NetUtil;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -23,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -56,9 +58,13 @@ public class FindFragment extends Fragment{
     private TextView findSome;
     private LinearLayout findSomeLine;
     private ProgressBar userRecPro;
+    private GridLayout llHotTitle;
+    private LinearLayout llFindAny;
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
         view = inflater.inflate(R.layout.find_fragment, container,false);
+        TextView toptitle = (TextView)view.findViewById(R.id.tvTop);
+        toptitle.setText("找你喜欢");
 		return view;
 	}
     Handler h = new Handler() {
@@ -137,7 +143,8 @@ public class FindFragment extends Fragment{
         ibSetting.setBackgroundDrawable(resources.getDrawable(R.drawable.setting));
         TextView tvSettingText = (TextView)getActivity().findViewById(R.id.rbSettingText);
         tvSettingText.setTextColor(resources.getColor(R.color.content));
-
+        llHotTitle = (GridLayout)getActivity().findViewById(R.id.llHotTitle);
+        llHotTitle.setVisibility(View.GONE);
         recTitle = (TextView)getActivity().findViewById(R.id.recTitle);
         recTitleLine = (LinearLayout)getActivity().findViewById(R.id.recTitleLine);
         hotTitle = (TextView)getActivity().findViewById(R.id.hotTitle);
@@ -150,23 +157,32 @@ public class FindFragment extends Fragment{
         hotTitle.setOnClickListener(hotGag);
         findSome.setOnClickListener(findSomething);
 
+        llFindAny = (LinearLayout)getActivity().findViewById(R.id.llFindAny);
+        llFindAny.setVisibility(View.GONE);
         userRecPro = (ProgressBar)getActivity().findViewById(R.id.userRecPro);
 
         gridView = (GridView) getActivity().findViewById(R.id.recPerson);
-        //String url1 = GlobalVariable.URLHEAD + "/customer/customersize";
-        //HttpGetTask task1 = new HttpGetTask(h);
-        //task1.execute(url1);
-        String url = GlobalVariable.URLHEAD + "/customer/user/alluser";
-        HttpGetTask task = new HttpGetTask(h);
-        task.execute(url);
-        lmap = new ArrayList<Map<String, Object>>();
+        if (NetUtil.checkNet(getActivity())) {
+            //String url1 = GlobalVariable.URLHEAD + "/customer/customersize";
+            //HttpGetTask task1 = new HttpGetTask(h);
+            //task1.execute(url1);
+            String url = GlobalVariable.URLHEAD + "/customer/user/alluser";
+            HttpGetTask task = new HttpGetTask(h);
+            task.execute(url);
+            lmap = new ArrayList<Map<String, Object>>();
 
-        userAdapter = new GridViewAdapter(getActivity(), lmap);
-        gridView.setAdapter(userAdapter);
+            userAdapter = new GridViewAdapter(getActivity(), lmap);
+            gridView.setAdapter(userAdapter);
+        }else{
+            userRecPro.setVisibility(View.GONE);
+        }
 	}
     public View.OnClickListener hotGag =  new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            llHotTitle.setVisibility(View.VISIBLE);
+            gridView.setVisibility(View.GONE);
+            llFindAny.setVisibility(View.GONE);
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize/puretext";
 //            HttpGetTask task1 = new HttpGetTask(h);
@@ -188,6 +204,9 @@ public class FindFragment extends Fragment{
     public View.OnClickListener recUser =  new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            llHotTitle.setVisibility(View.GONE);
+            gridView.setVisibility(View.VISIBLE);
+            llFindAny.setVisibility(View.GONE);
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize/puretext";
 //            HttpGetTask task1 = new HttpGetTask(h);
@@ -209,6 +228,9 @@ public class FindFragment extends Fragment{
     public View.OnClickListener findSomething =  new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            llHotTitle.setVisibility(View.GONE);
+            gridView.setVisibility(View.GONE);
+            llFindAny.setVisibility(View.VISIBLE);
             String url3 = GlobalVariable.URLHEAD
                     + "/article/gagsize/puretext";
 //            HttpGetTask task1 = new HttpGetTask(h);

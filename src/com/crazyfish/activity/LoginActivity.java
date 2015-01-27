@@ -55,6 +55,7 @@ public class LoginActivity extends Activity {
 		if( !NetUtil.checkNet(getApplicationContext())){
 			Toast.makeText(getApplicationContext(), "连接网络失败", Toast.LENGTH_LONG).show();
 		}
+        ((TextView)findViewById(R.id.tvTop)).setText("用户登录");
 		tv = (TextView)findViewById(R.id.otherLogin);
 		customerName = (EditText) findViewById(R.id.name);
 		customerPasswd = (EditText) findViewById(R.id.passwd);

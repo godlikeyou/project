@@ -22,7 +22,7 @@
 
             <LinearLayout
                 android:id="@+id/recTitleLine"
-                style="@style/line"></LinearLayout>
+                style="@style/line_find"></LinearLayout>
         </LinearLayout>
 
         <LinearLayout style="@style/topitem">
@@ -35,8 +35,9 @@
 
             <LinearLayout
                 android:id="@+id/hotTitleLine"
-                style="@style/line"></LinearLayout>
+                style="@style/line_find"></LinearLayout>
         </LinearLayout>
+
         <LinearLayout style="@style/topitem">
 
             <TextView
@@ -47,22 +48,127 @@
 
             <LinearLayout
                 android:id="@+id/findSomeLine"
-                style="@style/line"></LinearLayout>
+                style="@style/line_find"></LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <ProgressBar android:id="@+id/userRecPro"
+
+    <ProgressBar
+        android:id="@+id/userRecPro"
         android:layout_width="fill_parent"
+        android:background="@color/nearwhite"
         android:layout_height="50dp" />
+
     <GridView
         android:id="@+id/recPerson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numColumns="3"
         android:background="@color/nearwhite"
-        android:verticalSpacing="4dp"
         android:horizontalSpacing="4dp"
+        android:numColumns="3"
         android:padding="5dp"
-        >
+        android:verticalSpacing="4dp">
 
     </GridView>
+
+    <GridLayout
+        android:id="@+id/llHotTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/nearwhite"
+        android:columnCount="3"
+        android:padding="5dp">
+
+        <LinearLayout style="@style/hottitle">
+
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/fromphone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hottitle" />
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/hottitle">
+
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/fromphone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/godgag" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/hottitle">
+
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/fromphone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hottitle" />
+        </LinearLayout>
+    </GridLayout>
+
+    <LinearLayout
+        android:id="@+id/llFindAny"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/nearwhite"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/findsome"
+                android:layout_margin="5dp"
+                android:contentDescription="@string/login"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/finduser"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gofind"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/findsome"
+                android:layout_margin="5dp"
+                android:contentDescription="@string/login"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/findgag"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gofind"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

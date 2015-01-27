@@ -22,9 +22,5 @@
 	<TextView android:id="@+id/clearCache"
 	    style="@style/title"
 	    android:text="@string/clearcache"/>
-	<ListView android:id="@+id/btnTest"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-	    
-	</ListView>
+
 </LinearLayout>

@@ -4,6 +4,7 @@
     android:layout_height="fill_parent"
     android:gravity="top|center"
     android:orientation="vertical" >
+    <include layout="@layout/top_title" />
     <EditText android:id="@+id/name"
         style="@style/edittext"
 	    android:hint="@string/readName"
@@ -23,6 +24,6 @@
         android:background="@drawable/loginbutonstate"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/butonforeground"
         android:text="@string/Register" />
 </LinearLayout>

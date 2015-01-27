@@ -11,12 +11,21 @@
     <color name="white">#fff</color>
     <color name="head">#ff6005</color>
     <color name="bottomtext">#999</color>
-  	<color name="bottombackground">#fffbfbfb</color>
+  	<color name="bottombackground">#ff101010</color>
+    <color name="bottombackgroundpressed">#ff252525</color>
   	<color name="titlebackground">#fff</color>
     <color name="content">#848484</color>
     <color name="divider">#fff3f1f0</color>
     <color name="llfocus">#6ADEA6</color>
     <color name="bottomfocus">#ff6005</color>
-    <color name="bottomtopline">#ffe9e9e9</color>
-    <color name="nearwhite">#fff7f7f7</color>
+    <color name="bottomtopline">#fff3f3f3</color>
+    <color name="nearwhite">#ffefefef</color>
+    <color name="focus">#b9ff6005</color>
+    <color name="focuspress">#b96ADEA6</color>
+    <color name="loginbutton">#b9ff0000</color>
+    <color name="butonforeground">#fff</color>
+
+    <color name="almostwhite">#fffcfcfc</color>
+
+    <color name="splitcolor">#ffeeeeee</color>
 </resources>

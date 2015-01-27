@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical" >
-
+    <include layout="@layout/top_title" />
 	<EditText android:id="@+id/name"
 	    android:hint="@string/readName"
         style="@style/edittext"
@@ -20,7 +20,7 @@
         android:background="@drawable/loginbutonstate"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/butonforeground"
         android:text="@string/login" />
     <LinearLayout
         android:layout_width="fill_parent"

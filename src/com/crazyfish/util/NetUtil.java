@@ -10,21 +10,18 @@ import android.widget.Toast;
 
 public class NetUtil {
 	public static boolean checkNet(Context context) {
-        // »ñÈ¡ÊÖ»úÁ¬½Ó¹ÜÀí¶ÔÏó£¨°üÀ¨wi-fi£¬netµÈÁ¬½ÓµÄ¹ÜÀí£©
         ConnectivityManager conn = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (conn != null) {
-            // ÍøÂç¹ÜÀíÁ¬½Ó¶ÔÏó
             NetworkInfo info = conn.getActiveNetworkInfo();
             
             if(info != null && info.isConnected()) {
-                // ÅĞ¶Ïµ±Ç°ÍøÂçÊÇ·ñÁ¬½Ó
                 if (info.getState() == NetworkInfo.State.CONNECTED) {
                     return true;
                 }
             }       
         }
-        Toast.makeText(context, "±¯¾çÁË,Ä¾ÓĞÍøÂç°¡", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "è¯·æ£€æŸ¥æ‚¨çš„ç½‘ç»œè¿æ¥", Toast.LENGTH_LONG).show();
         return false;
     }
 }

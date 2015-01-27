@@ -81,6 +81,8 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.home_fragment, container, false);
+        TextView toptitle = (TextView)view.findViewById(R.id.tvTop);
+        toptitle.setText("首页");
 		return view;
 	}
 
@@ -94,19 +96,26 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 				result = bundle.getString("result");
 				String rtype = bundle.getString("type");
 				String url1 = GlobalVariable.URLHEAD + "/article/gagsize";
-				String url = GlobalVariable.URLHEAD + "/article/allarticle/1";
-                String url2 = GlobalVariable.URLHEAD + "/article/allarticle/havepic/1";
+				String url_all = GlobalVariable.URLHEAD + "/article/allarticle/1";
+                String url_havapic = GlobalVariable.URLHEAD + "/article/allarticle/havepic/1";
                 String url3 = GlobalVariable.URLHEAD + "/article/gagsize/havepic";
                 String url4 = GlobalVariable.URLHEAD + "/article/gagsize/puretext";
-                String url5 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
+                String url_puretext = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
 				Log.i("handler", result + rtype);
 				if (result.equals("timeout")) {
 					Toast.makeText(getActivity(), "加载失败，为您加载了历史浏览信息，请检查网络",
 							Toast.LENGTH_LONG).show();
 					pbLoad.setVisibility(View.GONE);
 					//btRefresh.setVisibility(View.VISIBLE);
-                    String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
-                            + "allgag";
+                    String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator;
+                    if( rtype.equals(url_all)) {
+                        link += "allgag";
+                    }else if( rtype.equals(url_havapic)){
+                        link += "havepic";
+                    }else if( rtype.equals(url_puretext)){
+                        link += "puretext";
+                    }
+
                     String str = FileUtils.readCacheFile(link);
                     Log.i("ifdata", str);
                     String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
@@ -124,7 +133,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 					} catch (NullPointerException e) {
 						e.printStackTrace();
 					}
-				} else if (rtype.equals(url)) {
+				} else if (rtype.equals(url_all)) {
 					if (FileUtils.fileCache("allgag", result) == null) {
 					}
 					String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
@@ -138,9 +147,9 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 					// dialogLoading.hide();
 					pbLoad.setVisibility(View.GONE);
 					bt.setVisibility(View.VISIBLE);
-					btRefresh.setVisibility(View.GONE);
-				}else if(rtype.equals(url2)){
-                    if (FileUtils.fileCache("allgag", result) == null) {
+					//btRefresh.setVisibility(View.GONE);
+				}else if(rtype.equals(url_havapic)){
+                    if (FileUtils.fileCache("havepic", result) == null) {
                     }
                     String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
                     // json decode
@@ -154,9 +163,9 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                     bt.setVisibility(View.VISIBLE);
                     bt.setEnabled(true);
                     //bt.setText("点击加载更多");
-                    btRefresh.setVisibility(View.GONE);
-                }else if(rtype.equals(url5)){
-                    if (FileUtils.fileCache("allgag", result) == null) {
+                    //btRefresh.setVisibility(View.GONE);
+                }else if(rtype.equals(url_puretext)){
+                    if (FileUtils.fileCache("puretext", result) == null) {
                     }
                     String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
                     // json decode
@@ -170,7 +179,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                     bt.setVisibility(View.VISIBLE);
                     bt.setEnabled(true);
                     //bt.setText("点击加载更多");
-                    btRefresh.setVisibility(View.GONE);
+                    //btRefresh.setVisibility(View.GONE);
                 }
 				break;
                 case GlobalVariable.HANDLER_GOOD_CODE:
@@ -245,7 +254,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         tvSchool.setOnClickListener(showSchool);
         tvSelected.setOnClickListener(showSelected);
 
-
+        pbLoad = (ProgressBar) view.findViewById(R.id.pbLoad);
         tvAllGag.setTextColor(resources.getColor(R.color.head));
         llAllGag.setBackgroundColor(resources.getColor(R.color.head));
 		if (NetUtil.checkNet(getActivity())) {
@@ -256,12 +265,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			moreView = getLayoutInflater(savedInstanceState).inflate(
 					R.layout.moredata, null);
 			bt = (Button) moreView.findViewById(R.id.bt_load);
-			btRefresh = (Button) view.findViewById(R.id.btRefresh);
+			//btRefresh = (Button) view.findViewById(R.id.btRefresh);
 			pg = (ProgressBar) moreView.findViewById(R.id.pg);
-			pbLoad = (ProgressBar) view.findViewById(R.id.pbLoad);
 			handler = new Handler();
 			bt.setVisibility(View.GONE);
-			btRefresh.setVisibility(View.GONE);
+//			//btRefresh.setVisibility(View.GONE);
 			String url1 = GlobalVariable.URLHEAD + "/article/gagsize";
 			HttpGetTask task1 = new HttpGetTask(h);
 			task1.execute(url1);
@@ -358,32 +366,19 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 					R.layout.moredata, null);
 			bt = (Button) moreView.findViewById(R.id.bt_load);
 			pg = (ProgressBar) moreView.findViewById(R.id.pg);
-			handler = new Handler();
+			//handler = new Handler();
 			String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
 					+ "allgag";
 			String str = FileUtils.readCacheFile(link);
-			Log.i("ifdata", str);
 			String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
 			// json decode
 			lmap = JsonCodec.deJson(str, type);
 			allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
 			lv.addFooterView(moreView);
 			lv.setAdapter(allAdapter);
-			bt.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					handler.postDelayed(new Runnable() {
-						@Override
-						public void run() {
-							bt.setVisibility(View.VISIBLE);
-							bt.setText("点击加载");
-							bt.setEnabled(false);
-							Toast.makeText(getActivity(), "加载中",
-									Toast.LENGTH_LONG).show();
-						}
-					}, 2000);
-				}
-			});
+			bt.setEnabled(false);
+            bt.setText("没有网络，下拉刷新");
+            pbLoad.setVisibility(View.GONE);
 		}
 	}
 
@@ -454,15 +449,31 @@ public class HomeFragment extends Fragment implements OnScrollListener {
             filterType = GlobalVariable.FILTER_ALL_GAG;
 
             pbLoad.setVisibility(View.VISIBLE);
+            if (NetUtil.checkNet(getActivity())) {
+                String url3 = GlobalVariable.URLHEAD
+                        + "/article/gagsize";
+                HttpGetTask task1 = new HttpGetTask(h);
+                task1.execute(url3);
+                String url4 = GlobalVariable.URLHEAD + "/article/allarticle/1";
+                HttpGetTask task = new HttpGetTask(h);
+                task.execute(url4);
+            }else {
+                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
 
-            String url3 = GlobalVariable.URLHEAD
-                    + "/article/gagsize";
-            HttpGetTask task1 = new HttpGetTask(h);
-            task1.execute(url3);
-            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/1";
-            HttpGetTask task = new HttpGetTask(h);
-            task.execute(url4);
-
+                //handler = new Handler();
+                String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
+                        + "allgag";
+                String str = FileUtils.readCacheFile(link);
+                String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                // json decode
+                lmap = JsonCodec.deJson(str, type);
+                allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
+                lv.addFooterView(moreView);
+                lv.setAdapter(allAdapter);
+                bt.setEnabled(false);
+                bt.setText("没有网络，下拉刷新");
+                pbLoad.setVisibility(View.GONE);
+            }
             tvAllGag.setTextColor(resources.getColor(R.color.head));
             llAllGag.setBackgroundColor(resources.getColor(R.color.head));
 
@@ -485,15 +496,31 @@ public class HomeFragment extends Fragment implements OnScrollListener {
             filterType = GlobalVariable.FILTER_HAVE_PIC;
 
             pbLoad.setVisibility(View.VISIBLE);
+            if (NetUtil.checkNet(getActivity())) {
+                String url3 = GlobalVariable.URLHEAD
+                        + "/article/gagsize/havepic";
+                HttpGetTask task1 = new HttpGetTask(h);
+                task1.execute(url3);
+                String url4 = GlobalVariable.URLHEAD + "/article/allarticle/havepic/1";
+                HttpGetTask task = new HttpGetTask(h);
+                task.execute(url4);
+            }else {
+                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
 
-            String url3 = GlobalVariable.URLHEAD
-                    + "/article/gagsize/havepic";
-            HttpGetTask task1 = new HttpGetTask(h);
-            task1.execute(url3);
-            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/havepic/1";
-            HttpGetTask task = new HttpGetTask(h);
-            task.execute(url4);
-
+                //handler = new Handler();
+                String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
+                        + "havepic";
+                String str = FileUtils.readCacheFile(link);
+                String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                // json decode
+                lmap = JsonCodec.deJson(str, type);
+                allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
+                lv.addFooterView(moreView);
+                lv.setAdapter(allAdapter);
+                bt.setEnabled(false);
+                bt.setText("没有网络，下拉刷新");
+                pbLoad.setVisibility(View.GONE);
+            }
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
 
@@ -515,14 +542,31 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_PURE_TEXT;
             pbLoad.setVisibility(View.VISIBLE);
-            String url3 = GlobalVariable.URLHEAD
-                    + "/article/gagsize/puretext";
-            HttpGetTask task1 = new HttpGetTask(h);
-            task1.execute(url3);
-            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
-            HttpGetTask task = new HttpGetTask(h);
-            task.execute(url4);
+            if (NetUtil.checkNet(getActivity())) {
+                String url3 = GlobalVariable.URLHEAD
+                        + "/article/gagsize/puretext";
+                HttpGetTask task1 = new HttpGetTask(h);
+                task1.execute(url3);
+                String url4 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
+                HttpGetTask task = new HttpGetTask(h);
+                task.execute(url4);
+            }else {
+                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
 
+                //handler = new Handler();
+                String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
+                        + "puretext";
+                String str = FileUtils.readCacheFile(link);
+                String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                // json decode
+                lmap = JsonCodec.deJson(str, type);
+                allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
+                lv.addFooterView(moreView);
+                lv.setAdapter(allAdapter);
+                bt.setEnabled(false);
+                bt.setText("没有网络，下拉刷新");
+                pbLoad.setVisibility(View.GONE);
+            }
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
 
@@ -544,14 +588,31 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_SCHOOL;
             pbLoad.setVisibility(View.VISIBLE);
-            String url3 = GlobalVariable.URLHEAD
-                    + "/article/gagsize/puretext";
-            HttpGetTask task1 = new HttpGetTask(h);
-            task1.execute(url3);
-            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
-            HttpGetTask task = new HttpGetTask(h);
-            task.execute(url4);
+            if (NetUtil.checkNet(getActivity())) {
+                String url3 = GlobalVariable.URLHEAD
+                        + "/article/gagsize/puretext";
+                HttpGetTask task1 = new HttpGetTask(h);
+                task1.execute(url3);
+                String url4 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
+                HttpGetTask task = new HttpGetTask(h);
+                task.execute(url4);
+            }else {
+                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
 
+                //handler = new Handler();
+                String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
+                        + "allgag";
+                String str = FileUtils.readCacheFile(link);
+                String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                // json decode
+                lmap = JsonCodec.deJson(str, type);
+                allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
+                lv.addFooterView(moreView);
+                lv.setAdapter(allAdapter);
+                bt.setEnabled(false);
+                bt.setText("没有网络，下拉刷新");
+                pbLoad.setVisibility(View.GONE);
+            }
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
 
@@ -573,14 +634,31 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_SELECTED;
             pbLoad.setVisibility(View.VISIBLE);
-            String url3 = GlobalVariable.URLHEAD
-                    + "/article/gagsize/puretext";
-            HttpGetTask task1 = new HttpGetTask(h);
-            task1.execute(url3);
-            String url4 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
-            HttpGetTask task = new HttpGetTask(h);
-            task.execute(url4);
+            if (NetUtil.checkNet(getActivity())) {
+                String url3 = GlobalVariable.URLHEAD
+                        + "/article/gagsize/puretext";
+                HttpGetTask task1 = new HttpGetTask(h);
+                task1.execute(url3);
+                String url4 = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
+                HttpGetTask task = new HttpGetTask(h);
+                task.execute(url4);
+            }else {
+                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
 
+                //handler = new Handler();
+                String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
+                        + "allgag";
+                String str = FileUtils.readCacheFile(link);
+                String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
+                // json decode
+                lmap = JsonCodec.deJson(str, type);
+                allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
+                lv.addFooterView(moreView);
+                lv.setAdapter(allAdapter);
+                bt.setEnabled(false);
+                bt.setText("没有网络，下拉刷新");
+                pbLoad.setVisibility(View.GONE);
+            }
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
 

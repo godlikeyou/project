@@ -48,14 +48,12 @@ public class MainActivity extends FragmentActivity {
             switch (msg.what) {
                 case MSG_RESIZE: {
                     if (msg.arg1 == BIGGER) {
-                        Toast.makeText(MainActivity.this,"隐藏软键盘",Toast.LENGTH_LONG).show();
                         LinearLayout bottomList = (LinearLayout)findViewById(R.id.bottomList);
                         LinearLayout flPost = (LinearLayout)findViewById(R.id.llUserPost);
                         bottomList.setVisibility(View.VISIBLE);
                         flPost.setVisibility(View.INVISIBLE);
                         //findViewById(R.id.bottom_layout).setVisibility(View.VISIBLE);
                     } else {
-                        Toast.makeText(MainActivity.this,"显示软键盘",Toast.LENGTH_LONG).show();
                         LinearLayout bottomList = (LinearLayout)findViewById(R.id.bottomList);
                         LinearLayout flPost = (LinearLayout)findViewById(R.id.llUserPost);
                         bottomList.setVisibility(View.INVISIBLE);
@@ -166,7 +164,7 @@ public class MainActivity extends FragmentActivity {
 						ft.commit();
 					}
 				});
-		findViewById(R.id.rbMe).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.bottomMe).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				SharedPreferences preferences;
@@ -186,7 +184,7 @@ public class MainActivity extends FragmentActivity {
 				ft.commit();
 			}
 		});
-		findViewById(R.id.rbSetting).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.bottomSetting).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				popAllFragmentsExceptTheBottomOne();

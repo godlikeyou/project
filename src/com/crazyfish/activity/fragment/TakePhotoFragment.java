@@ -30,6 +30,9 @@ import com.crazyfish.activity.TextPostActivity;
 import com.crazyfish.demo.R;
 import com.crazyfish.util.GlobalVariable;
 import com.crazyfish.util.TakePhoto;
+
+import org.w3c.dom.Text;
+
 public class TakePhotoFragment extends Fragment {
 	
 	private View view = null;
@@ -42,6 +45,7 @@ public class TakePhotoFragment extends Fragment {
 	@Override 
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		view = inflater.inflate(R.layout.takephoto_fragment,container, false);
+        ((TextView)view.findViewById(R.id.tvTop)).setText("分享");
 		return view;
 	}
 	@Override

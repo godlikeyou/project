@@ -28,9 +28,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crazyfish.activity.ImageShower;
 import com.crazyfish.activity.RecommendationActivity;
+import com.crazyfish.activity.UserHomeActivity;
 import com.crazyfish.asynctask.BitmapWorkerTask;
 import com.crazyfish.demo.R;
+import com.crazyfish.model.SerializableMap;
 import com.crazyfish.util.GlobalVariable;
 import com.crazyfish.util.JsonCodec;
 import com.crazyfish.util.LoginUtil;
@@ -261,6 +264,34 @@ public class AllArticleAdapter extends BaseAdapter {
                     + "评");
 
             final int p = position;
+            view.userUpload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(context,ImageShower.class);
+                    Bitmap image = PicHandler.getBitmap(listItems.get(p).get("gPic").toString(), context);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("image",image);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
+            final SerializableMap<String,String> userinfo = new SerializableMap<String,String>();
+            userinfo.getMap().put("cId",ulist.get(0).get("cId").toString());
+            userinfo.getMap().put("cName",ulist.get(0).get("cName").toString());
+            userinfo.getMap().put("cPurl",ulist.get(0).get("cPurl").toString());
+            userinfo.getMap().put("cSignature",ulist.get(0).get("cSignature").toString());
+            view.ivGap.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Intent intent = new Intent();
+                    intent.setClass(context, UserHomeActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("userinfo",userinfo);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
             view.btnCollect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -1,5 +1,8 @@
 package com.crazyfish.useradapter;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,8 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crazyfish.activity.UserHomeActivity;
 import com.crazyfish.asynctask.BitmapWorkerTask;
 import com.crazyfish.demo.R;
+import com.crazyfish.model.SerializableMap;
 import com.crazyfish.model.UserRec;
 import com.crazyfish.util.GlobalVariable;
 
@@ -65,6 +70,22 @@ public class GridViewAdapter extends BaseAdapter {
             BitmapWorkerTask asyncTask = new BitmapWorkerTask(imageView,context, GlobalVariable.PIC_USER_HEAD);
             asyncTask.execute(list.get(position).get("cPurl").toString());
             textView.setText(list.get(position).get("cName").toString());
+            final SerializableMap<String,String> userinfo = new SerializableMap<String,String>();
+            userinfo.getMap().put("cId",list.get(position).get("cId").toString());
+            userinfo.getMap().put("cName",list.get(position).get("cName").toString());
+            userinfo.getMap().put("cPurl",list.get(position).get("cPurl").toString());
+            userinfo.getMap().put("cSignature",list.get(position).get("cSignature").toString());
+            imageView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Intent intent = new Intent();
+                    intent.setClass(context, UserHomeActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("userinfo",userinfo);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
         }
         return view;
     }

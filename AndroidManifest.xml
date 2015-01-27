@@ -76,6 +76,11 @@
         <activity android:name="com.crazyfish.activity.RecommendationActivity"
             android:label="用户评论">
         </activity>
+        <activity android:name="com.crazyfish.activity.UserHomeActivity"
+            android:label="用户主页">
+        </activity>
+        <activity android:name="com.crazyfish.activity.ImageShower"
+            android:label="显示大图"></activity>
     </application>
 
 </manifest>
