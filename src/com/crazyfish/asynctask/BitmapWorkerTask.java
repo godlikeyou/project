@@ -10,6 +10,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
@@ -74,6 +75,7 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 			//url1 = params[0].toString();
 			url1 = params[0].toString();
 			Bitmap userupload = PicHandler.getBitmap(url1,context);// ���뵽result��,��Ӧ���������
+            Log.i("xxsize",userupload.getWidth()+":"+userupload.getHeight());
 			//Bitmap userhead = PicHandler.getBitmap(url2,context);
 			list = new ArrayList<Bitmap>();
 			//list.add(userupload);
@@ -98,7 +100,9 @@ public class BitmapWorkerTask extends AsyncTask<String, Integer, List<Bitmap>> {
 		// imageView.setVisibility(View.VISIBLE);
 		try {
 			if (imageView.getTag().equals(url1)) {
-                imageView.setImageBitmap(result.get(0));
+                Bitmap bitmap = result.get(0);
+                //bitmap = ThumbnailUtils.extractThumbnail(bitmap, 400, 320);
+                imageView.setImageBitmap(bitmap);
             }
 		} catch (Exception e) {
 			e.printStackTrace();

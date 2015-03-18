@@ -2,7 +2,9 @@ package com.crazyfish.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crazyfish.demo.R;
@@ -14,5 +16,7 @@ public class OtherLoginActivity extends Activity{
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.otherlogin);
         ((TextView)findViewById(R.id.tvTop)).setText("其他账号登录");
+        ImageView v = (ImageView)findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
 	}
 }

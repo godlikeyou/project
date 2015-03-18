@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crazyfish.demo.R;
@@ -31,6 +32,8 @@ public class ChangeInfoActivity extends Activity {
         setContentView(R.layout.change_info);
         tvTop = (TextView) this.findViewById(R.id.tvTop);
         tvTop.setText("资料完善");
+        ImageView v = (ImageView)findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
         username = (TextView) this.findViewById(R.id.name);
         nickname = (TextView) this.findViewById(R.id.nickname);
         phone = (TextView) this.findViewById(R.id.phone);

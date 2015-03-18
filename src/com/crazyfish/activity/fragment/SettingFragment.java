@@ -21,6 +21,8 @@ public class SettingFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		view =  inflater.inflate(R.layout.setting_fragment, container, false);
         ((TextView)view.findViewById(R.id.tvTop)).setText("设置");
+        ImageView v = (ImageView)view.findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
 		return view;
 	}
 	@Override

@@ -46,6 +46,8 @@ public class TakePhotoFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		view = inflater.inflate(R.layout.takephoto_fragment,container, false);
         ((TextView)view.findViewById(R.id.tvTop)).setText("分享");
+        ImageView v = (ImageView)view.findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
 		return view;
 	}
 	@Override

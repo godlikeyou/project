@@ -324,6 +324,7 @@ public class AllArticleAdapter extends BaseAdapter {
                     //commentPop.dismiss();
                     etInput.setVisibility(View.VISIBLE);
                     llUserPost.setVisibility(View.VISIBLE);
+                    etInput.requestFocus();
                     gid = String.valueOf(listItems.get(p).get("gId"));
                     btUserRec.setOnClickListener(new View.OnClickListener() {
                         @Override

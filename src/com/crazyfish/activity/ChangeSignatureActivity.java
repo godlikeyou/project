@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ public class ChangeSignatureActivity extends Activity{
         setContentView(R.layout.change_customer_signature);
         toptv = (TextView) findViewById(R.id.tvTop);
         toptv.setText("修改个性签名");
+        ImageView v = (ImageView)findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
         editsignature = (EditText)findViewById(R.id.editsignature);
         preferences = this.getSharedPreferences("loginInfo", 0);
         String nickname = preferences.getString("customerSignature", "");

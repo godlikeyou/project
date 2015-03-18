@@ -9,7 +9,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 
 public class CustomerHomeActivity extends FragmentActivity {
 	private static FragmentManager fm;
@@ -32,6 +34,8 @@ public class CustomerHomeActivity extends FragmentActivity {
       	focusCount = bundle.getInt("focusCount");
       	customerName = bundle.getString("customerName");
       	customerPic = bundle.getString("customerPic");
+        ImageView v = (ImageView)findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
         fm = getSupportFragmentManager();
         initFragment();
     }

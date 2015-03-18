@@ -14,11 +14,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -36,8 +41,8 @@ import android.widget.Toast;
 import com.crazyfish.asynctask.HttpGetTask;
 import com.crazyfish.demo.R;
 import com.crazyfish.extension.EImageButton;
-import com.crazyfish.extension.EListView;
-import com.crazyfish.extension.EListView.OnRefreshListener;
+//import com.crazyfish.extension.ListView;
+//import com.crazyfish.extension.ListView.OnRefreshListener;
 import com.crazyfish.useradapter.AllArticleAdapter;
 import com.crazyfish.util.FileUtils;
 import com.crazyfish.util.GETThread;
@@ -76,13 +81,17 @@ public class HomeFragment extends Fragment implements OnScrollListener {
     private Resources resources;
 	// private HkDialogLoading dialogLoading;
 	private Button btRefresh;
+    private ImageView ivRefresh;
     private int filterType = 1;//default all gag
-	@Override
+    ListView lv;
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.home_fragment, container, false);
         TextView toptitle = (TextView)view.findViewById(R.id.tvTop);
         toptitle.setText("首页");
+        ImageView v = (ImageView)view.findViewById(R.id.ivRefresh);
+        v.setVisibility(View.VISIBLE);
 		return view;
 	}
 
@@ -103,27 +112,32 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 String url_puretext = GlobalVariable.URLHEAD + "/article/allarticle/puretext/1";
 				Log.i("handler", result + rtype);
 				if (result.equals("timeout")) {
+                    if(rtype.equals(url1)||rtype.equals(url3)||rtype.equals(url4)){
+                        break;
+                    }
 					Toast.makeText(getActivity(), "加载失败，为您加载了历史浏览信息，请检查网络",
 							Toast.LENGTH_LONG).show();
 					pbLoad.setVisibility(View.GONE);
 					//btRefresh.setVisibility(View.VISIBLE);
                     String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator;
                     if( rtype.equals(url_all)) {
-                        link += "allgag";
+                        link = link + "allgag";
                     }else if( rtype.equals(url_havapic)){
                         link += "havepic";
                     }else if( rtype.equals(url_puretext)){
                         link += "puretext";
                     }
-
+                    Log.i("ifdata", rtype);
                     String str = FileUtils.readCacheFile(link);
                     Log.i("ifdata", str);
                     String type = "gContent,gId,gtReccount,gtGoodcount,school,customer,gPic";
                     // json decode
                     lmap = JsonCodec.deJson(str, type);
-                    final EListView lv = (EListView) view.findViewById(R.id.allArticle);
+                    final ListView lv = (ListView) view.findViewById(R.id.allArticle);
                     allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
                     lv.setAdapter(allAdapter);
+                    lv.setVisibility(View.VISIBLE);
+                    ivRefresh.clearAnimation();
 					break;
 				}
 				if (rtype.equals(url1)||rtype.equals(url3)||rtype.equals(url4)) {
@@ -147,6 +161,10 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 					// dialogLoading.hide();
 					pbLoad.setVisibility(View.GONE);
 					bt.setVisibility(View.VISIBLE);
+                    bt.setEnabled(true);
+                    bt.setText("点击加载更多...");
+                    ivRefresh.clearAnimation();
+                    lv.setVisibility(View.VISIBLE);
 					//btRefresh.setVisibility(View.GONE);
 				}else if(rtype.equals(url_havapic)){
                     if (FileUtils.fileCache("havepic", result) == null) {
@@ -162,6 +180,9 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                     pbLoad.setVisibility(View.GONE);
                     bt.setVisibility(View.VISIBLE);
                     bt.setEnabled(true);
+                    bt.setText("点击加载更多...");
+                    ivRefresh.clearAnimation();
+                    lv.setVisibility(View.VISIBLE);
                     //bt.setText("点击加载更多");
                     //btRefresh.setVisibility(View.GONE);
                 }else if(rtype.equals(url_puretext)){
@@ -178,6 +199,10 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                     pbLoad.setVisibility(View.GONE);
                     bt.setVisibility(View.VISIBLE);
                     bt.setEnabled(true);
+                    bt.setText("点击加载更多...");
+
+                    ivRefresh.clearAnimation();
+                    lv.setVisibility(View.VISIBLE);
                     //bt.setText("点击加载更多");
                     //btRefresh.setVisibility(View.GONE);
                 }
@@ -257,17 +282,43 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         pbLoad = (ProgressBar) view.findViewById(R.id.pbLoad);
         tvAllGag.setTextColor(resources.getColor(R.color.head));
         llAllGag.setBackgroundColor(resources.getColor(R.color.head));
+        ivRefresh = (ImageView)view.findViewById(R.id.ivRefresh);
+        ivRefresh.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation operatingAnim = AnimationUtils.loadAnimation(getActivity(),R.anim.refresh);
+                LinearInterpolator lin = new LinearInterpolator();
+                operatingAnim.setInterpolator(lin);
+                ivRefresh.startAnimation(operatingAnim);
+                if( filterType == GlobalVariable.FILTER_ALL_GAG) {
+                    String url3 = GlobalVariable.URLHEAD
+                            + "/article/allarticle/1";
+                    HttpGetTask task = new HttpGetTask(h);
+                    task.execute(url3);
+                }else if(filterType == GlobalVariable.FILTER_PURE_TEXT){
+                    String url3 = GlobalVariable.URLHEAD
+                            + "/article/allarticle/puretext/1";
+                    HttpGetTask task = new HttpGetTask(h);
+                    task.execute(url3);
+                }else if( filterType == GlobalVariable.FILTER_HAVE_PIC){
+                    String url3 = GlobalVariable.URLHEAD
+                            + "/article/allarticle/havepic/1";
+                    HttpGetTask task = new HttpGetTask(h);
+                    task.execute(url3);
+                }
+            }
+        });
+        lv = (ListView) view.findViewById(R.id.allArticle);
+        moreView = getLayoutInflater(savedInstanceState).inflate(
+                R.layout.moredata, null);
+        bt = (Button) moreView.findViewById(R.id.bt_load);
+        handler = new Handler();
 		if (NetUtil.checkNet(getActivity())) {
 			// dialogLoading = new HkDialogLoading(getActivity());
 			// dialogLoading.show();
 			lmap = new ArrayList<Map<String, Object>>();
-			final EListView lv = (EListView) view.findViewById(R.id.allArticle);
-			moreView = getLayoutInflater(savedInstanceState).inflate(
-					R.layout.moredata, null);
-			bt = (Button) moreView.findViewById(R.id.bt_load);
 			//btRefresh = (Button) view.findViewById(R.id.btRefresh);
 			pg = (ProgressBar) moreView.findViewById(R.id.pg);
-			handler = new Handler();
 			bt.setVisibility(View.GONE);
 //			//btRefresh.setVisibility(View.GONE);
 			String url1 = GlobalVariable.URLHEAD + "/article/gagsize";
@@ -279,7 +330,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 			allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
 			lv.addFooterView(moreView);
 			lv.setAdapter(allAdapter);
-			lv.setonRefreshListener(new OnRefreshListener() {
+			/*lv.setonRefreshListener(new OnRefreshListener() {
 				@Override
 				public void onRefresh() {
 					// TODO Auto-generated method stub
@@ -300,7 +351,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 							GETThread th3 = new GETThread(url3);
 							th3.startServiceThread();
 							boolean flag = false;
-							if (th3 != null
+							if (th3.getResultData() != null
 									&& !th3.getResultData().equals("timeout")) {
 								size = Integer.valueOf(th3.getResultData());
 								Log.i("size", String.valueOf(size));
@@ -337,33 +388,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 					}.execute(null, null, null);
 				}
 			});
+			*/
 			lv.setItemsCanFocus(true);
 			lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 			lv.setOnScrollListener(this);
-			bt.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					pg.setVisibility(View.VISIBLE);
-					bt.setVisibility(View.GONE);
-					handler.postDelayed(new Runnable() {
-						@Override
-						public void run() {
-							String rlt = loadMoreData();
-							bt.setVisibility(View.VISIBLE);
-							pg.setVisibility(View.GONE);
-							if ("success".equals(rlt)) {
-								allAdapter.notifyDataSetChanged();
-							} else {
-								bt.setText("加载失败");
-							}
-						}
-					}, 2000);
-				}
-			});
 		} else {
-			final EListView lv = (EListView) view.findViewById(R.id.allArticle);
-			moreView = getLayoutInflater(savedInstanceState).inflate(
-					R.layout.moredata, null);
 			bt = (Button) moreView.findViewById(R.id.bt_load);
 			pg = (ProgressBar) moreView.findViewById(R.id.pg);
 			//handler = new Handler();
@@ -380,11 +409,31 @@ public class HomeFragment extends Fragment implements OnScrollListener {
             bt.setText("没有网络，下拉刷新");
             pbLoad.setVisibility(View.GONE);
 		}
+        bt.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pg.setVisibility(View.VISIBLE);
+                bt.setVisibility(View.GONE);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        String rlt = loadMoreData();
+                        bt.setVisibility(View.VISIBLE);
+                        pg.setVisibility(View.GONE);
+                        if ("success".equals(rlt)) {
+                            allAdapter.notifyDataSetChanged();
+                        } else {
+                            bt.setText("加载失败");
+                        }
+                    }
+                }, 2000);
+            }
+        });
 	}
 
 	private String loadMoreData() {
 		int count = allAdapter.getCount();
-		Log.i("currrentsize", "" + count);
+		Log.i("currrentsize", "" + count+"size:"+size);
 		if (count + GlobalVariable.GAG_PAGE_SIZE <= (size + 2)) {
 			int currentPage = count / GlobalVariable.GAG_PAGE_SIZE + 1;
 			Log.i("currentpage", "" + currentPage);
@@ -426,10 +475,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
+        Log.i("idle",""+lastVisibleIndex+":"+allAdapter.getCount());
 		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-				&& lastVisibleIndex == allAdapter.getCount()) {
-			// pg.setVisibility(View.VISIBLE);
-			// bt.setVisibility(View.GONE);
+				&& (lastVisibleIndex + 3) == allAdapter.getCount()) {
+			 //pg.setVisibility(View.VISIBLE);
+			 //bt.setVisibility(View.GONE);
 			// handler.postDelayed(new Runnable() {
 			//
 			// @Override
@@ -447,7 +497,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         @Override
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_ALL_GAG;
-
+            lv.setVisibility(View.GONE);
             pbLoad.setVisibility(View.VISIBLE);
             if (NetUtil.checkNet(getActivity())) {
                 String url3 = GlobalVariable.URLHEAD
@@ -458,7 +508,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 HttpGetTask task = new HttpGetTask(h);
                 task.execute(url4);
             }else {
-                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
+                final ListView lv = (ListView) view.findViewById(R.id.allArticle);
 
                 //handler = new Handler();
                 String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
@@ -468,10 +518,10 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 // json decode
                 lmap = JsonCodec.deJson(str, type);
                 allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
-                lv.addFooterView(moreView);
+                //lv.addFooterView(moreView);
                 lv.setAdapter(allAdapter);
-                bt.setEnabled(false);
-                bt.setText("没有网络，下拉刷新");
+                lv.setVisibility(View.VISIBLE);
+                //bt.setVisibility(View.GONE);
                 pbLoad.setVisibility(View.GONE);
             }
             tvAllGag.setTextColor(resources.getColor(R.color.head));
@@ -494,7 +544,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         @Override
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_HAVE_PIC;
-
+            lv.setVisibility(View.GONE);
             pbLoad.setVisibility(View.VISIBLE);
             if (NetUtil.checkNet(getActivity())) {
                 String url3 = GlobalVariable.URLHEAD
@@ -505,7 +555,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 HttpGetTask task = new HttpGetTask(h);
                 task.execute(url4);
             }else {
-                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
+                final ListView lv = (ListView) view.findViewById(R.id.allArticle);
 
                 //handler = new Handler();
                 String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
@@ -515,11 +565,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 // json decode
                 lmap = JsonCodec.deJson(str, type);
                 allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
-                lv.addFooterView(moreView);
+                //lv.addFooterView(moreView);
                 lv.setAdapter(allAdapter);
-                bt.setEnabled(false);
-                bt.setText("没有网络，下拉刷新");
+                //bt.setVisibility(View.GONE);
                 pbLoad.setVisibility(View.GONE);
+                lv.setVisibility(View.VISIBLE);
             }
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
@@ -541,6 +591,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         @Override
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_PURE_TEXT;
+            lv.setVisibility(View.GONE);
             pbLoad.setVisibility(View.VISIBLE);
             if (NetUtil.checkNet(getActivity())) {
                 String url3 = GlobalVariable.URLHEAD
@@ -551,7 +602,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 HttpGetTask task = new HttpGetTask(h);
                 task.execute(url4);
             }else {
-                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
+                final ListView lv = (ListView) view.findViewById(R.id.allArticle);
 
                 //handler = new Handler();
                 String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
@@ -561,11 +612,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 // json decode
                 lmap = JsonCodec.deJson(str, type);
                 allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
-                lv.addFooterView(moreView);
+                //lv.addFooterView(moreView);
                 lv.setAdapter(allAdapter);
-                bt.setEnabled(false);
-                bt.setText("没有网络，下拉刷新");
+                //bt.setVisibility(View.GONE);
                 pbLoad.setVisibility(View.GONE);
+                lv.setVisibility(View.VISIBLE);
             }
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
@@ -587,6 +638,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         @Override
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_SCHOOL;
+            lv.setVisibility(View.GONE);
             pbLoad.setVisibility(View.VISIBLE);
             if (NetUtil.checkNet(getActivity())) {
                 String url3 = GlobalVariable.URLHEAD
@@ -597,7 +649,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 HttpGetTask task = new HttpGetTask(h);
                 task.execute(url4);
             }else {
-                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
+                final ListView lv = (ListView) view.findViewById(R.id.allArticle);
 
                 //handler = new Handler();
                 String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
@@ -607,11 +659,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 // json decode
                 lmap = JsonCodec.deJson(str, type);
                 allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
-                lv.addFooterView(moreView);
+                //lv.addFooterView(moreView);
                 lv.setAdapter(allAdapter);
-                bt.setEnabled(false);
-                bt.setText("没有网络，下拉刷新");
+                //bt.setVisibility(View.GONE);
                 pbLoad.setVisibility(View.GONE);
+                lv.setVisibility(View.VISIBLE);
             }
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));
@@ -633,6 +685,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         @Override
         public void onClick(View v) {
             filterType = GlobalVariable.FILTER_SELECTED;
+            lv.setVisibility(View.GONE);
             pbLoad.setVisibility(View.VISIBLE);
             if (NetUtil.checkNet(getActivity())) {
                 String url3 = GlobalVariable.URLHEAD
@@ -643,7 +696,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 HttpGetTask task = new HttpGetTask(h);
                 task.execute(url4);
             }else {
-                final EListView lv = (EListView) view.findViewById(R.id.allArticle);
+                final ListView lv = (ListView) view.findViewById(R.id.allArticle);
 
                 //handler = new Handler();
                 String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
@@ -653,11 +706,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                 // json decode
                 lmap = JsonCodec.deJson(str, type);
                 allAdapter = new AllArticleAdapter(getActivity(), lmap,etInput,llUserPost,bottomList,btUserRec,h);
-                lv.addFooterView(moreView);
+                //lv.addFooterView(moreView);
                 lv.setAdapter(allAdapter);
-                bt.setEnabled(false);
-                bt.setText("没有网络，下拉刷新");
+                //bt.setVisibility(View.GONE);
                 pbLoad.setVisibility(View.GONE);
+                lv.setVisibility(View.VISIBLE);
             }
             tvAllGag.setTextColor(resources.getColor(R.color.content));
             llAllGag.setBackgroundColor(resources.getColor(R.color.white));

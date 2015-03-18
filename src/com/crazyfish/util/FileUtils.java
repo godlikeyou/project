@@ -24,8 +24,8 @@ import android.provider.SyncStateContract.Constants;
 import android.util.Log;
 
     /** 
-     * ÎÄ¼þ´¦Àí¹¤¾ßÀà 
-     * ±¾µØÎÄ¼þ»º´æ
+     * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ 
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
      */  
     public class FileUtils {  
       
@@ -35,7 +35,7 @@ import android.util.Log;
         public static final long GB = MB * 1024;  
         private static final int BUFFER = 8192;  
         /** 
-         * ¸ñÊ½»¯ÎÄ¼þ´óÐ¡<b> ´øÓÐµ¥Î» 
+         * ï¿½ï¿½Ê½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡<b> ï¿½ï¿½ï¿½Ðµï¿½Î» 
          *  
          * @param size 
          * @return 
@@ -61,7 +61,7 @@ import android.util.Log;
         }  
       
         /** 
-         * ±£ÁôÁ½Î»Ð¡Êý 
+         * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»Ð¡ï¿½ï¿½ 
          *  
          * @param d 
          * @return 
@@ -75,7 +75,7 @@ import android.util.Log;
         }  
       
         /** 
-         * sd¿¨¹ÒÔØÇÒ¿ÉÓÃ 
+         * sdï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¿ï¿½ï¿½ï¿½ 
          *  
          * @return 
          */  
@@ -85,7 +85,7 @@ import android.util.Log;
         }  
       
         /** 
-         * µÝ¹é´´½¨ÎÄ¼þÄ¿Â¼ 
+         * ï¿½Ý¹é´´ï¿½ï¿½ï¿½Ä¼ï¿½Ä¿Â¼ 
          *  
          * @param path 
          * */  
@@ -103,7 +103,7 @@ import android.util.Log;
         }  
       
         /** 
-         * ¶ÁÈ¡ÎÄ¼þ 
+         * ï¿½ï¿½È¡ï¿½Ä¼ï¿½ 
          *  
          * @param file 
          * @return 
@@ -124,7 +124,7 @@ import android.util.Log;
         }  
       
         /** 
-         * ´ÓÁ÷ÖÐ¶ÁÈ¡ÎÄ¼þ 
+         * ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½È¡ï¿½Ä¼ï¿½ 
          *  
          * @param is 
          * @return 
@@ -148,7 +148,7 @@ import android.util.Log;
         }  
         
         /** 
-         * ½«ÎÄ±¾ÄÚÈÝÐ´ÈëÎÄ¼þ 
+         * ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä¼ï¿½ 
          *  
          * @param file 
          * @param str 
@@ -167,7 +167,7 @@ import android.util.Log;
         }  
       
         /** 
-         * ½«Bitmap±£´æ±¾µØJPGÍ¼Æ¬ 
+         * ï¿½ï¿½Bitmapï¿½ï¿½ï¿½æ±¾ï¿½ï¿½JPGÍ¼Æ¬ 
          * @param url 
          * @return 
          * @throws IOException 
@@ -207,7 +207,7 @@ import android.util.Log;
 //        }  
 //      
         /** 
-         * ¶ÁÈ¡±íÇéÅäÖÃÎÄ¼þ 
+         * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ 
          *  
          * @param context 
          * @return 
@@ -215,7 +215,7 @@ import android.util.Log;
         public static List<String> getEmojiFile(Context context) {  
             try {  
                 List<String> list = new ArrayList<String>();  
-                InputStream in = context.getResources().getAssets().open("emoji");// ÎÄ¼þÃû×ÖÎªrose.txt  
+                InputStream in = context.getResources().getAssets().open("emoji");// ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Îªrose.txt  
                 BufferedReader br = new BufferedReader(new InputStreamReader(in,  
                         "UTF-8"));  
                 String str = null;  
@@ -231,7 +231,7 @@ import android.util.Log;
         }  
       
         /** 
-         * »ñÈ¡Ò»¸öÎÄ¼þ¼Ð´óÐ¡ 
+         * ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð´ï¿½Ð¡ 
          *  
          * @param f 
          * @return 
@@ -251,26 +251,26 @@ import android.util.Log;
         }  
       
         /** 
-         * É¾³ýÎÄ¼þ 
+         * É¾ï¿½ï¿½ï¿½Ä¼ï¿½ 
          *  
          * @param file 
          */  
         public static void deleteFile(File file) {  
       
-            if (file.exists()) { // ÅÐ¶ÏÎÄ¼þÊÇ·ñ´æÔÚ  
-                if (file.isFile()) { // ÅÐ¶ÏÊÇ·ñÊÇÎÄ¼þ  
-                    file.delete(); // delete()·½·¨ ÄãÓ¦¸ÃÖªµÀ ÊÇÉ¾³ýµÄÒâË¼;  
-                } else if (file.isDirectory()) { // ·ñÔòÈç¹ûËüÊÇÒ»¸öÄ¿Â¼  
-                    File files[] = file.listFiles(); // ÉùÃ÷Ä¿Â¼ÏÂËùÓÐµÄÎÄ¼þ files[];  
-                    for (int i = 0; i < files.length; i++) { // ±éÀúÄ¿Â¼ÏÂËùÓÐµÄÎÄ¼þ  
-                        deleteFile(files[i]); // °ÑÃ¿¸öÎÄ¼þ ÓÃÕâ¸ö·½·¨½øÐÐµü´ú  
+            if (file.exists()) { // ï¿½Ð¶ï¿½ï¿½Ä¼ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½  
+                if (file.isFile()) { // ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½  
+                    file.delete(); // delete()ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ó¦ï¿½ï¿½Öªï¿½ï¿½ ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ë¼;  
+                } else if (file.isDirectory()) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ä¿Â¼  
+                    File files[] = file.listFiles(); // ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Ä¼ï¿½ files[];  
+                    for (int i = 0; i < files.length; i++) { // ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Ä¼ï¿½  
+                        deleteFile(files[i]); // ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ä¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½  
                     }  
                 }  
                 file.delete();  
             }  
         }  
         /*
-         * »ñµÃ»òÕß´´½¨ÎÄ¼þ»º´æÎ»ÖÃ
+         * ï¿½ï¿½Ã»ï¿½ï¿½ß´ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
          * */
         public static File fileCache(String fileName,String data){
         	if( !isSdCardMounted())
@@ -304,10 +304,10 @@ import android.util.Log;
         	return fileFile;
         }
         /*
-         * ¸ù¾ÝÂ·¾¶¶ÁÈ¡ÎÄ¼þ
+         * ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ä¼ï¿½
          * */
         public static String readCacheFile(String link){
-        	Log.i("hh", link);
+        	Log.i("xx(hh", link);
         	FileInputStream fs = null;
         	try{
         		fs = new FileInputStream(link);

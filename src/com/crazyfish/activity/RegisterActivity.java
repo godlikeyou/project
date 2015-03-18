@@ -23,6 +23,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,8 @@ public class RegisterActivity extends Activity {
         ((TextView)findViewById(R.id.tvTop)).setText("用户注册");
 		registerButton = (Button) findViewById(R.id.Register);
 		registerButton.setOnClickListener(listener);
+        ImageView v = (ImageView)findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
 	}
 	
 	private OnClickListener listener = new OnClickListener() {

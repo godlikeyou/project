@@ -65,6 +65,8 @@ public class FindFragment extends Fragment{
         view = inflater.inflate(R.layout.find_fragment, container,false);
         TextView toptitle = (TextView)view.findViewById(R.id.tvTop);
         toptitle.setText("找你喜欢");
+        ImageView v = (ImageView)view.findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
 		return view;
 	}
     Handler h = new Handler() {
@@ -80,6 +82,9 @@ public class FindFragment extends Fragment{
                     String url = GlobalVariable.URLHEAD + "/customer/user/alluser";
                     Log.i("handler", result + rtype);
                     if (result.equals("timeout")) {
+                        if(rtype.equals(url1)){
+                            break;
+                        }
                         Toast.makeText(getActivity(), "加载失败，为您加载了历史浏览信息，请检查网络",
                                 Toast.LENGTH_LONG).show();
                         String link = GlobalVariable.FILE_CACHE_LOCATION + File.separator
@@ -89,9 +94,10 @@ public class FindFragment extends Fragment{
                         String type = "cId,cName,cNickname,cPurl,cSignature";
                         // json decode
                         lmap = JsonCodec.deJson(str, type);
-                        final EListView lv = (EListView) view.findViewById(R.id.allArticle);
+                        final GridView lv = (GridView) view.findViewById(R.id.recPerson);
                         userAdapter = new GridViewAdapter(getActivity(), lmap);
                         lv.setAdapter(userAdapter);
+                        userRecPro.setVisibility(View.GONE);
                         break;
                     }
                     if (rtype.equals(url1)) {

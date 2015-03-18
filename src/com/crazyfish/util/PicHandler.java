@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.BitmapFactory;
@@ -40,28 +41,28 @@ public class PicHandler {
 	public static Bitmap getBitmap(String url,Context context) {
 		ImageFileCache fileCache = new ImageFileCache();
 		ImageMemoryCache memoryCache = new ImageMemoryCache(context);
-		// ´ÓÄÚ´æ»º´æÖĞ»ñÈ¡Í¼Æ¬
+		// ï¿½ï¿½ï¿½Ú´æ»ºï¿½ï¿½ï¿½Ğ»ï¿½È¡Í¼Æ¬
 		Bitmap result = memoryCache.getBitmapFromCache(url);
 		if (result == null) {
-			// ÎÄ¼ş»º´æÖĞ»ñÈ¡
+			// ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½È¡
 			result = fileCache.getImage(url);
 			if (result == null) {
-				// ´ÓÍøÂç»ñÈ¡
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡
 				result = ImageGetFromHttp.downloadBitmap(url);
 				if (result != null) {
 					fileCache.saveBitmap(result, url);
 					memoryCache.addBitmapToCache(url, result);
 				}
 			} else {
-				//Log.i("ÄÚ´æÖĞÃ»ÓĞ", "ÄÚ´æÖĞÃ»ÓĞ£¬Ö»ÄÜ´ÓÎÄ¼ş»º´æÖĞ»ñÈ¡");
-				// Ìí¼Óµ½ÄÚ´æ»º´æ
+				//Log.i("ï¿½Ú´ï¿½ï¿½ï¿½Ã»ï¿½ï¿½", "ï¿½Ú´ï¿½ï¿½ï¿½Ã»ï¿½Ğ£ï¿½Ö»ï¿½Ü´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½È¡");
+				// ï¿½ï¿½Óµï¿½ï¿½Ú´æ»ºï¿½ï¿½
 				memoryCache.addBitmapToCache(url, result);
 			}
 		}
-		//Log.i("xx","ÄÚ´æÖĞÓĞ£¬´ÓÄÚ´æÖĞÖ±½Ó¼ÓÔØ");
+		//Log.i("xx","ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½Ö±ï¿½Ó¼ï¿½ï¿½ï¿½");
 		return result;
 	}
-	/*´Ó±¾µØÎÄ¼ş»ñÈ¡Í¼Æ¬*/
+	/*ï¿½Ó±ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½È¡Í¼Æ¬*/
 	public static Bitmap getBitmapFromFile(String uri){
 		int width = 300;
         int height = 300;
@@ -82,4 +83,31 @@ public class PicHandler {
                 factoryOptions);
        return thumbnail;
 	}
+    public static Bitmap zoomImg(Bitmap bm, int newWidth ,int newHeight){
+
+        // è·å¾—å›¾ç‰‡çš„å®½é«˜
+
+        int width = bm.getWidth();
+
+        int height = bm.getHeight();
+
+        // è®¡ç®—ç¼©æ”¾æ¯”ä¾‹
+
+        float scaleWidth = ((float) newWidth) / width;
+
+        float scaleHeight = ((float) newHeight) / height;
+
+        // å–å¾—æƒ³è¦ç¼©æ”¾çš„matrixå‚æ•°
+
+        Matrix matrix = new Matrix();
+
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // å¾—åˆ°æ–°çš„å›¾ç‰‡
+
+        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+
+        return newbm;
+
+    }
 }

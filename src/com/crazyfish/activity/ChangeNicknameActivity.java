@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,8 @@ public class ChangeNicknameActivity extends Activity{
         editnickname.setSelection(nickname.length());
         sureButton = (Button) findViewById(R.id.surebutton);
         sureButton.setOnClickListener(listener);
+        ImageView v = (ImageView)findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
     }
 
     private View.OnClickListener listener = new View.OnClickListener(){

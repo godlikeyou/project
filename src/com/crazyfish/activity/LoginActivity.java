@@ -30,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class LoginActivity extends Activity {
 	private Button btnLogin;
 	private EditText customerName;
 	private EditText customerPasswd;
-	private String url = "http://192.168.0.108:8080/ssm_demo/customer/1.0/customerLogin";
+	private String url = GlobalVariable.URLHEAD + "/customer/1.0/customerLogin";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -59,7 +60,8 @@ public class LoginActivity extends Activity {
 		tv = (TextView)findViewById(R.id.otherLogin);
 		customerName = (EditText) findViewById(R.id.name);
 		customerPasswd = (EditText) findViewById(R.id.passwd);
-		
+        ImageView v = (ImageView)findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
 		btnLogin = (Button) findViewById(R.id.Login);
 		btnLogin.setOnClickListener(listener);
 

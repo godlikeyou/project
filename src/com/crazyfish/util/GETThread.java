@@ -38,7 +38,7 @@ public class GETThread extends Thread {
 	private String getDataFromService(String link){
 		 StringBuffer data = null;
 		try {
-			// ÊµÀý»¯URL
+			// Êµï¿½ï¿½URL
 			URL url = new URL(link);
 			URLConnection urlConnection = url.openConnection();
 			HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
@@ -47,13 +47,13 @@ public class GETThread extends Thread {
 			httpUrlConnection.setReadTimeout(10000);//10s
 			httpUrlConnection.connect();
 			Log.i("resp", httpUrlConnection.getResponseCode()+"");
-			// ´ò¿ªURL¶ÔÓ¦µÄÊäÈëÁ÷
+			// ï¿½ï¿½URLï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			InputStream is = httpUrlConnection.getInputStream();
 			byte[] bbuf = new byte[1024];
-			// ÓÃÒÔÖ¸Ê¾ÊÇ·ñ»¹ÓÐÊý¾Ý
+			// ï¿½ï¿½ï¿½ï¿½Ö¸Ê¾ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			int hasRead = 0;
 			data = new StringBuffer("");
-			// Ñ­»·ÊäÈëÊý¾Ýµ½dataÖÐ
+			// Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½dataï¿½ï¿½
 			while ((hasRead = is.read(bbuf)) > 0) {
 				data.append(new String(bbuf, 0, hasRead));
 			}

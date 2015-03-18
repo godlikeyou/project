@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * 自定义MsgListView，继承了ListView， 但填充了listview的头部，即下拉刷新样式，并实现其功能
+ * 自定义EListView，继承了ListView， 但填充了listview的头部，即下拉刷新样式，并实现其功能
  *
  * @author yanbo
  */
@@ -107,7 +107,7 @@ public class EListView extends ListView implements OnScrollListener {
     public void onScroll(AbsListView arg0, int firstVisiableItem, int arg2,// 滚动事件
                          int arg3) {
         firstItemIndex = firstVisiableItem;// 得到首item索引
-        //Toast.makeText(context,"收"+firstVisiableItem,Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"收"+firstVisiableItem,Toast.LENGTH_LONG).show();
     }
 
     public void onScrollStateChanged(AbsListView arg0, int arg1) {
@@ -118,7 +118,8 @@ public class EListView extends ListView implements OnScrollListener {
             case MotionEvent.ACTION_DOWN:// 手按下 对应下拉刷新状态
                 if (firstItemIndex == 0 && !isRecored) {// 如果首item索引为0，且尚未记录startY,则在下拉时记录之，并执行isRecored
 // = true;
-                    startY = (int) event.getY() + 200;
+                    startY = (int) event.getY();
+                    Toast.makeText(context,"starty"+startY,Toast.LENGTH_LONG).show();
                     isRecored = true;
                     Log.v(TAG, "在down时候记录当前位置‘");
                 }
@@ -180,8 +181,10 @@ public class EListView extends ListView implements OnScrollListener {
                     }
 // 还没有到达显示松开刷新的时候,DONE或者是PULL_To_REFRESH状态
                     if (state == PULL_To_REFRESH) {// 如果状态是下拉刷新
+
 // 下拉到可以进入RELEASE_TO_REFRESH的状态
                         if (tempY - startY >= headContentHeight) {// 如果实时高度与起始高度之差大于等于头部高度，则状态设为松开刷新
+                            Toast.makeText(context,"shuaxin",Toast.LENGTH_LONG).show();
                             state = RELEASE_To_REFRESH;
                             isBack = true;
                             changeHeaderViewByState();

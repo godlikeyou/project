@@ -59,6 +59,8 @@ public class MeFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.me_fragment, container, false);
+        ImageView v = (ImageView)view.findViewById(R.id.ivRefresh);
+        v.setVisibility(View.INVISIBLE);
 		// loginReturn();
 		return view;
 	}
@@ -113,8 +115,7 @@ public class MeFragment extends Fragment {
                 startActivityForResult(intent,REQUEST_CODE);
             }
             else {
-				Toast.makeText(getActivity(), "登录!",
-						Toast.LENGTH_LONG).show();
+				//Toast.makeText(getActivity(), "登录!",Toast.LENGTH_LONG).show();
 			}
 		}
 	};
